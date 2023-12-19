@@ -170,11 +170,9 @@ def check_valid_moves():
         options_list = white_options
     else:
         options_list = black_options
-    print(options_list)
-    # valid_options = options_list[selection]
+
     if selection <= len(options_list):
         valid_options = options_list[selection]
-        # return valid_options
     else:
         print('selection outside of options range!')
         valid_options = []
@@ -273,7 +271,39 @@ def check_knight(position, color):
 
 
 def check_bishop(position, color):
-    pass
+    moves_list = []
+    if color == 'white':
+        enemies_list = black_locations
+        friends_list = white_locations
+    elif color == 'black':
+        friends_list = black_locations
+        enemies_list = white_locations
+    for i in range(4):  # up-right, up-left, down-right, down-left
+        path = True
+        chain = 1
+        match i:
+            case 0:
+                x = 1
+                y = -1
+            case 1:
+                x = -1
+                y = -1
+            case 2:
+                x = 1
+                y = 1
+            case 3:
+                x = -1
+                y = 1
+        while path:
+            if (position[0] + (chain * x), position[1] + (chain * y)) not in friends_list and \
+                    0 <= position[0] + (chain * x) <= 7 and 0 <= position[1] + (chain * y) <= 7:
+                moves_list.append((position[0] + (chain * x), position[1] + (chain * y)))
+                if (position[0] + (chain * x), position[1] + (chain * y)) in enemies_list:
+                    path = False
+                chain += 1
+            else:
+                path = False
+    return moves_list
 
 
 def check_queen(position, color):
