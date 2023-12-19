@@ -140,6 +140,16 @@ def draw_pieces():
                                  [black_locations[i][0] * 100 + 1, black_locations[i][1] * 100 + 1, 100, 100], 2)
 
 
+def draw_captured():
+    for i in range(len(captured_pieces_white)):
+        captured_piece = captured_pieces_white[i]
+        index = piece_list.index(captured_piece)
+        screen.blit(small_black_images[index], (825, 5 + 50*i))
+    for i in range(len(captured_pieces_black)):
+        captured_piece = captured_pieces_black[i]
+        index = piece_list.index(captured_piece)
+        screen.blit(small_white_images[index], (925, 5 + 50*i))
+
 # function to check all pieces valid options on board
 def check_options(pieces, locations, turn):
     moves_list = []
@@ -338,6 +348,7 @@ while run:
     screen.fill('dark gray')
     draw_board()
     draw_pieces()
+    draw_captured()
     if selection != 100:
         print(selection)
         valid_moves = check_valid_moves()
