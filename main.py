@@ -314,7 +314,18 @@ def check_queen(position, color):
     return moves_list
 
 def check_king(position, color):
-    pass
+    moves_list = []
+    if color == 'white':
+        friends_list = white_locations
+    elif color == 'black':
+        friends_list = black_locations
+        # 8 squares to check for kings
+    targets = [(1, 0), (1, 1), (1, -1), (-1, 0), (-1, 1), (-1, -1), (0, 1), (0, -1)]
+    for i in range(8):
+        target = (position[0] + targets[i][0], position[1] + targets[i][1])
+        if target not in friends_list and 0 <= target[0] <= 7 and 0 <= target[1] <= 7:
+            moves_list.append(target)
+    return moves_list
 
 
 black_options = check_options(black_pieces, black_locations, 'black')
