@@ -260,13 +260,8 @@ def check_pawn(position, color):
 
 def check_rook(position, color):
     moves_list = []
-    match color:
-        case 'white':
-            enemies_list = black_locations
-            friends_list = white_locations    
-        case 'black':
-            friends_list = black_locations
-            enemies_list = white_locations    
+    friends_list = friendly_list(color)
+    enemies_list = enemy_list(color)  
     for i in range(4):  # down, up, right, left
         path = True
         chain = 1
@@ -297,11 +292,7 @@ def check_rook(position, color):
 
 def check_knight(position, color):
     moves_list = []
-    match color: 
-        case 'white':
-            friends_list = white_locations
-        case 'black':
-            friends_list = black_locations
+    friends_list = friendly_list(color)
     # 8 squares to check for knights, they can go two squares in one direction and one in another
     targets = [(1, 2), (1, -2), (2, 1), (2, -1), (-1, 2), (-1, -2), (-2, 1), (-2, -1)]
     for i in range(8):
@@ -313,13 +304,8 @@ def check_knight(position, color):
 
 def check_bishop(position, color):
     moves_list = []
-    match color:
-        case 'white':
-            enemies_list = black_locations
-            friends_list = white_locations    
-        case 'black':
-            friends_list = black_locations
-            enemies_list = white_locations    
+    friends_list = friendly_list(color)
+    enemies_list = enemy_list(color)  
     for i in range(4):  # up-right, up-left, down-right, down-left
         path = True
         chain = 1
@@ -355,13 +341,10 @@ def check_queen(position, color):
         moves_list.append(second_list[i])
     return moves_list
 
+
 def check_king(position, color):
     moves_list = []
-    match color: 
-        case 'white':
-            friends_list = white_locations
-        case 'black':
-            friends_list = black_locations
+    friends_list = friendly_list(color)
         # 8 squares to check for kings
     targets = [(1, 0), (1, 1), (1, -1), (-1, 0), (-1, 1), (-1, -1), (0, 1), (0, -1)]
     for i in range(8):
@@ -370,6 +353,24 @@ def check_king(position, color):
             moves_list.append(target)
     return moves_list
 
+
+def friendly_list(color):
+    friends_list = []
+    match color:
+        case 'white':
+            friends_list = white_locations    
+        case 'black':
+            friends_list = black_locations
+    return friends_list
+
+def enemy_list(color):
+    enemies_list = []
+    match color:
+        case 'white':
+            enemies_list = black_locations
+        case 'black':
+            friends_list = black_locations
+    return enemies_list
 
 black_options = check_options(black_pieces, black_locations, 'black')
 
