@@ -220,7 +220,6 @@ def check_valid_moves():
 
 
 def draw_valid(moves):
-    # print(moves)
     if turn_step < 2:
         color = 'red'
     else:
@@ -233,39 +232,41 @@ def draw_valid(moves):
 # check if pawn can move
 def check_pawn(position, color):
     moves_list = []
-    if color == 'white':
-        if (position[0], position[1] + 1) not in white_locations and \
-                (position[0], position[1] + 1) not in black_locations and position[1] < 7:
-            moves_list.append((position[0], position[1] + 1))
-        if (position[0], position[1] + 2) not in white_locations and \
-                (position[0], position[1] + 2) not in black_locations and position[1] == 1:
-            moves_list.append((position[0], position[1] + 2))
-        if (position[0] + 1, position[1] + 1) in black_locations:
-            moves_list.append((position[0] + 1, position[1] + 1))
-        if (position[0] - 1, position[1] + 1) in black_locations:
-            moves_list.append((position[0] - 1, position[1] + 1))
-    elif color == 'black':
-        if (position[0], position[1] - 1) not in white_locations and \
-                (position[0], position[1] - 1) not in black_locations and position[1] > 0:
-            moves_list.append((position[0], position[1] - 1))
-        if (position[0], position[1] - 2) not in white_locations and \
-                (position[0], position[1] - 2) not in black_locations and position[1] == 6:
-            moves_list.append((position[0], position[1] - 2))
-        if (position[0] + 1, position[1] - 1) in white_locations:
-            moves_list.append((position[0] + 1, position[1] - 1))
-        if (position[0] - 1, position[1] - 1) in white_locations:
-            moves_list.append((position[0] - 1, position[1] - 1))
+    match color:
+        case 'white':
+            if (position[0], position[1] + 1) not in white_locations and \
+                    (position[0], position[1] + 1) not in black_locations and position[1] < 7:
+                moves_list.append((position[0], position[1] + 1))
+            if (position[0], position[1] + 2) not in white_locations and \
+                    (position[0], position[1] + 2) not in black_locations and position[1] == 1:
+                moves_list.append((position[0], position[1] + 2))
+            if (position[0] + 1, position[1] + 1) in black_locations:
+                moves_list.append((position[0] + 1, position[1] + 1))
+            if (position[0] - 1, position[1] + 1) in black_locations:
+                moves_list.append((position[0] - 1, position[1] + 1))
+        case 'black':
+            if (position[0], position[1] - 1) not in white_locations and \
+                    (position[0], position[1] - 1) not in black_locations and position[1] > 0:
+                moves_list.append((position[0], position[1] - 1))
+            if (position[0], position[1] - 2) not in white_locations and \
+                    (position[0], position[1] - 2) not in black_locations and position[1] == 6:
+                moves_list.append((position[0], position[1] - 2))
+            if (position[0] + 1, position[1] - 1) in white_locations:
+                moves_list.append((position[0] + 1, position[1] - 1))
+            if (position[0] - 1, position[1] - 1) in white_locations:
+                moves_list.append((position[0] - 1, position[1] - 1))
     return moves_list
 
 
 def check_rook(position, color):
     moves_list = []
-    if color == 'white':
-        enemies_list = black_locations
-        friends_list = white_locations
-    elif color == 'black':
-        friends_list = black_locations
-        enemies_list = white_locations
+    match color:
+        case 'white':
+            enemies_list = black_locations
+            friends_list = white_locations    
+        case 'black':
+            friends_list = black_locations
+            enemies_list = white_locations    
     for i in range(4):  # down, up, right, left
         path = True
         chain = 1
@@ -296,10 +297,11 @@ def check_rook(position, color):
 
 def check_knight(position, color):
     moves_list = []
-    if color == 'white':
-        friends_list = white_locations
-    elif color == 'black':
-        friends_list = black_locations
+    match color: 
+        case 'white':
+            friends_list = white_locations
+        case 'black':
+            friends_list = black_locations
     # 8 squares to check for knights, they can go two squares in one direction and one in another
     targets = [(1, 2), (1, -2), (2, 1), (2, -1), (-1, 2), (-1, -2), (-2, 1), (-2, -1)]
     for i in range(8):
@@ -311,12 +313,13 @@ def check_knight(position, color):
 
 def check_bishop(position, color):
     moves_list = []
-    if color == 'white':
-        enemies_list = black_locations
-        friends_list = white_locations
-    elif color == 'black':
-        friends_list = black_locations
-        enemies_list = white_locations
+    match color:
+        case 'white':
+            enemies_list = black_locations
+            friends_list = white_locations    
+        case 'black':
+            friends_list = black_locations
+            enemies_list = white_locations    
     for i in range(4):  # up-right, up-left, down-right, down-left
         path = True
         chain = 1
@@ -354,10 +357,11 @@ def check_queen(position, color):
 
 def check_king(position, color):
     moves_list = []
-    if color == 'white':
-        friends_list = white_locations
-    elif color == 'black':
-        friends_list = black_locations
+    match color: 
+        case 'white':
+            friends_list = white_locations
+        case 'black':
+            friends_list = black_locations
         # 8 squares to check for kings
     targets = [(1, 0), (1, 1), (1, -1), (-1, 0), (-1, 1), (-1, -1), (0, 1), (0, -1)]
     for i in range(8):
@@ -384,13 +388,12 @@ while run:
     draw_captured()
     draw_check()
     if selection != 100:
-        print(selection)
         valid_moves = check_valid_moves()
         draw_valid(valid_moves)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and not game_over:
             x_coord = event.pos[0] // 100
             y_coord = event.pos[1] // 100
             click_coords = (x_coord, y_coord)
