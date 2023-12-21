@@ -363,6 +363,7 @@ def friendly_list(color):
             friends_list = black_locations
     return friends_list
 
+
 def enemy_list(color):
     enemies_list = []
     match color:
@@ -371,6 +372,7 @@ def enemy_list(color):
         case 'black':
             friends_list = black_locations
     return enemies_list
+
 
 black_options = check_options(black_pieces, black_locations, 'black')
 
