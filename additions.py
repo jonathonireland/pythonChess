@@ -2,8 +2,8 @@
 # pawn double space checking
 # castling
 # en passant
+# pawn promotion
 # part one, set up variables images and game loop
-# from typing import List, Tuple, Any
 
 # import pygame
 from constants import *
