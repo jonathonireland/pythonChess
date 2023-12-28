@@ -126,13 +126,13 @@ def check_valid_moves():
         options_list = white_options
     else:
         options_list = black_options
-
+        
     if selection <= len(options_list):
         valid_options = options_list[selection]
     else:
         print('selection outside of options range!')
         valid_options = []
-
+        
     return valid_options
 
 
@@ -161,6 +161,11 @@ def check_pawn(position, color):
                 moves_list.append((position[0] + 1, position[1] + 1))
             if (position[0] - 1, position[1] + 1) in black_locations:
                 moves_list.append((position[0] - 1, position[1] + 1))
+            # add en passant move checker
+            if (position[0] + 1, position[1] + 1) == black_ep:
+                moves_list.append((position[0] + 1, position[1] + 1))
+            if (position[0] - 1, position[1] + 1) == black_ep:
+                moves_list.append((position[0] - 1, position[1] + 1))
         case 'black':
             if (position[0], position[1] - 1) not in white_locations and \
                     (position[0], position[1] - 1) not in black_locations and position[1] > 0:
@@ -172,9 +177,32 @@ def check_pawn(position, color):
                 moves_list.append((position[0] + 1, position[1] - 1))
             if (position[0] - 1, position[1] - 1) in white_locations:
                 moves_list.append((position[0] - 1, position[1] - 1))
+            # add en passant move checker
+            if (position[0] + 1, position[1] - 1) == white_ep:
+                moves_list.append((position[0] + 1, position[1] - 1))
+            if (position[0] - 1, position[1] - 1) == white_ep:
+                moves_list.append((position[0] - 1, position[1] - 1))
     return moves_list
 
 
+# check en passant because people on the internet won't stop bugging me for it
+def check_ep(old_coords, new_coords):
+    if turn_step <= 1:
+        index = white_locations.index(old_coords)
+        ep_coords = (new_coords[0], new_coords[1] - 1)
+        piece = white_pieces[index]
+    else: 
+        index = black_locations.index(old_coords)
+        ep_coords = (new_coords[0], new_coords[1] + 1)
+        piece = black_pieces[index]
+    if piece == 'pawn' and abs(old_coords[1] - new_coords[1]) > 1:
+        # if piece was pawn and moved two spaces, return EP coords as defined above
+        pass
+    else: 
+        ep_coords = (100, 100)
+    return ep_coords
+
+# check if rook can move
 def check_rook(position, color):
     moves_list = []
     friends_list = friendly_list(color)
@@ -325,12 +353,18 @@ while run:
                     if turn_step == 0:
                         turn_step = 1
                 if click_coords in valid_moves and selection != 100:
+                    white_ep = check_ep(white_locations[selection], click_coords)
                     white_locations[selection] = click_coords
                     if click_coords in black_locations:
                         black_piece = black_locations.index(click_coords)
                         captured_pieces_white.append(black_pieces[black_piece])
                         if black_pieces[black_piece] == 'king':
                             winner = 'white'
+                        black_pieces.pop(black_piece)
+                        black_locations.pop(black_piece)
+                    if click_coords == black_ep:
+                        black_piece = black_locations.index((black_ep[0], black_ep[1]-1))
+                        captured_pieces_white.append(black_pieces[black_piece])
                         black_pieces.pop(black_piece)
                         black_locations.pop(black_piece)
                     black_options = check_options(black_pieces, black_locations, 'black')
@@ -346,12 +380,18 @@ while run:
                     if turn_step == 2:
                         turn_step = 3
                 if click_coords in valid_moves and selection != 100:
+                    black_ep = check_ep(black_locations[selection], click_coords)
                     black_locations[selection] = click_coords
                     if click_coords in white_locations:
                         white_piece = white_locations.index(click_coords)
                         captured_pieces_black.append(white_pieces[white_piece])
                         if white_pieces[white_piece] == 'king':
                             winner = 'black'
+                        white_pieces.pop(white_piece)
+                        white_locations.pop(white_piece)
+                    if click_coords == white_ep:
+                        white_piece = white_locations.index((white_ep[0], white_ep[1]+1))
+                        captured_pieces_black.append(white_pieces[white_piece])
                         white_pieces.pop(white_piece)
                         white_locations.pop(white_piece)
                     black_options = check_options(black_pieces, black_locations, 'black')
@@ -385,6 +425,6 @@ while run:
     if winner != '':
             game_over = True
             draw_game_over()    
-
+    print(black_ep, white_ep)
     pygame.display.flip()
 pygame.quit()

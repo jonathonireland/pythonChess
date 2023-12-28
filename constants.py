@@ -90,3 +90,5 @@ piece_list = ['pawn', 'queen', 'king', 'knight', 'rook', 'bishop']
 counter = 0
 winner = ''
 game_over = False
+white_ep = (100, 100)
+black_ep = (100, 100)
