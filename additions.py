@@ -250,7 +250,7 @@ def draw_promotion():
 
 def check_promo_select():
     mouse_pos = pygame.mouse.get_pos()
-    left_check = pygame.mouse.get_pressed()[0]
+    left_click = pygame.mouse.get_pressed()[0]
     x_pos = mouse_pos[0] // 100
     y_pos = mouse_pos[1] // 100
     if white_promote and left_click and x_pos > 7 and y_pos < 4:
