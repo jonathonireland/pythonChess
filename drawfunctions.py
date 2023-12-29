@@ -104,5 +104,25 @@ def draw_valid(moves):
         color = 'blue'
     for i in range(len(moves)):
         pygame.draw.circle(screen, color, (moves[i][0] * 100 + 50, moves[i][1] * 100 + 50), 5)
+        
+        
+def draw_promotion():
+    pygame.draw.rect(screen, 'dark gray', [800, 0, 200, 420])
+    if white_promote:
+        color = 'white'
+        for i in range(len(white_promotions)):
+            piece = white_promotions[i]
+            index = piece_list.index(piece)
+            screen.blit(white_images[index], (860, 5 + 100 * i))
+    elif black_promote: 
+        color = 'black'
+        for i in range(len(black_promotions)):
+            piece = black_promotions[i]
+            index = piece_list.index(piece)
+            screen.blit(black_images[index], (860, 5 + 100 * i))
+    pygame.draw.rect(screen, color, [800, 0, 200, 420], 8)
+    
+    
+
 
 
