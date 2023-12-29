@@ -207,7 +207,7 @@ def check_ep(old_coords, new_coords):
     return ep_coords
 
 
-#check for promotions
+# add pawn promotion
 def check_promotion():
     pawn_indexes = []
     white_promotion = False
@@ -217,7 +217,7 @@ def check_promotion():
         if white_pieces[i] == 'pawn':
             pawn_indexes.append(i)
     for i in range(len(pawn_indexes)):
-        if white_locations[pawn_indexes[i]][1]== 7:    
+        if white_locations[pawn_indexes[i]][1] == 7:
             white_promotion = True
             promote_index = pawn_indexes[i]
     pawn_indexes = []
@@ -225,7 +225,7 @@ def check_promotion():
         if black_pieces[i] == 'pawn':
             pawn_indexes.append(i)
     for i in range(len(pawn_indexes)):
-        if black_locations[pawn_indexes[i]][1]== 7:    
+        if black_locations[pawn_indexes[i]][1] == 0:
             black_promotion = True
             promote_index = pawn_indexes[i]
     return white_promotion, black_promotion, promote_index
@@ -255,7 +255,7 @@ def check_promo_select():
     y_pos = mouse_pos[1] // 100
     if white_promote and left_click and x_pos > 7 and y_pos < 4:
         white_pieces[promo_index] = white_promotions[y_pos]
-    if black_promote and left_click and x_pos > 7 and y_pos < 4:
+    elif black_promote and left_click and x_pos > 7 and y_pos < 4:
         black_pieces[promo_index] = black_promotions[y_pos]
     
 
