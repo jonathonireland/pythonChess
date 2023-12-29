@@ -37,6 +37,22 @@ def draw_check():
                         pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1,
                                                                black_locations[king_index][1] * 100 + 1, 100, 100], 5)
 
+def draw_promotion():
+    pygame.draw.rect(screen, 'dark gray', [800, 0, 200, 420])
+    if white_promote:
+        color = 'white'
+        for i in range(len(white_promotions)):
+            piece = white_promotions[i]
+            index = piece_list.index(piece)
+            screen.blit(white_images[index], (860, 5 + 100 * i))
+    elif black_promote: 
+        color = 'black'
+        for i in range(len(black_promotions)):
+            piece = black_promotions[i]
+            index = piece_list.index(piece)
+            screen.blit(black_images[index], (860, 5 + 100 * i))
+    pygame.draw.rect(screen, color, [800, 0, 200, 420], 8)
+
 
 # function to check all pieces valid options on board
 def check_options(pieces, locations, turn):
@@ -130,10 +146,22 @@ def check_promo_select():
     elif black_promote and left_click and x_pos > 7 and y_pos < 4:
         black_pieces[promo_index] = black_promotions[y_pos]
 
+
 def get_both_options():
     black_options = check_options(black_pieces, black_locations, 'black')
     white_options = check_options(white_pieces, white_locations, 'white')
     return black_options, white_options
+
+
+def pop_pieces_out_lists(piece, color):
+    if color == 'white':
+        white_pieces.pop(piece)
+        white_locations.pop(piece)
+        white_moved.pop(piece)
+    if color == 'black':
+        black_pieces.pop(piece)
+        black_locations.pop(piece)
+        black_moved.pop(piece)
 
 
 black_options = get_both_options()[0]
@@ -154,7 +182,7 @@ while run:
     if not game_over: 
         white_promote, black_promote, promo_index = check_promotion()
         if white_promote or black_promote:
-            drawfunctions.draw_promotion()
+            draw_promotion()
             check_promo_select()
     if selection != 100:
         valid_moves = check_valid_moves()
@@ -182,15 +210,11 @@ while run:
                         captured_pieces_white.append(black_pieces[black_piece])
                         if black_pieces[black_piece] == 'king':
                             winner = 'white'
-                        black_pieces.pop(black_piece)
-                        black_locations.pop(black_piece)
-                        black_moved.pop(black_piece)
+                        pop_pieces_out_lists(black_piece, 'black')
                     if click_coords == black_ep:
                         black_piece = black_locations.index((black_ep[0], black_ep[1]-1))
                         captured_pieces_white.append(black_pieces[black_piece])
-                        black_pieces.pop(black_piece)
-                        black_locations.pop(black_piece)
-                        black_moved.pop(black_piece)
+                        pop_pieces_out_lists(black_piece, 'black')
                     black_options = get_both_options()[0]
                     white_options = get_both_options()[1]
                     turn_step = 2
@@ -212,15 +236,11 @@ while run:
                         captured_pieces_black.append(white_pieces[white_piece])
                         if white_pieces[white_piece] == 'king':
                             winner = 'black'
-                        white_pieces.pop(white_piece)
-                        white_locations.pop(white_piece)
-                        white_moved.pop(white_piece)
+                        pop_pieces_out_lists(white_piece, 'white')
                     if click_coords == white_ep:
                         white_piece = white_locations.index((white_ep[0], white_ep[1]+1))
                         captured_pieces_black.append(white_pieces[white_piece])
-                        white_pieces.pop(white_piece)
-                        white_locations.pop(white_piece)
-                        white_moved.pop(white_piece)
+                        pop_pieces_out_lists(white_piece, 'white')
                     black_options = get_both_options()[0]
                     white_options = get_both_options()[1]
                     turn_step = 0
