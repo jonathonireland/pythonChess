@@ -7,7 +7,7 @@
 
 # import pygame
 from constants import *
-from drawfunctions import *
+import drawfunctions
 
 pygame.init()
 
@@ -72,15 +72,6 @@ def check_valid_moves():
         valid_options = []
         
     return valid_options
-
-
-def draw_valid(moves):
-    if turn_step < 2:
-        color = 'red'
-    else:
-        color = 'blue'
-    for i in range(len(moves)):
-        pygame.draw.circle(screen, color, (moves[i][0] * 100 + 50, moves[i][1] * 100 + 50), 5)
 
 
 # piece checks
@@ -322,9 +313,9 @@ while run:
     else:
         counter = 0
     screen.fill('dark gray')
-    draw_board()
-    draw_pieces()
-    draw_captured()
+    drawfunctions.draw_board()
+    drawfunctions.draw_pieces()
+    drawfunctions.draw_captured()
     draw_check()
     if not game_over: 
         white_promote, black_promote, promo_index = check_promotion()
@@ -333,7 +324,7 @@ while run:
             check_promo_select()
     if selection != 100:
         valid_moves = check_valid_moves()
-        draw_valid(valid_moves)
+        drawfunctions.draw_valid(valid_moves)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False

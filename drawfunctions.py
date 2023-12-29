@@ -95,5 +95,14 @@ def draw_promotion():
             index = piece_list.index(piece)
             screen.blit(black_images[index], (860, 5 + 100 * i))
     pygame.draw.rect(screen, color, [800, 0, 200, 420], 8)
+    
+    
+def draw_valid(moves):
+    if turn_step < 2:
+        color = 'red'
+    else:
+        color = 'blue'
+    for i in range(len(moves)):
+        pygame.draw.circle(screen, color, (moves[i][0] * 100 + 50, moves[i][1] * 100 + 50), 5)
 
 
