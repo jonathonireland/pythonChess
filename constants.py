@@ -86,9 +86,16 @@ small_black_images = [black_pawn_small, black_queen_small, black_king_small, bla
                       black_bishop_small]
 
 piece_list = ['pawn', 'queen', 'king', 'knight', 'rook', 'bishop']
+
+white_promotions = ['bishop', 'knight', 'rook', 'queen']
+black_promotions = ['bishop', 'knight', 'rook', 'queen']
 # check variables/ flashing counter
 counter = 0
 winner = ''
 game_over = False
 white_ep = (100, 100)
 black_ep = (100, 100)
+white_promote = False
+black_promote = False
+promo_index = 100
+left_click = ""
