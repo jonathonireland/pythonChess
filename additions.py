@@ -17,12 +17,15 @@ pygame.init()
 
 # draw a flashing square around king if in check
 def draw_check():
+    global check
+    check = False
     if turn_step < 2:
         if 'king' in white_pieces:
             king_index = white_pieces.index('king')
             king_location = white_locations[king_index]
             for i in range(len(black_options)):
                 if king_location in black_options[i]:
+                    check = True
                     if counter < 15:
                         pygame.draw.rect(screen, 'dark red', [white_locations[king_index][0] * 100 + 1,
                                                               white_locations[king_index][1] * 100 + 1, 100, 100], 5)
@@ -32,6 +35,7 @@ def draw_check():
             king_location = black_locations[king_index]
             for i in range(len(white_options)):
                 if king_location in white_options[i]:
+                    check = True
                     if counter < 15:
                         pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1,
                                                                black_locations[king_index][1] * 100 + 1, 100, 100], 5)
@@ -56,8 +60,10 @@ def draw_promotion():
 
 # function to check all pieces valid options on board
 def check_options(pieces, locations, turn):
+    global castling_moves
     moves_list = []
     all_moves_list = []
+    castling_moves = []
     for i in range((len(pieces))):
         location = locations[i]
         piece = pieces[i]
@@ -73,7 +79,7 @@ def check_options(pieces, locations, turn):
             case 'queen':
                 moves_list = checkfunctions.check_queen(location, turn)
             case 'king':
-                moves_list = checkfunctions.check_king(location, turn)
+                moves_list, castling_moves = check_king(location, turn)
         all_moves_list.append(moves_list)
     return all_moves_list
 
@@ -182,7 +188,34 @@ def check_castling():
                             castle = False
                 if castle:
                     castle_moves.append((empty_squares[1], empty_squares[0]))
-    return castle_moves        
+    return castle_moves
+
+def check_king(position, color):
+    moves_list = []
+    castle_moves = check_castling()
+    friends_list = checkfunctions.friendly_list(color)
+        # 8 squares to check for kings
+    targets = [(1, 0), (1, 1), (1, -1), (-1, 0), (-1, 1), (-1, -1), (0, 1), (0, -1)]
+    for i in range(8):
+        target = (position[0] + targets[i][0], position[1] + targets[i][1])
+        if target not in friends_list and 0 <= target[0] <= 7 and 0 <= target[1] <= 7:
+            moves_list.append(target)
+    return moves_list, castle_moves
+
+def draw_castling(moves):
+    if turn_step < 2:
+        color = 'red'
+    else:
+        color = 'blue'
+    for i in range(len(moves)):
+        pygame.draw.circle(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70), 8)
+        screen.blit(font.render('king', True, 'black'), (moves[i][0][0] * 100 + 30, moves[i][0][1] * 100 + 70))
+        pygame.draw.circle(screen, color, (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 8)
+        screen.blit(font.render('rook', True, 'black'),
+                    (moves[i][1][0] * 100 + 30, moves[i][1][1] * 100 + 70))
+        pygame.draw.line(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70),
+                         (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 2)
+        
                             
                             
 def check_promo_select():
@@ -236,6 +269,8 @@ while run:
     if selection != 100:
         valid_moves = check_valid_moves()
         drawfunctions.draw_valid(valid_moves)
+        if selected_piece == 'king':
+            draw_castling(castling_moves)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
