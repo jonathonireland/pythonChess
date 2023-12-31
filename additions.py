@@ -215,7 +215,6 @@ def draw_castling(moves):
                     (moves[i][1][0] * 100 + 30, moves[i][1][1] * 100 + 70))
         pygame.draw.line(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70),
                          (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 2)
-        
                             
                             
 def check_promo_select():
@@ -306,6 +305,23 @@ while run:
                     turn_step = 2
                     selection = 100
                     valid_moves = []
+                #add option to castle
+                elif selection != 100 and selected_piece == 'king':
+                    for q in range(len(castling_moves)):
+                        if click_coords == castling_moves[q][0]:
+                            white_locations[selection] = click_coords
+                            white_moved[selection] = True
+                            if click_coords == (1, 0):
+                                rook_coords = (0, 0)
+                            else: 
+                                rook_coords = (7, 0)
+                            rook_index = white_locations.index(rook_coords)
+                            white_locations[rook_index] = castling_moves[q][1]
+                            black_options = get_both_options()[0]
+                            white_options = get_both_options()[1]
+                            turn_step = 2
+                            selection = 100
+                            valid_moves = []
             if turn_step > 1:
                 if click_coords == (8, 8) or click_coords == (9, 8):
                     winner = 'white'
@@ -334,6 +350,23 @@ while run:
                     turn_step = 0
                     selection = 100
                     valid_moves = []
+                    #add option to castle
+                elif selection != 100 and selected_piece == 'king':
+                    for q in range(len(castling_moves)):
+                        if click_coords == castling_moves[q][0]:
+                            black_locations[selection] = click_coords
+                            black_moved[selection] = True
+                            if click_coords == (1, 0):
+                                rook_coords = (0, 0)
+                            else: 
+                                rook_coords = (7, 0)
+                            rook_index = black_locations.index(rook_coords)
+                            black_locations[rook_index] = castling_moves[q][1]
+                            black_options = get_both_options()[0]
+                            white_options = get_both_options()[1]
+                            turn_step = 2
+                            selection = 100
+                            valid_moves = []
         if event.type == pygame.KEYDOWN and game_over:
             if event.key == pygame.K_RETURN:
                 game_over = False
