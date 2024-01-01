@@ -40,7 +40,6 @@ def draw_check():
                         pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1,
                                                                black_locations[king_index][1] * 100 + 1, 100, 100], 5)
 
-
 def draw_promotion():
     pygame.draw.rect(screen, 'dark gray', [800, 0, 200, 420])
     if white_promote:
