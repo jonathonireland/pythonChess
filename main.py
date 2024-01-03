@@ -224,13 +224,13 @@ def draw_castling(moves):
 def check_promo_select():
     mouse_pos = pygame.mouse.get_pos()
     left_click = pygame.mouse.get_pressed()[0]
-    x_pos = mouse_pos[0] // 100
+    x_pos = mouse_pos[0] // 100 
     y_pos = mouse_pos[1] // 100
     if white_promote and left_click and x_pos > 7 and y_pos < 4:
         white_pieces[promo_index] = white_promotions[y_pos]
     elif black_promote and left_click and x_pos > 7 and y_pos < 4:
         black_pieces[promo_index] = black_promotions[y_pos]
-
+  
 
 def get_both_options():
     black_options = check_options(black_pieces, black_locations, 'black')
@@ -291,9 +291,18 @@ while run:
                     if turn_step == 0:
                         turn_step = 1
                 if click_coords in valid_moves and selection != 100:
+                    
                     white_ep = check_ep(white_locations[selection], click_coords)
                     white_locations[selection] = click_coords
                     white_moved[selection] = True
+                    moves_made_counter += 1
+                    moves_made_list.append((moves_made_counter, 'white',' white moved '+ selected_piece + ' to '+ str(click_coords)))
+                    iteration_spacer = moves_made_counter * 45
+                    white_font_color = (255, 255, 255)
+                    print((moves_made_counter, 'white',' white moved '+ selected_piece + ' to '+ str(click_coords)))
+                    pygame.draw.rect(screen, 'black', [1005, 0, 290, iteration_spacer-10], 0)
+                    screen.blit(font.render(f'{moves_made_list[-1][0]} {moves_made_list[-1][2]}', True, white_font_color), (1010, iteration_spacer))
+              
                     if click_coords in black_locations:
                         black_piece = black_locations.index(click_coords)
                         captured_pieces_white.append(black_pieces[black_piece])
@@ -339,6 +348,14 @@ while run:
                     black_ep = check_ep(black_locations[selection], click_coords)
                     black_locations[selection] = click_coords
                     black_moved[selection] = True
+                    moves_made_counter += 1
+                    moves_made_list.append((moves_made_counter, 'black',' black moved '+ selected_piece + ' to '+ str(click_coords)))
+                    pygame.draw.rect(screen, 'white', [1005, 0, 290, iteration_spacer-10], 0)
+                    print((moves_made_counter, 'black',' black moved '+ selected_piece + ' to '+ str(click_coords)))
+                    iteration_spacer = moves_made_counter * 45
+                    black_font_color = (0, 0, 0)
+                    screen.blit(font.render(f'{moves_made_list[-1][0]} {moves_made_list[-1][2]}', True, black_font_color), (1010, iteration_spacer))
+                    
                     if click_coords in white_locations:
                         white_piece = white_locations.index(click_coords)
                         captured_pieces_black.append(white_pieces[white_piece])

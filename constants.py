@@ -8,6 +8,9 @@ pygame.display.set_caption('Two-Player Pygame Chess!')
 font = pygame.font.Font('freesansbold.ttf', 20)
 medium_font = pygame.font.Font('freesansbold.ttf', 40)
 big_font = pygame.font.Font('freesansbold.ttf', 50)
+small_font = pygame.font.Font('freesansbold.ttf', 8)
+pygame.font.init()
+
 timer = pygame.time.Clock()
 fps = 60
 
@@ -80,6 +83,10 @@ black_pawn_small = pygame.transform.scale(black_pawn, (45, 45))
 white_pawn = pygame.transform.scale(pygame.image.load('assets/images/white/pawn.png'), (65, 65))
 white_pawn_small = pygame.transform.scale(white_pawn, (45, 45))
 
+# text backgrounds
+white_text_bg = pygame.transform.scale(pygame.image.load('assets/images/white/move-text-bg.png'), (300, 45))
+black_text_bg = pygame.transform.scale(pygame.image.load('assets/images/black/move-text-bg.png'), (300, 45))
+
 # white pieces
 white_images = [white_pawn, white_queen, white_king, white_knight, white_rook, white_bishop]
 small_white_images = [white_pawn_small, white_queen_small, white_king_small, white_knight_small, white_rook_small,
@@ -95,6 +102,8 @@ white_promotions = ['bishop', 'knight', 'rook', 'queen']
 black_promotions = ['bishop', 'knight', 'rook', 'queen']
 # check variables/ flashing counter
 counter = 0
+moves_made_counter = 0
+moves_made_list = []
 winner = ''
 game_over = False
 white_ep = (100, 100)
