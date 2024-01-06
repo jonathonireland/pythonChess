@@ -7,7 +7,6 @@ Thanks!
 
 https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbFpQVEZ3MkJEQkJSbkp4ZEhSWk1DV0thSnpKZ3xBQ3Jtc0tteDlPR2VEd0R5NW1FdW05ZDc0ckgtS2xGVzUxNHVJMjRKVkFaNVNXZDU5dEtvTmtnUzhINXlSN3ZUSFZ2TEVRTjMzRERtVkZuRURoUEF3bFctaE90RElwbWFrN1ZOcnVPY3hWTG5wQkRBam43WThIMA&q=https%3A%2F%2Fgithub.com%2Fplemaster01%2FpygameChess&v=X-e0jk4I938
 
-
 Current bugs (moves-list-branch):
 
 1. List of moves displays text and then disappears.
