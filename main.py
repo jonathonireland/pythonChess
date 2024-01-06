@@ -443,7 +443,7 @@ run = True
 screen.fill('dark gray')
 while run:
     timer.tick(fps)
-    screen.fill('dark gray', (0, 0, screen.get_width()// 2, screen.get_height()))
+    screen.fill('white', (0, 0, (screen.get_width()//3)*1.85, screen.get_height()))
     if counter < 30:
         counter += 1
     else:
