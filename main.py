@@ -484,9 +484,14 @@ while run:
                     white_moved[selection] = True
                     moves_made_counter += 1
                     moves_made_list.append(all_moves.index('player 1 moved white ' + selected_piece +' '+ str(click_coords) ))
-                    iteration_spacer = moves_made_counter * 24
-                    white_font_color = (255, 255, 255)
-                    screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1010, iteration_spacer))
+                    if moves_made_counter < 32:
+                        iteration_spacer = moves_made_counter * 24
+                        white_font_color = (255, 255, 255)
+                        screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1010, iteration_spacer))
+                    else:
+                        iteration_spacer = moves_made_counter * 24
+                        white_font_color = (255, 255, 255)
+                        screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1010, iteration_spacer))
                     print(str(moves_made_counter)+'. '+all_moves[moves_made_list[-1]])
                     if click_coords in black_locations:
                         black_piece = black_locations.index(click_coords)
@@ -534,9 +539,14 @@ while run:
                     black_moved[selection] = True
                     moves_made_counter += 1
                     moves_made_list.append(all_moves.index('player 2 moved black '+ selected_piece +' '+ str(click_coords)))
-                    iteration_spacer = moves_made_counter * 24
-                    black_font_color = (0, 0, 0)
-                    screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1010, iteration_spacer))  
+                    if moves_made_counter < 32:
+                        iteration_spacer = moves_made_counter * 24
+                        black_font_color = (0, 0, 0)
+                        screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1010, iteration_spacer))
+                    else: 
+                        iteration_spacer = moves_made_counter * 24
+                        black_font_color = (0, 0, 0)
+                        screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1010, iteration_spacer))
                     print(str(moves_made_counter)+'. '+all_moves[moves_made_list[-1]])
                     if click_coords in white_locations:
                         white_piece = white_locations.index(click_coords)
