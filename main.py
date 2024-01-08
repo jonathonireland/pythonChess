@@ -354,7 +354,7 @@ def draw_board():
         pygame.draw.rect(screen, 'gray', [0, 800, WIDTH, 100])
         pygame.draw.rect(screen, 'gold', [0, 800, WIDTH, 100], 5)
         pygame.draw.rect(screen, 'gold', [800, 0, 200, HEIGHT], 5)
-        pygame.draw.rect(screen, 'black', [1000, 0, 300, HEIGHT], 5)
+        pygame.draw.rect(screen, 'black', [1000, 0, 400, HEIGHT], 5)
         status_text = ['White: Select a Piece to Move!', 'White: Select a Destination!',
                        'Black: Select a Piece to Move!', 'Black: Select a Destination!']
         screen.blit(big_font.render(status_text[turn_step], True, 'black'), (20, 820))
@@ -448,13 +448,7 @@ def write_moves_made(moves_made_list, color, moves_made_counter, column_two_coun
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1010, iteration_spacer))
         else:
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1010, iteration_spacer))
-    if moves_made_counter == 33 and moves_made_counter < 65:
-        iteration_spacer = column_two_counter * increment_pixels
-        if color == 'white':
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1105, iteration_spacer))
-        else:
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1105, iteration_spacer))
-    if moves_made_counter > 33 and moves_made_counter < 65:
+    if moves_made_counter == 33 or moves_made_counter > 33 and moves_made_counter < 65:
         iteration_spacer = column_two_counter * increment_pixels
         if color == 'white':
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1105, iteration_spacer))
@@ -465,7 +459,13 @@ def write_moves_made(moves_made_list, color, moves_made_counter, column_two_coun
         if color == 'white':
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1200, iteration_spacer))
         else:
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1200, iteration_spacer))          
+            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1200, iteration_spacer))
+    if moves_made_counter == 97 or moves_made_counter > 97 and moves_made_counter < 129:
+        iteration_spacer = column_four_counter * increment_pixels
+        if color == 'white':
+            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1300, iteration_spacer))
+        else: 
+            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1300, iteration_spacer))
     print(str(moves_made_counter)+'. '+all_moves[moves_made_list[-1]])
 
 black_options = get_both_options()[0]
@@ -473,11 +473,13 @@ white_options = get_both_options()[1]
 
 column_two_counter = 0
 column_three_counter = 0
+column_four_counter = 0
 run = True
 screen.fill('dark gray')
 while run:
     timer.tick(fps)
     screen.fill('white', (0, 0, (screen.get_width()//3)*1.85, screen.get_height()))
+    screen.fill('dark gray', (800, 0, 200, HEIGHT))
     if counter < 30:
         counter += 1    
     else:
@@ -527,6 +529,10 @@ while run:
                         column_three_counter = 1
                     if moves_made_counter > 65 and moves_made_counter < 97:
                         column_three_counter +=1
+                    if moves_made_counter == 97:
+                        column_four_counter = 1
+                    if moves_made_counter > 97 and moves_made_counter < 129:
+                        column_four_counter +=1
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords) ))
                     # display moves to right column
@@ -587,6 +593,10 @@ while run:
                         column_three_counter = 1
                     if moves_made_counter > 65 and moves_made_counter < 97:
                         column_three_counter +=1
+                    if moves_made_counter == 97:
+                        column_four_counter = 1
+                    if moves_made_counter > 97 and moves_made_counter < 129:
+                        column_four_counter +=1
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords)))
                     # display moves to right column

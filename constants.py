@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
 
-WIDTH = 1300
+WIDTH = 1400
 HEIGHT = 900
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption('Two-Player Pygame Chess!')
