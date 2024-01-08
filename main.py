@@ -524,15 +524,15 @@ while run:
                     if moves_made_counter == 33:
                         column_two_counter = 1
                     if moves_made_counter > 33 and moves_made_counter < 65:
-                        column_two_counter +=1
+                        column_two_counter += 1
                     if moves_made_counter == 65:
                         column_three_counter = 1
                     if moves_made_counter > 65 and moves_made_counter < 97:
-                        column_three_counter +=1
+                        column_three_counter += 1
                     if moves_made_counter == 97:
                         column_four_counter = 1
                     if moves_made_counter > 97 and moves_made_counter < 129:
-                        column_four_counter +=1
+                        column_four_counter += 1
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords) ))
                     # display moves to right column
