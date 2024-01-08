@@ -1,4 +1,6 @@
 import pygame
+import mysql.connector
+import db_connection 
 pygame.init()
 
 WIDTH = 1400
