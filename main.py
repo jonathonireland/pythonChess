@@ -382,20 +382,7 @@ def draw_captured():
         captured_piece = captured_pieces_black[i]
         index = piece_list.index(captured_piece)
         screen.blit(small_white_images[index], (925, 5 + 50*i))
-          
-def draw_game_over():
-    pygame.draw.rect(screen, 'black', [200, 200, 400, 100])
-    screen.blit(font.render(f'{winner} won the game!', True, 'white'), (210, 210))
-    screen.blit(font.render(f'Press ENTER to Restart!', True, 'white'), (210, 240))
     
-def draw_valid(moves):
-    if turn_step < 2:
-        color = 'red'
-    else:
-        color = 'blue'
-    for i in range(len(moves)):
-        pygame.draw.circle(screen, color, (moves[i][0] * 100 + 50, moves[i][1] * 100 + 50), 5)
-        
 def check_promo_select():
     mouse_pos = pygame.mouse.get_pos()
     left_click = pygame.mouse.get_pressed()[0]
@@ -410,37 +397,6 @@ def get_both_options():
     black_options = check_options(black_pieces, black_locations, 'black')
     white_options = check_options(white_pieces, white_locations, 'white')
     return black_options, white_options
-
-def write_moves_made(moves_made_list, color, moves_made_counter, column_two_counter, column_three_counter):
-    white_font_color = (255, 255, 255)
-    black_font_color = (0, 0, 0)
-    iteration_spacer = 1
-    increment_pixels = 24
-    if moves_made_counter == 1 or moves_made_counter > 1 and moves_made_counter < 33:
-        iteration_spacer = moves_made_counter * increment_pixels
-        if color == 'white':
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1010, iteration_spacer))
-        else:
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1010, iteration_spacer))
-    if moves_made_counter == 33 or moves_made_counter > 33 and moves_made_counter < 65:
-        iteration_spacer = column_two_counter * increment_pixels
-        if color == 'white':
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1105, iteration_spacer))
-        else:
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1105, iteration_spacer))
-    if moves_made_counter == 65 or moves_made_counter > 65 and moves_made_counter < 97:
-        iteration_spacer = column_three_counter * increment_pixels
-        if color == 'white':
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1200, iteration_spacer))
-        else:
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1200, iteration_spacer))
-    if moves_made_counter == 97 or moves_made_counter > 97 and moves_made_counter < 129:
-        iteration_spacer = column_four_counter * increment_pixels
-        if color == 'white':
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1300, iteration_spacer))
-        else: 
-            screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1300, iteration_spacer))
-    print(str(moves_made_counter)+'. '+all_moves[moves_made_list[-1]])
 
 def create_new_game():
     mydb = mysql.connector.connect(host=connectionCredentials()[0],user=connectionCredentials()[1],password=connectionCredentials()[2],database=connectionCredentials()[3])
@@ -523,7 +479,7 @@ while run:
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords) ))
                     # display moves to right column
-                    write_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter)
+                    write_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                     
                     if click_coords in black_locations:
                         black_piece = black_locations.index(click_coords)
@@ -589,7 +545,7 @@ while run:
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords)))
                     # display moves to right column
-                    write_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter)
+                    write_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                     
                     if click_coords in white_locations:
                         white_piece = white_locations.index(click_coords)
@@ -630,9 +586,11 @@ while run:
                 winner = ''
                 white_pieces = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn']
                 white_locations = [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (0, 1), (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1)]
+                previous_white_locations = []
                 white_moved = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
                 black_pieces = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn']
                 black_locations = [(0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (7, 7), (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6), (7, 6)]
+                previous_black_locations = []
                 black_moved = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
                 captured_pieces_white = []
                 captured_pieces_black = []
@@ -647,6 +605,6 @@ while run:
                 moves_made_list = []
     if winner != '':
             game_over = True
-            draw_game_over()    
+            draw_game_over(winner)    
     pygame.display.flip()
 pygame.quit()
