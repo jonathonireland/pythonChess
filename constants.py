@@ -128,7 +128,6 @@ selection = 100
 valid_moves = []
 # load in game piece images (queen, king, rook, bishop, knight, pawn) * 2
 
-# kings ############
 # black king
 black_king = pygame.transform.scale(pygame.image.load('assets/images/black/king.png'), (80, 80))
 black_king_small = pygame.transform.scale(black_king, (45, 45))
@@ -136,7 +135,6 @@ black_king_small = pygame.transform.scale(black_king, (45, 45))
 white_king = pygame.transform.scale(pygame.image.load('assets/images/white/king.png'), (80, 80))
 white_king_small = pygame.transform.scale(white_king, (45, 45))
 
-# queens ###########
 # black queen
 black_queen = pygame.transform.scale(pygame.image.load('assets/images/black/queen.png'), (80, 80))
 black_queen_small = pygame.transform.scale(black_queen, (45, 45))
@@ -144,7 +142,6 @@ black_queen_small = pygame.transform.scale(black_queen, (45, 45))
 white_queen = pygame.transform.scale(pygame.image.load('assets/images/white/queen.png'), (80, 80))
 white_queen_small = pygame.transform.scale(white_queen, (45, 45))
 
-# rooks ###########
 # black rook
 black_rook = pygame.transform.scale(pygame.image.load('assets/images/black/rook.png'), (80, 80))
 black_rook_small = pygame.transform.scale(black_rook, (45, 45))
@@ -152,7 +149,6 @@ black_rook_small = pygame.transform.scale(black_rook, (45, 45))
 white_rook = pygame.transform.scale(pygame.image.load('assets/images/white/rook.png'), (80, 80))
 white_rook_small = pygame.transform.scale(white_rook, (45, 45))
 
-# bishops ##########
 # black bishop
 black_bishop = pygame.transform.scale(pygame.image.load('assets/images/black/bishop.png'), (80, 80))
 black_bishop_small = pygame.transform.scale(black_bishop, (45, 45))
@@ -160,7 +156,6 @@ black_bishop_small = pygame.transform.scale(black_bishop, (45, 45))
 white_bishop = pygame.transform.scale(pygame.image.load('assets/images/white/bishop.png'), (80, 80))
 white_bishop_small = pygame.transform.scale(white_bishop, (45, 45))
 
-# knights ##########
 # black knight
 black_knight = pygame.transform.scale(pygame.image.load('assets/images/black/knight.png'), (80, 80))
 black_knight_small = pygame.transform.scale(black_knight, (45, 45))
@@ -168,7 +163,6 @@ black_knight_small = pygame.transform.scale(black_knight, (45, 45))
 white_knight = pygame.transform.scale(pygame.image.load('assets/images/white/knight.png'), (80, 80))
 white_knight_small = pygame.transform.scale(white_knight, (45, 45))
 
-# pawns ##########
 # pawn
 black_pawn = pygame.transform.scale(pygame.image.load('assets/images/black/pawn.png'), (65, 65))
 black_pawn_small = pygame.transform.scale(black_pawn, (45, 45))
