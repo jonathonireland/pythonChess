@@ -13,8 +13,7 @@ Working through development plans.
 Development plans:
 1. Connect pygame to mysql, completed 
 2. Save each game to a games table, completed assigned last game id to global gameid variable.
-3. Save each moves made list to a gameMoves table, in progress. 
-   3. a. Almost done, starting position should have coordinants instead of a single digit.
+3. Save each moves made list to a gameMoves table, completed.
 4. Save each pawn promotion to a gamePromotions table. 
 5. Save each castling instance to a gameCastling table.
 6. Save each capture to a gameCaptures table.
