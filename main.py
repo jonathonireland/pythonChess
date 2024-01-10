@@ -532,7 +532,7 @@ while run:
                     white_locations[selection] = click_coords
                     white_moved[selection] = True
                     moves_made_counter += 1
-                    # make_game_move(gameid,moves_made_counter,'white',selected_piece,selection,click_coords)
+                    record_game_move(gameid,moves_made_counter,'white',selected_piece,selection,click_coords)
                     # column counter logic
                     if moves_made_counter == 33:
                         column_two_counter = 1
@@ -597,7 +597,7 @@ while run:
                     black_locations[selection] = click_coords
                     black_moved[selection] = True
                     moves_made_counter += 1
-                    # make_game_move(gameid,moves_made_counter,'white',selected_piece,selection,click_coords)
+                    record_game_move(gameid,moves_made_counter,'black',selected_piece,selection,click_coords)
                     # column counter logic
                     if moves_made_counter == 33:
                         column_two_counter = 1

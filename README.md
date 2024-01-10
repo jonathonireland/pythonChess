@@ -11,7 +11,10 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbFp
 Working through development plans.
 
 Development plans:
-1. connect pygame to mysql, completed 
-2. save each game to a games table, completed assigned last game id to global gameid variable.
-3. save each moves made list to a moves_made table, in progress.
-4. make game more interactive to animate a previous game saved in database.
+1. Connect pygame to mysql, completed 
+2. Save each game to a games table, completed assigned last game id to global gameid variable.
+3. Save each moves made list to a moves_made table, in progress. Almost done, starting position should have coordinants instead of a single digit.
+4. Save each pawn promotion to aa gamePromotions table. 
+5. Save each castling instance to a gameCastling table.
+6. Save each capture to a gameCaptures table.
+7. Make game more interactive to animate a previous game saved in database?
