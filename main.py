@@ -2,25 +2,8 @@
 from constants import *
 from db_connection import connectionCredentials
 from db_functions import *
+from service_functions import *
 pygame.init()
-
-def friendly_list(color):
-    friends_list = []
-    match color:
-        case 'white':
-            friends_list = white_locations    
-        case 'black':
-            friends_list = black_locations
-    return friends_list
-
-def enemy_list(color):
-    enemies_list = []
-    match color:
-        case 'white':
-            enemies_list = black_locations
-        case 'black':
-            enemies_list = white_locations
-    return enemies_list
 
 def check_bishop(position, color):
     moves_list = []
@@ -427,16 +410,6 @@ def get_both_options():
     black_options = check_options(black_pieces, black_locations, 'black')
     white_options = check_options(white_pieces, white_locations, 'white')
     return black_options, white_options
-
-def pop_piece_out_lists(piece, color):
-    if color == 'white':
-        white_pieces.pop(piece)
-        white_locations.pop(piece)
-        white_moved.pop(piece)
-    if color == 'black':
-        black_pieces.pop(piece)
-        black_locations.pop(piece)
-        black_moved.pop(piece)
 
 def write_moves_made(moves_made_list, color, moves_made_counter, column_two_counter, column_three_counter):
     white_font_color = (255, 255, 255)
