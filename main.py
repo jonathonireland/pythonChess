@@ -468,17 +468,6 @@ def write_moves_made(moves_made_list, color, moves_made_counter, column_two_coun
         else: 
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1300, iteration_spacer))
     print(str(moves_made_counter)+'. '+all_moves[moves_made_list[-1]])
-
-def create_new_game():
-    mydb = mysql.connector.connect(host=connectionCredentials()[0],user=connectionCredentials()[1],password=connectionCredentials()[2],database=connectionCredentials()[3])
-    mycursor = mydb.cursor()
-    sql = "INSERT INTO games (game_name, game_notes) VALUES (%s, %s)"
-    val = ("newGame", "initial attempt")
-    mycursor.execute(sql, val)
-    mydb.commit()
-    global gameid
-    gameid = mycursor.lastrowid
-    print(str(gameid) + "game id has a value")
     
 create_new_game()
 black_options = get_both_options()[0]
