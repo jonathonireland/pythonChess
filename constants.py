@@ -1,6 +1,5 @@
 import pygame
 import mysql.connector
-import db_connection 
 pygame.init()
 
 WIDTH = 1400
@@ -216,3 +215,4 @@ black_promote = False
 promo_index = 100
 left_click = ""
 check = False
+gameid = 0

@@ -1,5 +1,7 @@
 # import pygame
 from constants import *
+from db_connection import connectionCredentials
+from db_functions import *
 pygame.init()
 
 def friendly_list(color):
@@ -212,7 +214,6 @@ def check_valid_moves():
         options_list = white_options
     else:
         options_list = black_options
-        
     if selection <= len(options_list):
         valid_options = options_list[selection]
     else:
@@ -468,9 +469,20 @@ def write_moves_made(moves_made_list, color, moves_made_counter, column_two_coun
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1300, iteration_spacer))
     print(str(moves_made_counter)+'. '+all_moves[moves_made_list[-1]])
 
+def create_new_game():
+    mydb = mysql.connector.connect(host=connectionCredentials()[0],user=connectionCredentials()[1],password=connectionCredentials()[2],database=connectionCredentials()[3])
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO games (game_name, game_notes) VALUES (%s, %s)"
+    val = ("newGame", "initial attempt")
+    mycursor.execute(sql, val)
+    mydb.commit()
+    global gameid
+    gameid = mycursor.lastrowid
+    print(str(gameid) + "game id has a value")
+    
+create_new_game()
 black_options = get_both_options()[0]
 white_options = get_both_options()[1]
-
 column_two_counter = 0
 column_three_counter = 0
 column_four_counter = 0
@@ -520,6 +532,7 @@ while run:
                     white_locations[selection] = click_coords
                     white_moved[selection] = True
                     moves_made_counter += 1
+                    # make_game_move(gameid,moves_made_counter,'white',selected_piece,selection,click_coords)
                     # column counter logic
                     if moves_made_counter == 33:
                         column_two_counter = 1
@@ -584,6 +597,7 @@ while run:
                     black_locations[selection] = click_coords
                     black_moved[selection] = True
                     moves_made_counter += 1
+                    # make_game_move(gameid,moves_made_counter,'white',selected_piece,selection,click_coords)
                     # column counter logic
                     if moves_made_counter == 33:
                         column_two_counter = 1
