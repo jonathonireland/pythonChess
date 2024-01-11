@@ -149,22 +149,6 @@ def draw_check():
                         pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1,
                                                                black_locations[king_index][1] * 100 + 1, 100, 100], 5)
 
-def draw_promotion():
-    pygame.draw.rect(screen, 'dark gray', [800, 0, 200, 420])
-    if white_promote:
-        color = 'white'
-        for i in range(len(white_promotions)):
-            piece = white_promotions[i]
-            index = piece_list.index(piece)
-            screen.blit(white_images[index], (860, 5 + 100 * i))
-    elif black_promote: 
-        color = 'black'
-        for i in range(len(black_promotions)):
-            piece = black_promotions[i]
-            index = piece_list.index(piece)
-            screen.blit(black_images[index], (860, 5 + 100 * i))
-    pygame.draw.rect(screen, color, [800, 0, 200, 420], 8)
-
 
 # function to check all pieces valid options on board
 def check_options(pieces, locations, turn):
@@ -243,6 +227,22 @@ def check_promotion():
             black_promotion = True
             promote_index = pawn_indexes[i]
     return white_promotion, black_promotion, promote_index
+
+def draw_promotion():
+    pygame.draw.rect(screen, 'dark gray', [800, 0, 200, 420])
+    if white_promote:
+        color = 'white'
+        for i in range(len(white_promotions)):
+            piece = white_promotions[i]
+            index = piece_list.index(piece)
+            screen.blit(white_images[index], (860, 5 + 100 * i))
+    elif black_promote: 
+        color = 'black'
+        for i in range(len(black_promotions)):
+            piece = black_promotions[i]
+            index = piece_list.index(piece)
+            screen.blit(black_images[index], (860, 5 + 100 * i))
+    pygame.draw.rect(screen, color, [800, 0, 200, 420], 8)
 
 def check_castling():
     # 1. king must not currently be in check
@@ -325,32 +325,6 @@ def draw_castling(moves):
                     (moves[i][1][0] * 100 + 30, moves[i][1][1] * 100 + 70))
         pygame.draw.line(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70),
                          (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 2)
-
-# draw main game board
-def draw_board():   
-    for i in range(32):
-        column = i % 4
-        row = i // 4
-        if row % 2 == 0:
-            pygame.draw.rect(screen, 'light gray', [600 - (column * 200), row * 100, 100, 100])
-        else:
-            pygame.draw.rect(screen, 'light gray', [700 - (column * 200), row * 100, 100, 100])
-        pygame.draw.rect(screen, 'gray', [0, 800, WIDTH, 100])
-        pygame.draw.rect(screen, 'gold', [0, 800, WIDTH, 100], 5)
-        pygame.draw.rect(screen, 'gold', [800, 0, 200, HEIGHT], 5)
-        pygame.draw.rect(screen, 'black', [1000, 0, 400, HEIGHT], 5)
-        status_text = ['White: Select a Piece to Move!', 'White: Select a Destination!',
-                       'Black: Select a Piece to Move!', 'Black: Select a Destination!']
-        screen.blit(big_font.render(status_text[turn_step], True, 'black'), (20, 820))
-        for i in range(9):
-            pygame.draw.line(screen, 'black', (0, 100 * i), (800, 100 * i), 2)
-            pygame.draw.line(screen, 'black', (100 * i, 0), (100 * i, 800), 2)
-        screen.blit(medium_font.render('FORFEIT', True, 'black'), (810, 830))
-        if white_promote or black_promote:
-            pygame.draw.rect(screen, 'gray', [0, 800, WIDTH - 200, 100])
-            pygame.draw.rect(screen, 'gold', [0, 800, WIDTH - 200, 100], 5)
-            screen.blit(big_font.render('Select Piece to Promote Pawn', True, 'black'), (20, 820))
-    screen.blit(chess_board_numbers, (5,5))
 
 # draw pieces onto board
 def draw_pieces():
@@ -602,7 +576,8 @@ while run:
                 column_two_counter = 0
                 column_three_counter = 0
                 moves_made_counter = 0
-                moves_made_list = []
+                moves_made_list = []    
+                create_new_game()
     if winner != '':
             game_over = True
             draw_game_over(winner)    
