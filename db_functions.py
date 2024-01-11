@@ -1,12 +1,16 @@
 from constants import * 
 from db_connection import connectionCredentials
 
-def record_game_move(gameid,moves_made_counter,color,selected_piece,selection,click_coords):
-    mydb = mysql.connector.connect(host=connectionCredentials()[0],user=connectionCredentials()[1],password=connectionCredentials()[2],database=connectionCredentials()[3])
+def record_pawn_promotion(piece, moveid, color, promotion_id):
+    mydb = mysql.connector.connect(host=connectionCredentials()[0], user=connectionCredentials()[1],
+                                   password=connectionCredentials()[2], database=connectionCredentials()[3])
     mycursor = mydb.cursor()
-    sql = "INSERT INTO gameMoves (games_id, order_number, color, piece, start_pos, end_pos) VALUES ('"+str(gameid)+"', '"+str(moves_made_counter)+"', '"+color+"', '"+str(selected_piece)+"', '"+str(selection)+"', '"+str(click_coords)+"')"
+    sql = "INSERT INTO gamePromotions (promotion_to_piece, game_moves_id, color, promotion_id) VALUES (%s, %s, %s, %s)"
+    values = (str(piece), str(moveid), str(color), str(promotion_id))
+
     try:
-        mycursor.execute(sql)
+        mycursor.execute(sql, values)
         mydb.commit()
-    except:
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
         mydb.rollback()

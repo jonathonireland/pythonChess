@@ -290,14 +290,21 @@ def check_promo_select(): # Check Promotion Options
     left_click = pygame.mouse.get_pressed()[0]
     x_pos = mouse_pos[0] // 100 
     y_pos = mouse_pos[1] // 100
+    color = 'fail'
+    piece = 'epic fail'
+    promotion_id =''
+    global moveid
     if white_promote and left_click and x_pos > 7 and y_pos < 4:
         white_pieces[promo_index] = white_promotions[y_pos]
-        print('('+str(x_pos)+', '+str(y_pos)+') position coords, '+str(left_click)+' left_click')
-        print(white_pieces[promo_index])
-    elif black_promote and left_click and x_pos > 7 and y_pos < 4:
+        color = 'white'
+        piece = white_pieces[promo_index]
+        promotion_id = str(piece)+str(moveid)+str(color)
+    if black_promote and left_click and x_pos > 7 and y_pos < 4:
         black_pieces[promo_index] = black_promotions[y_pos]
-        print('('+str(x_pos)+', '+str(y_pos)+') position coords, '+str(left_click)+' left_click')
-        print(black_pieces[promo_index])
+        color = 'black'
+        piece = black_pieces[promo_index]
+        promotion_id = str(piece)+str(moveid)+str(color)
+    record_pawn_promotion(piece, moveid, color, promotion_id)
 
 def get_both_options(): # Get Options from check_options 
     black_options = check_options(black_pieces, black_locations, 'black')
@@ -309,12 +316,28 @@ def create_new_game(): # Create a New Game in Persistant Data
     mycursor = mydb.cursor()
     sql = "INSERT INTO games (game_name, game_notes) VALUES (%s, %s)"
     val = ("newGame", "initial attempt")
-    mycursor.execute(sql, val)
-    mydb.commit()
-    global gameid
-    gameid = mycursor.lastrowid
-    print(str(gameid) + " game id has a value")
-    
+    try:
+        mycursor.execute(sql, val)
+        mydb.commit()
+        global gameid
+        gameid = mycursor.lastrowid
+        print(str(gameid) + " game id has a value")
+    except:
+        mydb.rollback()
+
+def record_game_move(gameid, moves_made_counter, color, selected_piece, selection, click_coords):
+    mydb = mysql.connector.connect(host=connectionCredentials()[0],user=connectionCredentials()[1],password=connectionCredentials()[2],database=connectionCredentials()[3])
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO gameMoves (games_id, order_number, color, piece, start_pos, end_pos) VALUES ('"+str(gameid)+"', '"+str(moves_made_counter)+"', '"+color+"', '"+str(selected_piece)+"', '"+str(selection)+"', '"+str(click_coords)+"')"
+    try:
+        mycursor.execute(sql)
+        mydb.commit()
+        global moveid
+        moveid = mycursor.lastrowid
+        print(str(moveid) + " move id has a value")
+    except:
+        mydb.rollback()
+
 # Clean Start Game Variables and Begin While Run Loop
 create_new_game()
 black_options = get_both_options()[0]

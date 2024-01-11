@@ -201,6 +201,7 @@ promo_index = 100
 left_click = ""
 check = False
 gameid = 0
+moveid = 0
 turn_step = 0
 # 0 - whites turn no selction: 1- whites turn piece selected: 2 - black turn no selection
 selection = 100
