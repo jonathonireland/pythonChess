@@ -299,7 +299,7 @@ def check_promo_select(): # Check Promotion Options
         print('('+str(x_pos)+', '+str(y_pos)+') position coords, '+str(left_click)+' left_click')
         print(black_pieces[promo_index])
 
-def get_both_options():
+def get_both_options(): # Get Options from check_options 
     black_options = check_options(black_pieces, black_locations, 'black')
     white_options = check_options(white_pieces, white_locations, 'white')
     return black_options, white_options
@@ -315,6 +315,7 @@ def create_new_game(): # Create a New Game in Persistant Data
     gameid = mycursor.lastrowid
     print(str(gameid) + " game id has a value")
     
+# Clean Start Game Variables and Begin While Run Loop
 create_new_game()
 black_options = get_both_options()[0]
 white_options = get_both_options()[1]

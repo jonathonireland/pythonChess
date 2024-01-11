@@ -124,12 +124,6 @@ all_moves = ['rook (0, 0)', 'rook (0, 1)', 'rook (0, 2)', 'rook (0, 3)', 'rook (
     'pawn (6, 0)', 'pawn (6, 1)', 'pawn (6, 2)', 'pawn (6, 3)', 'pawn (6, 4)', 'pawn (6, 5)', 'pawn (6, 6)', 'pawn (6, 7)', 
     'pawn (7, 0)', 'pawn (7, 1)', 'pawn (7, 2)', 'pawn (7, 3)', 'pawn (7, 4)', 'pawn (7, 5)', 'pawn (7, 6)', 'pawn (7, 7)']
 
-turn_step = 0
-# 0 - whites turn no selction: 1- whites turn piece selected: 2 - black turn no selection
-selection = 100
-valid_moves = []
-# load in game piece images (queen, king, rook, bishop, knight, pawn) * 2
-
 # black king
 black_king = pygame.transform.scale(pygame.image.load('assets/images/black/king.png'), (80, 80))
 black_king_small = pygame.transform.scale(black_king, (45, 45))
@@ -207,3 +201,7 @@ promo_index = 100
 left_click = ""
 check = False
 gameid = 0
+turn_step = 0
+# 0 - whites turn no selction: 1- whites turn piece selected: 2 - black turn no selection
+selection = 100
+valid_moves = []
