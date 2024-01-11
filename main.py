@@ -149,9 +149,7 @@ def draw_check():
                         pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1,
                                                                black_locations[king_index][1] * 100 + 1, 100, 100], 5)
 
-
-# function to check all pieces valid options on board
-def check_options(pieces, locations, turn):
+def check_options(pieces, locations, turn): # function to check all pieces valid options on board
     global castling_moves
     moves_list = []
     all_moves_list = []
@@ -175,8 +173,7 @@ def check_options(pieces, locations, turn):
         all_moves_list.append(moves_list)
     return all_moves_list
 
-# check for valid moves for just selected piece
-def check_valid_moves():
+def check_valid_moves(): # check for valid moves for just selected piece
     if turn_step < 2:
         options_list = white_options
     else:
@@ -188,8 +185,7 @@ def check_valid_moves():
         valid_options = []
     return valid_options
 
-# check en passant because people on the internet won't stop bugging me for it
-def check_ep(old_coords, new_coords):
+def check_ep(old_coords, new_coords): # check en passant because people on the internet won't stop bugging me for it
     if turn_step <= 1:
         index = white_locations.index(old_coords)
         ep_coords = (new_coords[0], new_coords[1] - 1)
@@ -205,8 +201,7 @@ def check_ep(old_coords, new_coords):
         ep_coords = (100, 100)
     return ep_coords
 
-# add pawn promotion
-def check_promotion():
+def check_promotion(): # add pawn promotion
     pawn_indexes = []
     white_promotion = False
     black_promotion = False
@@ -228,27 +223,7 @@ def check_promotion():
             promote_index = pawn_indexes[i]
     return white_promotion, black_promotion, promote_index
 
-def draw_promotion():
-    pygame.draw.rect(screen, 'dark gray', [800, 0, 200, 420])
-    if white_promote:
-        color = 'white'
-        for i in range(len(white_promotions)):
-            piece = white_promotions[i]
-            index = piece_list.index(piece)
-            screen.blit(white_images[index], (860, 5 + 100 * i))
-    elif black_promote: 
-        color = 'black'
-        for i in range(len(black_promotions)):
-            piece = black_promotions[i]
-            index = piece_list.index(piece)
-            screen.blit(black_images[index], (860, 5 + 100 * i))
-    pygame.draw.rect(screen, color, [800, 0, 200, 420], 8)
-
 def check_castling():
-    # 1. king must not currently be in check
-    # 2. Neither the rook nor rook has moved previously
-    # 3. No pieces can exist between king and rook
-    # 4. King does not pass through or or finish on an attacked piece
     castle_moves = []  # store each valid castle move as [((king_coords), (castle_coords))]
     rook_indexes = []
     rook_locations = []
@@ -311,51 +286,6 @@ def check_king(position, color):
         if target not in friends_list and 0 <= target[0] <= 7 and 0 <= target[1] <= 7:
             moves_list.append(target)
     return moves_list, castle_moves
-
-def draw_castling(moves):
-    if turn_step < 2:
-        color = 'red'
-    else:
-        color = 'blue'
-    for i in range(len(moves)):
-        pygame.draw.circle(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70), 8)
-        screen.blit(font.render('king', True, 'black'), (moves[i][0][0] * 100 + 30, moves[i][0][1] * 100 + 70))
-        pygame.draw.circle(screen, color, (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 8)
-        screen.blit(font.render('rook', True, 'black'),
-                    (moves[i][1][0] * 100 + 30, moves[i][1][1] * 100 + 70))
-        pygame.draw.line(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70),
-                         (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 2)
-
-# draw pieces onto board
-def draw_pieces():
-    for i in range(len(white_pieces)):
-        index = piece_list.index(white_pieces[i])
-        if white_pieces[i] == 'pawn':
-            screen.blit(white_pawn, (white_locations[i][0] * 100 + 22, white_locations[i][1] * 100 + 30))
-        else:
-            screen.blit(white_images[index],(white_locations[i][0] * 100 + 10, white_locations[i][1] * 100 + 10))
-        if turn_step < 2:
-            if selection == i:
-                pygame.draw.rect(screen,'red',[white_locations[i][0] * 100 + 1, white_locations[i][1] * 100 + 1, 100, 100], 2)
-    for i in range(len(black_pieces)):
-        index = piece_list.index(black_pieces[i])
-        if black_pieces[i] == 'pawn':
-            screen.blit(black_pawn, (black_locations[i][0] * 100 + 22, black_locations[i][1] * 100 + 30))
-        else:
-            screen.blit(black_images[index],(black_locations[i][0] * 100 + 10, black_locations[i][1] * 100 + 10))
-        if turn_step >= 2:
-            if selection == i:
-                pygame.draw.rect(screen,'blue',[black_locations[i][0] * 100 + 1, black_locations[i][1] * 100 + 1, 100, 100], 2)
-                
-def draw_captured():
-    for i in range(len(captured_pieces_white)):
-        captured_piece = captured_pieces_white[i]
-        index = piece_list.index(captured_piece)
-        screen.blit(small_black_images[index], (825, 5 + 50*i))
-    for i in range(len(captured_pieces_black)):
-        captured_piece = captured_pieces_black[i]
-        index = piece_list.index(captured_piece)
-        screen.blit(small_white_images[index], (925, 5 + 50*i))
     
 def check_promo_select():
     mouse_pos = pygame.mouse.get_pos()
@@ -364,8 +294,12 @@ def check_promo_select():
     y_pos = mouse_pos[1] // 100
     if white_promote and left_click and x_pos > 7 and y_pos < 4:
         white_pieces[promo_index] = white_promotions[y_pos]
+        print('('+str(x_pos)+', '+str(y_pos)+') position coords, '+str(left_click)+' left_click')
+        print(white_pieces[promo_index])
     elif black_promote and left_click and x_pos > 7 and y_pos < 4:
         black_pieces[promo_index] = black_promotions[y_pos]
+        print('('+str(x_pos)+', '+str(y_pos)+') position coords, '+str(left_click)+' left_click')
+        print(black_pieces[promo_index])
 
 def get_both_options():
     black_options = check_options(black_pieces, black_locations, 'black')
@@ -381,7 +315,7 @@ def create_new_game():
     mydb.commit()
     global gameid
     gameid = mycursor.lastrowid
-    print(str(gameid) + "game id has a value")
+    print(str(gameid) + " game id has a value")
     
 create_new_game()
 black_options = get_both_options()[0]
@@ -406,7 +340,7 @@ while run:
     if not game_over: 
         white_promote, black_promote, promo_index = check_promotion()
         if white_promote or black_promote:
-            draw_promotion()
+            draw_promotion(white_promote, black_promote)
             check_promo_select()
     if selection != 100:
         valid_moves = check_valid_moves()
@@ -453,7 +387,7 @@ while run:
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords) ))
                     # display moves to right column
-                    write_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
+                    draw_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                     
                     if click_coords in black_locations:
                         black_piece = black_locations.index(click_coords)
@@ -519,7 +453,7 @@ while run:
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords)))
                     # display moves to right column
-                    write_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
+                    draw_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                     
                     if click_coords in white_locations:
                         white_piece = white_locations.index(click_coords)
