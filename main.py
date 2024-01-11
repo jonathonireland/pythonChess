@@ -5,7 +5,7 @@ from db_functions import *
 from service_functions import *
 pygame.init()
 
-def check_bishop(position, color):
+def check_bishop(position, color): # Check Bishop's Valid Moves
     moves_list = []
     friends_list = friendly_list(color)
     enemies_list = enemy_list(color)  
@@ -36,7 +36,7 @@ def check_bishop(position, color):
                 path = False
     return moves_list
 
-def check_knight(position, color):
+def check_knight(position, color): # Check Knight's Valid Moves
     moves_list = []
     friends_list = friendly_list(color)
     # 8 squares to check for knights, they can go two squares in one direction and one in another
@@ -85,15 +85,14 @@ def check_pawn(position, color):
                 moves_list.append((position[0] - 1, position[1] - 1))
     return moves_list
 
-def check_queen(position, color):
+def check_queen(position, color): # Check Queen's Valid Moves
     moves_list = check_bishop(position, color)
     second_list = check_rook(position, color)
     for i in range(len(second_list)):
         moves_list.append(second_list[i])
     return moves_list
 
-# check if rook can move
-def check_rook(position, color):
+def check_rook(position, color): # Check if Rook Can Move
     moves_list = []
     friends_list = friendly_list(color)
     enemies_list = enemy_list(color)  
@@ -124,8 +123,7 @@ def check_rook(position, color):
                 path = False
     return moves_list
 
-# draw a flashing square around king if in check
-def draw_check():
+def draw_check(): # Draw a Flashing Square Around King if in Check
     global check
     check = False
     if turn_step < 2:
@@ -149,7 +147,7 @@ def draw_check():
                         pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1,
                                                                black_locations[king_index][1] * 100 + 1, 100, 100], 5)
 
-def check_options(pieces, locations, turn): # function to check all pieces valid options on board
+def check_options(pieces, locations, turn): # Check All Pieces Valid Options on Board
     global castling_moves
     moves_list = []
     all_moves_list = []
@@ -173,7 +171,7 @@ def check_options(pieces, locations, turn): # function to check all pieces valid
         all_moves_list.append(moves_list)
     return all_moves_list
 
-def check_valid_moves(): # check for valid moves for just selected piece
+def check_valid_moves(): # Check for Valid Moves for Selected Piece
     if turn_step < 2:
         options_list = white_options
     else:
@@ -185,7 +183,7 @@ def check_valid_moves(): # check for valid moves for just selected piece
         valid_options = []
     return valid_options
 
-def check_ep(old_coords, new_coords): # check en passant because people on the internet won't stop bugging me for it
+def check_ep(old_coords, new_coords): # Check en passant 
     if turn_step <= 1:
         index = white_locations.index(old_coords)
         ep_coords = (new_coords[0], new_coords[1] - 1)
@@ -201,7 +199,7 @@ def check_ep(old_coords, new_coords): # check en passant because people on the i
         ep_coords = (100, 100)
     return ep_coords
 
-def check_promotion(): # add pawn promotion
+def check_promotion(): # Check to Add Pawn Promotion
     pawn_indexes = []
     white_promotion = False
     black_promotion = False
@@ -223,7 +221,7 @@ def check_promotion(): # add pawn promotion
             promote_index = pawn_indexes[i]
     return white_promotion, black_promotion, promote_index
 
-def check_castling():
+def check_castling(): # Check if Castling is Possible
     castle_moves = []  # store each valid castle move as [((king_coords), (castle_coords))]
     rook_indexes = []
     rook_locations = []
@@ -275,7 +273,7 @@ def check_castling():
                     castle_moves.append((empty_squares[1], empty_squares[0]))
     return castle_moves
 
-def check_king(position, color):
+def check_king(position, color): # Check King's Valid Moves
     moves_list = []
     castle_moves = check_castling()
     friends_list = friendly_list(color)
@@ -287,7 +285,7 @@ def check_king(position, color):
             moves_list.append(target)
     return moves_list, castle_moves
     
-def check_promo_select():
+def check_promo_select(): # Check Promotion Options
     mouse_pos = pygame.mouse.get_pos()
     left_click = pygame.mouse.get_pressed()[0]
     x_pos = mouse_pos[0] // 100 
@@ -306,7 +304,7 @@ def get_both_options():
     white_options = check_options(white_pieces, white_locations, 'white')
     return black_options, white_options
 
-def create_new_game():
+def create_new_game(): # Create a New Game in Persistant Data
     mydb = mysql.connector.connect(host=connectionCredentials()[0],user=connectionCredentials()[1],password=connectionCredentials()[2],database=connectionCredentials()[3])
     mycursor = mydb.cursor()
     sql = "INSERT INTO games (game_name, game_notes) VALUES (%s, %s)"
