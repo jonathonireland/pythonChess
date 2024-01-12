@@ -16,5 +16,8 @@ Development plans:
 3. Save each moves made list to a gameMoves table, completed.
 4. Save each pawn promotion to a gamePromotions table, completed. 
 5. Save each capture to a gameCaptures table, completed.
-6. Save each castling instance to a gameCastling table.
-7. Make game more interactive to animate a previous game saved in database?
+6. Save each castling instance to a gameCastling table, completed.
+7. Fix game move quirks created from adding castling to moves types.
+8. Clean up code.
+9. Add more features.
+
