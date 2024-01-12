@@ -11,12 +11,12 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbFp
 Working through development plans.
 
 Development plans:
-1. Connect pygame to mysql, completed 
-2. Save each game to a games table, completed assigned last game id to global gameid variable.
-3. Save each moves made list to a gameMoves table, completed.
-4. Save each pawn promotion to a gamePromotions table, completed. 
-5. Save each capture to a gameCaptures table, completed.
-6. Save each castling instance to a gameCastling table, completed.
+1. Completed: Connect pygame to persistent data  
+2. Completed: Save each game to a games table assigned last game id to global gameid variable.
+3. Completed: Save each moves made list to a gameMoves table.
+4. Completed: Save each pawn promotion to a gamePromotions table. 
+5. Completed: Save each capture to a gameCaptures table.
+6. Completed: Save each castling instance to a gameCastling table.
 7. Fix game move quirks created from adding castling to moves types.
 8. Clean up code.
 9. Add more features.
