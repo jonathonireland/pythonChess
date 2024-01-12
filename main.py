@@ -1,6 +1,5 @@
 # import pygame
 from constants import *
-from db_connection import connectionCredentials
 from db_functions import *
 from service_functions import *
 pygame.init()
@@ -290,8 +289,8 @@ def check_promo_select(): # Check Promotion Options
     left_click = pygame.mouse.get_pressed()[0]
     x_pos = mouse_pos[0] // 100 
     y_pos = mouse_pos[1] // 100
-    color = 'fail'
-    piece = 'epic fail'
+    color = ''
+    piece = ''
     promotion_id =''
     global moveid
     if white_promote and left_click and x_pos > 7 and y_pos < 4:
@@ -326,8 +325,6 @@ def get_both_options(): # Get Options from check_options
     return black_options, white_options
 
 def create_new_game(): # Create a New Game in Persistant Data
-    mydb = mysql.connector.connect(host=connectionCredentials()[0],user=connectionCredentials()[1],password=connectionCredentials()[2],database=connectionCredentials()[3])
-    mycursor = mydb.cursor()
     sql = "INSERT INTO games (game_name, game_notes) VALUES (%s, %s)"
     val = ("newGame", "initial attempt")
     try:
@@ -340,8 +337,6 @@ def create_new_game(): # Create a New Game in Persistant Data
         mydb.rollback()
 
 def record_game_move(gameid, moves_made_counter, color, selected_piece, selection, click_coords):
-    mydb = mysql.connector.connect(host=connectionCredentials()[0],user=connectionCredentials()[1],password=connectionCredentials()[2],database=connectionCredentials()[3])
-    mycursor = mydb.cursor()
     sql = "INSERT INTO gameMoves (games_id, order_number, color, piece, start_pos, end_pos) VALUES ('"+str(gameid)+"', '"+str(moves_made_counter)+"', '"+color+"', '"+str(selected_piece)+"', '"+str(selection)+"', '"+str(click_coords)+"')"
     try:
         mycursor.execute(sql)
@@ -448,6 +443,7 @@ while run:
                     valid_moves = []
                 #add option to castle
                 elif selection != 100 and selected_piece == 'king':
+                    moves_made_counter +=1
                     for q in range(len(castling_moves)):
                         if click_coords == castling_moves[q][0]:
                             white_locations[selection] = click_coords
@@ -457,7 +453,11 @@ while run:
                             else: 
                                 rook_coords = (7, 0)
                             rook_index = white_locations.index(rook_coords)
+                            king_index = click_coords
                             white_locations[rook_index] = castling_moves[q][1]
+                            moves_made_list.append(all_moves.index('castle ' + str(rook_coords) + ' ' + str(king_index)))
+                            draw_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
+                            record_castling_event('white', moveid, str(white_locations[rook_index]), str(king_index))
                             black_options = get_both_options()[0]
                             white_options = get_both_options()[1]
                             turn_step = 2
@@ -501,7 +501,7 @@ while run:
                         white_piece = white_locations.index(click_coords)
                         captured_pieces_black.append(white_pieces[white_piece])
                         color = 'black'
-                        captured_id = str(white_pieces[black_piece])+str(moveid)+str(color)
+                        captured_id = str(white_pieces[white_piece])+str(moveid)+str(color)
                         record_captured_piece(white_pieces[white_piece], moveid, color, captured_id)
                         if white_pieces[white_piece] == 'king':
                             winner = 'black'
@@ -520,6 +520,7 @@ while run:
                     valid_moves = []
                     #add option to castle
                 elif selection != 100 and selected_piece == 'king':
+                    moves_made_counter +=1
                     for q in range(len(castling_moves)):
                         if click_coords == castling_moves[q][0]:
                             black_locations[selection] = click_coords
@@ -529,7 +530,11 @@ while run:
                             else: 
                                 rook_coords = (7, 7)
                             rook_index = black_locations.index(rook_coords)
+                            king_index = click_coords
                             black_locations[rook_index] = castling_moves[q][1]
+                            moves_made_list.append(all_moves.index('castle ' + str(rook_coords) + ' ' + str(king_index)))
+                            draw_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
+                            record_castling_event('black', moveid, str(black_locations[rook_index]), str(king_index))
                             black_options = get_both_options()[0]
                             white_options = get_both_options()[1]
                             turn_step = 2

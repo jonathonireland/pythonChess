@@ -1,5 +1,6 @@
 import pygame
 import mysql.connector
+from db_connection import connectionCredentials
 pygame.init()
 
 WIDTH = 1400
@@ -122,7 +123,8 @@ all_moves = ['rook (0, 0)', 'rook (0, 1)', 'rook (0, 2)', 'rook (0, 3)', 'rook (
     'pawn (4, 0)', 'pawn (4, 1)', 'pawn (4, 2)', 'pawn (4, 3)', 'pawn (4, 4)', 'pawn (4, 5)', 'pawn (4, 6)', 'pawn (4, 7)', 
     'pawn (5, 0)', 'pawn (5, 1)', 'pawn (5, 2)', 'pawn (5, 3)', 'pawn (5, 4)', 'pawn (5, 5)', 'pawn (5, 6)', 'pawn (5, 7)', 
     'pawn (6, 0)', 'pawn (6, 1)', 'pawn (6, 2)', 'pawn (6, 3)', 'pawn (6, 4)', 'pawn (6, 5)', 'pawn (6, 6)', 'pawn (6, 7)', 
-    'pawn (7, 0)', 'pawn (7, 1)', 'pawn (7, 2)', 'pawn (7, 3)', 'pawn (7, 4)', 'pawn (7, 5)', 'pawn (7, 6)', 'pawn (7, 7)']
+    'pawn (7, 0)', 'pawn (7, 1)', 'pawn (7, 2)', 'pawn (7, 3)', 'pawn (7, 4)', 'pawn (7, 5)', 'pawn (7, 6)', 'pawn (7, 7)',
+    'castle (0, 0) (1, 0)', 'castle (2, 0) (1, 0)', 'castle (2, 7) (1, 7)', 'castle (4, 7) (5, 7)', 'castle (4, 0) (5, 0)','castle (0, 7) (1, 7)']
 
 # black king
 black_king = pygame.transform.scale(pygame.image.load('assets/images/black/king.png'), (80, 80))
@@ -183,6 +185,9 @@ small_black_images = [black_pawn_small, black_queen_small, black_king_small, bla
                       black_bishop_small]
 
 piece_list = ['pawn', 'queen', 'king', 'knight', 'rook', 'bishop']
+
+mydb = mysql.connector.connect(host=connectionCredentials()[0], user=connectionCredentials()[1],password=connectionCredentials()[2], database=connectionCredentials()[3])
+mycursor = mydb.cursor()
 
 white_promotions = ['bishop', 'knight', 'rook', 'queen']
 black_promotions = ['bishop', 'knight', 'rook', 'queen']
