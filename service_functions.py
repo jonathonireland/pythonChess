@@ -75,16 +75,6 @@ def draw_pieces(): # Draw Pieces Onto Board
             if selection == i:
                 pygame.draw.rect(screen,'blue',[black_locations[i][0] * 100 + 1, black_locations[i][1] * 100 + 1, 100, 100], 2)
         
-def draw_captured(): # Draw Captured Pieces 
-    for i in range(len(captured_pieces_white)):
-        captured_piece = captured_pieces_white[i]
-        index = piece_list.index(captured_piece)
-        screen.blit(small_black_images[index], (825, 5 + 50*i))
-    for i in range(len(captured_pieces_black)):
-        captured_piece = captured_pieces_black[i]
-        index = piece_list.index(captured_piece)
-        screen.blit(small_white_images[index], (925, 5 + 50*i))
-        
 def draw_game_over(winner): # Draw Game Over Box and Text #
     pygame.draw.rect(screen, 'black', [200, 200, 400, 100])
     screen.blit(font.render(f'{winner} won the game!', True, 'white'), (210, 210))

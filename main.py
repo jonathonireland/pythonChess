@@ -305,6 +305,20 @@ def check_promo_select(): # Check Promotion Options
         piece = black_pieces[promo_index]
         promotion_id = str(piece)+str(moveid)+str(color)
     record_pawn_promotion(piece, moveid, color, promotion_id)
+    
+def draw_captured(): # Draw Captured Pieces 
+    captured_piece = ''
+    color = ''
+    captured_id = ''
+    if len(captured_pieces_white) > 0 or len(captured_pieces_black) > 0:
+        for i in range(len(captured_pieces_white)):
+            captured_piece = captured_pieces_white[i]
+            index = piece_list.index(captured_piece)
+            screen.blit(small_black_images[index], (825, 5 + 50*i))
+        for i in range(len(captured_pieces_black)):
+            captured_piece = captured_pieces_black[i]
+            index = piece_list.index(captured_piece)
+            screen.blit(small_white_images[index], (925, 5 + 50*i))
 
 def get_both_options(): # Get Options from check_options 
     black_options = check_options(black_pieces, black_locations, 'black')
@@ -357,8 +371,8 @@ while run:
         counter = 0
     draw_board()
     draw_pieces()
-    draw_captured()
     draw_check()
+    draw_captured()
     if not game_over: 
         white_promote, black_promote, promo_index = check_promotion()
         if white_promote or black_promote:
@@ -414,12 +428,18 @@ while run:
                     if click_coords in black_locations:
                         black_piece = black_locations.index(click_coords)
                         captured_pieces_white.append(black_pieces[black_piece])
+                        color = 'white'
+                        captured_id = str(black_pieces[black_piece])+str(moveid)+str(color)
+                        record_captured_piece(black_pieces[black_piece], moveid, color, captured_id)
                         if black_pieces[black_piece] == 'king':
                             winner = 'white'
                         pop_piece_out_lists(black_piece, 'black')
                     if click_coords == black_ep:
                         black_piece = black_locations.index((black_ep[0], black_ep[1]-1))
                         captured_pieces_white.append(black_pieces[black_piece])
+                        color = 'white'
+                        captured_id = str(black_pieces[black_piece])+str(moveid)+str(color)
+                        record_captured_piece(black_pieces[black_piece], moveid, color, captured_id)
                         pop_piece_out_lists(black_piece, 'black')
                     black_options = get_both_options()[0]
                     white_options = get_both_options()[1]
@@ -480,12 +500,18 @@ while run:
                     if click_coords in white_locations:
                         white_piece = white_locations.index(click_coords)
                         captured_pieces_black.append(white_pieces[white_piece])
+                        color = 'black'
+                        captured_id = str(white_pieces[black_piece])+str(moveid)+str(color)
+                        record_captured_piece(white_pieces[white_piece], moveid, color, captured_id)
                         if white_pieces[white_piece] == 'king':
                             winner = 'black'
                         pop_piece_out_lists(white_piece, 'white')
                     if click_coords == white_ep:
                         white_piece = white_locations.index((white_ep[0], white_ep[1]+1))
                         captured_pieces_black.append(white_pieces[white_piece])
+                        color = 'black'
+                        captured_id = str(white_pieces[black_piece])+str(moveid)+str(color)
+                        record_captured_piece(white_pieces[white_piece], moveid, color, captured_id)
                         pop_piece_out_lists(white_piece, 'white')
                     black_options = get_both_options()[0]
                     white_options = get_both_options()[1]
