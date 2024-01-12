@@ -17,7 +17,8 @@ Development plans:
 4. Completed: Save each pawn promotion to a gamePromotions table. 
 5. Completed: Save each capture to a gameCaptures table.
 6. Completed: Save each castling instance to a gameCastling table.
-7. Fix game move quirks created from adding castling to moves types.
-8. Clean up code.
-9. Add more features.
+7. Save each check instance to a gameChecks table.
+8. Fix game move quirks created from adding castling to moves types.
+9. Clean up code.
+10. Add more features.
 
