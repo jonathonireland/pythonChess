@@ -46,8 +46,7 @@ def check_knight(position, color): # Check Knight's Valid Moves
             moves_list.append(target)
     return moves_list
 
-# check if pawn can move
-def check_pawn(position, color):
+def check_pawn(position, color): # Check if Pawn Can Move
     moves_list = []
     match color:
         case 'white':
@@ -131,6 +130,7 @@ def draw_check(): # Draw a Flashing Square Around King if in Check
             king_location = white_locations[king_index]
             for i in range(len(black_options)):
                 if king_location in black_options[i]:
+                    print(str(black_options[i]))
                     check = True
                     if counter < 15:
                         pygame.draw.rect(screen, 'dark red', [white_locations[king_index][0] * 100 + 1,
@@ -141,6 +141,7 @@ def draw_check(): # Draw a Flashing Square Around King if in Check
             king_location = black_locations[king_index]
             for i in range(len(white_options)):
                 if king_location in white_options[i]:
+                    print(str(white_options[i]))
                     check = True
                     if counter < 15:
                         pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1,
@@ -387,21 +388,37 @@ while run:
             click_coords = (x_coord, y_coord)
             # white's turn
             if turn_step <= 1:
+                
                 if click_coords == (8, 8) or click_coords == (9, 8):
-                    winner = 'black'
+                    winner = 'black' # stops game play
+                    
                 if click_coords in white_locations:
+                    # first click
                     selection = white_locations.index(click_coords)
+                    
                     # check what piece is selected, so you can only draw castling if king is selected
                     selected_piece = white_pieces[selection]
+                    
+                    # second click
                     if turn_step == 0:
                         turn_step = 1
+                        
                 if click_coords in valid_moves and selection != 100:
                     white_ep = check_ep(white_locations[selection], click_coords)
+                    
+                    # record previous move to pass it to record game moves
                     previous_white_locations.append(white_locations[selection])
+                    
+                    # change white locations selected coords
                     white_locations[selection] = click_coords
-                    white_moved[selection] = True
+                    
+                    # change boolean for selection to True if it's False
+                    if white_moved[selection] == False:
+                        white_moved[selection] = True
+                    
+                    # increment moves made counter!! 
                     moves_made_counter += 1
-                    record_game_move(gameid,moves_made_counter,'white',selected_piece,previous_white_locations[-1],click_coords)
+                    
                     # column counter logic
                     if moves_made_counter == 33:
                         column_two_counter = 1
@@ -415,11 +432,17 @@ while run:
                         column_four_counter = 1
                     if moves_made_counter > 97 and moves_made_counter < 129:
                         column_four_counter += 1
+                        
+                    # log game move to gameMoves table
+                    record_game_move(gameid,moves_made_counter,'white',selected_piece,previous_white_locations[-1],click_coords)
+                    
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords) ))
+                    
                     # display moves to right column
                     draw_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                     
+                    # record capture of black piece
                     if click_coords in black_locations:
                         black_piece = black_locations.index(click_coords)
                         captured_pieces_white.append(black_pieces[black_piece])
@@ -429,6 +452,8 @@ while run:
                         if black_pieces[black_piece] == 'king':
                             winner = 'white'
                         pop_piece_out_lists(black_piece, 'black')
+
+                    # En passant logic    
                     if click_coords == black_ep:
                         black_piece = black_locations.index((black_ep[0], black_ep[1]-1))
                         captured_pieces_white.append(black_pieces[black_piece])
@@ -436,49 +461,103 @@ while run:
                         captured_id = str(black_pieces[black_piece])+str(moveid)+str(color)
                         record_captured_piece(black_pieces[black_piece], moveid, color, captured_id)
                         pop_piece_out_lists(black_piece, 'black')
+                    
                     black_options = get_both_options()[0]
                     white_options = get_both_options()[1]
+                    
+                    # pass play to black's turn
                     turn_step = 2
                     selection = 100
                     valid_moves = []
+                    
                 #add option to castle
                 elif selection != 100 and selected_piece == 'king':
-                    moves_made_counter +=1
                     for q in range(len(castling_moves)):
                         if click_coords == castling_moves[q][0]:
+                            
+                            # increment moves made counter!! 
+                            moves_made_counter +=1
+                            
+                            # record previous coords to pass to record game moves
+                            previous_white_locations.append(white_locations[selection])
+                            
+                            # change white locations selected coords
                             white_locations[selection] = click_coords
-                            white_moved[selection] = True
+                            
+                            # change boolean for selection to True if it's False
+                            if(white_moved[selection]) == False:
+                                white_moved[selection] = True
+                            
+                            # specify coords where castling happens
                             if click_coords == (1, 0):
                                 rook_coords = (0, 0)
                             else: 
                                 rook_coords = (7, 0)
+                            
+                            # get rook_index to update it
                             rook_index = white_locations.index(rook_coords)
+                            
+                            # record rook_index in previous_white_locations
+                            previous_white_locations.append(white_locations[rook_index])
+                            
+                            # update king_index ? not sure if this is necessary after it probably happend on 468
                             king_index = click_coords
+                            
+                            # change rook index to castling move
                             white_locations[rook_index] = castling_moves[q][1]
+                            
+                            # log game move to gameMoves table
+                            record_game_move(gameid,moves_made_counter,'white',selected_piece,previous_white_locations[-1],click_coords)
+                            
+                            # append to moves list
                             moves_made_list.append(all_moves.index('castle ' + str(rook_coords) + ' ' + str(king_index)))
+                            
+                            # display moves to right column
                             draw_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
+                            
+                            # log castling event
                             record_castling_event('white', moveid, str(white_locations[rook_index]), str(king_index))
+                            
                             black_options = get_both_options()[0]
                             white_options = get_both_options()[1]
+                            
+                            # pass play to black's turn
                             turn_step = 2
                             selection = 100
                             valid_moves = []
             # black's turn 
             if turn_step > 1:
+                
                 if click_coords == (8, 8) or click_coords == (9, 8):
-                    winner = 'white'
+                    winner = 'white' # stops game play
+                    
                 if click_coords in black_locations:
+                    # first click
                     selection = black_locations.index(click_coords)
+                    
+                    # check what piece is selected, so you can only draw castling if king is selected
                     selected_piece = black_pieces[selection]
+                    
+                    # second click
                     if turn_step == 2:
                         turn_step = 3
+                        
                 if click_coords in valid_moves and selection != 100:
                     black_ep = check_ep(black_locations[selection], click_coords)
+                    
+                    # record previous move to pass it to record game moves
                     previous_black_locations.append(black_locations[selection])
+                    
+                    #change black locations selected coords
                     black_locations[selection] = click_coords
-                    black_moved[selection] = True
+                    
+                    # change boolean for selection to True if it's False
+                    if black_moved[selection]== False:
+                        black_moved[selection] = True
+                    
+                    # increment moves made counter!! 
                     moves_made_counter += 1
-                    record_game_move(gameid,moves_made_counter,'black',selected_piece,previous_black_locations[-1],click_coords)
+                    
                     # column counter logic
                     if moves_made_counter == 33:
                         column_two_counter = 1
@@ -492,11 +571,17 @@ while run:
                         column_four_counter = 1
                     if moves_made_counter > 97 and moves_made_counter < 129:
                         column_four_counter +=1
+                        
+                    # log game move to gameMoves table
+                    record_game_move(gameid,moves_made_counter,'black',selected_piece,previous_black_locations[-1],click_coords)
+                    
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords)))
+                    
                     # display moves to right column
                     draw_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                     
+                    # record capture of white pieces
                     if click_coords in white_locations:
                         white_piece = white_locations.index(click_coords)
                         captured_pieces_black.append(white_pieces[white_piece])
@@ -506,6 +591,8 @@ while run:
                         if white_pieces[white_piece] == 'king':
                             winner = 'black'
                         pop_piece_out_lists(white_piece, 'white')
+                        
+                    # En passant logic        
                     if click_coords == white_ep:
                         white_piece = white_locations.index((white_ep[0], white_ep[1]+1))
                         captured_pieces_black.append(white_pieces[white_piece])
@@ -513,31 +600,67 @@ while run:
                         captured_id = str(white_pieces[black_piece])+str(moveid)+str(color)
                         record_captured_piece(white_pieces[white_piece], moveid, color, captured_id)
                         pop_piece_out_lists(white_piece, 'white')
+                        
                     black_options = get_both_options()[0]
                     white_options = get_both_options()[1]
+                    
+                    # pass play to white's turn
                     turn_step = 0
                     selection = 100
                     valid_moves = []
                     #add option to castle
                 elif selection != 100 and selected_piece == 'king':
-                    moves_made_counter +=1
                     for q in range(len(castling_moves)):
                         if click_coords == castling_moves[q][0]:
+                            
+                            # increment moves made counter!!
+                            moves_made_counter +=1
+                            
+                            # record previous move to pass it to record game moves
+                            previous_black_locations.append(black_locations[selection])
+                            
+                            # change black loations to selected coords
                             black_locations[selection] = click_coords
-                            black_moved[selection] = True
+                            
+                            # change boolean for selection to True if it's False
+                            if black_moved[selection] == False:
+                                black_moved[selection] = True
+                            
+                            # specify coords where castling happens
                             if click_coords == (1, 7):
                                 rook_coords = (0, 7)
                             else: 
                                 rook_coords = (7, 7)
+                            
+                            # get rook_index to update it
                             rook_index = black_locations.index(rook_coords)
+                            
+                            # record rook_index in previous_black_locations
+                            previous_black_locations.append(black_locations[rook_index])
+                            
+                            # update king_index ? not sure if this is necessary after it probably happend on 578
                             king_index = click_coords
+                            
+                            # change rook index to castling move
                             black_locations[rook_index] = castling_moves[q][1]
+                            
+                            # log game move to gameMoves table
+                            record_game_move(gameid,moves_made_counter,'black',selected_piece,previous_black_locations[-1],click_coords)
+                            
+                            # append to moves list
                             moves_made_list.append(all_moves.index('castle ' + str(rook_coords) + ' ' + str(king_index)))
+                            
+                            # display moves to right column
                             draw_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
+                            
+                            # log castling event
                             record_castling_event('black', moveid, str(black_locations[rook_index]), str(king_index))
+                            
                             black_options = get_both_options()[0]
                             white_options = get_both_options()[1]
-                            turn_step = 2
+                            
+                            #pass play to white's turn
+                            turn_step = 0
                             selection = 100
                             valid_moves = []
         if event.type == pygame.KEYDOWN and game_over:

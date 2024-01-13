@@ -124,7 +124,8 @@ all_moves = ['rook (0, 0)', 'rook (0, 1)', 'rook (0, 2)', 'rook (0, 3)', 'rook (
     'pawn (5, 0)', 'pawn (5, 1)', 'pawn (5, 2)', 'pawn (5, 3)', 'pawn (5, 4)', 'pawn (5, 5)', 'pawn (5, 6)', 'pawn (5, 7)', 
     'pawn (6, 0)', 'pawn (6, 1)', 'pawn (6, 2)', 'pawn (6, 3)', 'pawn (6, 4)', 'pawn (6, 5)', 'pawn (6, 6)', 'pawn (6, 7)', 
     'pawn (7, 0)', 'pawn (7, 1)', 'pawn (7, 2)', 'pawn (7, 3)', 'pawn (7, 4)', 'pawn (7, 5)', 'pawn (7, 6)', 'pawn (7, 7)',
-    'castle (0, 0) (1, 0)', 'castle (2, 0) (1, 0)', 'castle (2, 7) (1, 7)', 'castle (4, 7) (5, 7)', 'castle (4, 0) (5, 0)','castle (0, 7) (1, 7)']
+    'castle (0, 0) (1, 0)', 'castle (2, 0) (1, 0)', 'castle (2, 7) (1, 7)', 'castle (4, 7) (5, 7)', 'castle (4, 0) (5, 0)',
+    'castle (0, 7) (1, 7)', 'castle (7, 0) (5, 0)', 'castle (7, 7) (5, 7)']
 
 # black king
 black_king = pygame.transform.scale(pygame.image.load('assets/images/black/king.png'), (80, 80))

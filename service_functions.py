@@ -124,25 +124,29 @@ def draw_moves_made(moves_made_list, color, moves_made_counter, column_two_count
     black_font_color = (0, 0, 0)
     iteration_spacer = 1
     increment_pixels = 24
-    if moves_made_counter == 1 or moves_made_counter > 1 and moves_made_counter < 33:
+    if moves_made_counter == 1 or moves_made_counter > 1 \
+        and moves_made_counter < 33:
         iteration_spacer = moves_made_counter * increment_pixels
         if color == 'white':
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1010, iteration_spacer))
         else:
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1010, iteration_spacer))
-    if moves_made_counter == 33 or moves_made_counter > 33 and moves_made_counter < 65:
+    if moves_made_counter == 33 or moves_made_counter > 33 \
+        and moves_made_counter < 65:
         iteration_spacer = column_two_counter * increment_pixels
         if color == 'white':
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1105, iteration_spacer))
         else:
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1105, iteration_spacer))
-    if moves_made_counter == 65 or moves_made_counter > 65 and moves_made_counter < 97:
+    if moves_made_counter == 65 or moves_made_counter > 65 \
+        and moves_made_counter < 97:
         iteration_spacer = column_three_counter * increment_pixels
         if color == 'white':
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1200, iteration_spacer))
         else:
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1200, iteration_spacer))
-    if moves_made_counter == 97 or moves_made_counter > 97 and moves_made_counter < 129:
+    if moves_made_counter == 97 or moves_made_counter > 97 \
+        and moves_made_counter < 129:
         iteration_spacer = column_four_counter * increment_pixels
         if color == 'white':
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1300, iteration_spacer))
