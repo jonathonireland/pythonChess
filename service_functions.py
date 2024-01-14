@@ -1,7 +1,7 @@
 from constants import *
 
 # LISTING SERVICE FUNCTIONS #
-def friendly_list(color): # Determine which Locations are Friendlies
+def get_friendly_list(color): # Determine which Locations are Friendlies
     friends_list = []
     match color:
         case 'white':
@@ -10,7 +10,7 @@ def friendly_list(color): # Determine which Locations are Friendlies
             friends_list = black_locations
     return friends_list
 
-def enemy_list(color): # Determine which Locations are Enemies
+def get_enemy_list(color): # Determine which Locations are Enemies
     enemies_list = []
     match color:
         case 'white':
@@ -31,6 +31,8 @@ def pop_piece_out_lists(piece, color): # Remove Pieces from Lists as Captures Ha
 
 # DRAWING SERVICE FUNCTIONS #
 def draw_board(): # Draw Main Game Board
+    screen.fill('white', (0, 0, (screen.get_width()//3)*1.85, screen.get_height()))
+    screen.fill('dark gray', (800, 0, 200, HEIGHT))
     for i in range(32):
         column = i % 4
         row = i // 4
