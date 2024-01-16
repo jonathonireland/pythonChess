@@ -10,7 +10,7 @@
 <p>I started adding some more features which include: </p>
 <ul>
 <li>listing out the moves made through the game next to the pieces that were captured</li> 
-<li>adding (and inserting into) new database table "games" for each new game</li>
+<li>adding (and inserting into) a "games" table for each game</li>
 <li>adding (and inserting into) a "gameMoves" table for each move</li>
 <li>adding (and inserting into) a "gameCaptures" table for each capture</li> 
 <li>adding (and inserting into) a "gameChecks" table for each check</li>
