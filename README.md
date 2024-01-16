@@ -54,7 +54,7 @@
 <li>Completed: Fix game move quirks created from adding castling to moves types.</li>
 <li>Completed: Replace old ugly game pieces with glossy nice ones.</li>
 <li>Fix Game reset after forfeit pieces do not reset as expected.</li>
-<li>Record game winners to a table (moves? or it's own table).</li>
+<li>Record game winners to a table (moves? games? or it's own table).</li>
 <li>Continue adding featues as ideas pop into my mind.</li>
 </ol>
 <h2>To to run this on your local (on Mac OS 13 or newer)</h2>
