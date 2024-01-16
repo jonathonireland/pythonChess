@@ -1,23 +1,35 @@
-<h1>Persistent Chess</h1>
-<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 1.48.37 AM.png">
-<p>This Pygame development I started in December of 2023 because of an interest in learning Python (and) I have always thought Chess was fun. It quickly became an obsession in completing the tutorials below... I have not stopped there though.</p>
+<h1>Persistent Two-Player Chess</h1>
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.36.21 AM.png" alt="black won the game! Persistent Two-Player Chess">
+<p>This Pygame development I started in December of 2023 because of an interest in learning Python (and) I have always thought Chess was fun. It quickly became an obsession in completing the tutorials below... It has not stopped there though, I don't know where this will end up, it's only for fun, so it doesn't have to stop.</p>
 <ol>
 <li><a href="https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s">https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s</a></li>
 <li><a href="https://www.youtube.com/watch?v=s2Dd_obh3fM&t=134s">https://www.youtube.com/watch?v=s2Dd_obh3fM&t=134s</a></li>
 </ol>
 <p>Those two tutorials were a great foundation to begin experimentation and learning in Python. Once they were completed, I began to start coding ideas of my own for the game, and I still am developing new features.</p>
 <h2>Working through development plans.</h2>
-<p>I started adding some more features which include: </p>
+<p>Obvious changes in the game's interface:</p>
 <ul>
 <li>listing out the moves made through the game next to the pieces that were captured</li> 
-<li>adding (and inserting into) a "games" table for each game</li>
-<li>adding (and inserting into) a "gameMoves" table for each move</li>
-<li>adding (and inserting into) a "gameCaptures" table for each capture</li> 
-<li>adding (and inserting into) a "gameChecks" table for each check</li>
-<li>adding (and inserting into) a "gamePromotions" table for each pawn promotion</li>
-<li>adding (and inserting into) a "gameCastling" table for each castle.</li>
 </ul>
-
+<p>New coding features include: </p>
+<ul>
+<li>adding (and inserting into) a "games" table for each game
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.56.49 AM.png" alt ="Select * from games ORDER BY id DESC LIMIT 10 shows that the games table is probably the least imaginative table but it is the base building block upon the games data is started with."/>
+</li>
+<li>adding (and inserting into) a "gameMoves" table for each move
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.53.33 AM.png" alt="Select * from gameMoves ORDER BY id DESC LIMIT 10 shows that game successfully creates a move associated with a specific game that includes the piece, starting position, ending position, and color."></li>
+<li>adding (and inserting into) a "gameCaptures" table for each capture
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.44.15 AM.png" alt="Select * From gameCaptures limit 10 shows that game successfully logs captures when playing the game." /></li> 
+<li>adding (and inserting into) a "gameChecks" table for each check
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.41.52 AM.png" alt="inserts completed in gameChecks"/></li>
+<li>adding (and inserting into) a "gamePromotions" table for each pawn promotion, there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. Still working through these issues.
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 10.00.58 AM.png
+" alt="select * from gamePromotions ORDER BY id DESC LIMIT 10 shows that there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. " /></li>
+<li>adding (and inserting into) a "gameCastling" table for each castle. There is room for improvement here, would like to capture the starting position of the king and rook and then their position after they complete the castle maenuver 
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 10.04.40 AM.png" alt="select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id." />
+</li>
+<li>adding (and inserting into) a "gameWinners" table for every completed game and incompleted game.</li>
+</ul>
 <h3>Development plans:</h3>
 <ol>
 <li>Completed: Connect pygame to persistent data.</li>
