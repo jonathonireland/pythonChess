@@ -21,6 +21,7 @@ def get_friendly_list(color): # Determine which Locations are Friendlies
             friends_list = black_locations
     return friends_list
 
+
 def get_enemy_list(color): # Determine which Locations are Enemies
     enemies_list = []
     match color:
@@ -29,6 +30,7 @@ def get_enemy_list(color): # Determine which Locations are Enemies
         case 'black':
             enemies_list = white_locations
     return enemies_list
+
 
 def pop_piece_out_lists(piece, color): # Remove Pieces from Lists as Captures Happen
     if color == 'white':
@@ -39,6 +41,7 @@ def pop_piece_out_lists(piece, color): # Remove Pieces from Lists as Captures Ha
         black_pieces.pop(piece)
         black_locations.pop(piece)
         black_moved.pop(piece)
+
 
 # DRAWING SERVICE FUNCTIONS #
 def draw_board(): # Draw Main Game Board
@@ -68,6 +71,7 @@ def draw_board(): # Draw Main Game Board
             screen.blit(big_font.render('Select Piece to Promote Pawn', True, 'black'), (20, 820))
     screen.blit(chess_board_numbers, (5,5))
 
+
 def draw_pieces(): # Draw Pieces Onto Board 
     for i in range(len(white_pieces)):
         index = piece_list.index(white_pieces[i])
@@ -87,11 +91,13 @@ def draw_pieces(): # Draw Pieces Onto Board
         if turn_step >= 2:
             if selection == i:
                 pygame.draw.rect(screen,'blue',[black_locations[i][0] * 100 + 1, black_locations[i][1] * 100 + 1, 100, 100], 2)
+
         
 def draw_game_over(winner): # Draw Game Over Box and Text #
     pygame.draw.rect(screen, 'black', [200, 200, 400, 100])
     screen.blit(font.render(f'{winner} won the game!', True, 'white'), (210, 210))
     screen.blit(font.render(f'Press ENTER to Restart!', True, 'white'), (210, 240))
+
 
 def draw_valid(moves): # Draw valid moves in game 
     if turn_step < 2:
@@ -100,6 +106,7 @@ def draw_valid(moves): # Draw valid moves in game
         color = 'blue'
     for i in range(len(moves)):
         pygame.draw.circle(screen, color, (moves[i][0] * 100 + 50, moves[i][1] * 100 + 50), 5)
+
 
 def draw_promotion(white_promote, black_promote): # Draw Pawn Promotion 
     pygame.draw.rect(screen, 'dark gray', [800, 0, 200, 420])
@@ -118,6 +125,7 @@ def draw_promotion(white_promote, black_promote): # Draw Pawn Promotion
             screen.blit(black_images[index], (860, 5 + 100 * i))
     pygame.draw.rect(screen, color, [800, 0, 200, 420], 8)
 
+
 def draw_castling(moves):
     if turn_step < 2:
         color = 'red'
@@ -131,6 +139,7 @@ def draw_castling(moves):
                     (moves[i][1][0] * 100 + 30, moves[i][1][1] * 100 + 70))
         pygame.draw.line(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70),
                          (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 2)
+
 
 def draw_moves_made(moves_made_list, color, moves_made_counter, column_two_counter, column_three_counter, column_four_counter): # Draw List of Moves as Game is Played
     white_font_color = (255, 255, 255)

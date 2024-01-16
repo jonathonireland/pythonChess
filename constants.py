@@ -28,6 +28,94 @@ black_moved = [False, False, False, False, False, False, False, False, False, Fa
 captured_pieces_white = []
 captured_pieces_black = []
 
+# black king
+black_king = pygame.transform.scale(pygame.image.load('assets/images/black/king2.png'), (80, 80))
+black_king_small = pygame.transform.scale(black_king, (45, 45))
+# white king
+white_king = pygame.transform.scale(pygame.image.load('assets/images/white/king2.png'), (80, 80))
+white_king_small = pygame.transform.scale(white_king, (45, 45))
+
+# black queen
+black_queen = pygame.transform.scale(pygame.image.load('assets/images/black/queen2.png'), (80, 80))
+black_queen_small = pygame.transform.scale(black_queen, (45, 45))
+# white queen
+white_queen = pygame.transform.scale(pygame.image.load('assets/images/white/queen2.png'), (80, 80))
+white_queen_small = pygame.transform.scale(white_queen, (45, 45))
+
+# black rook
+black_rook = pygame.transform.scale(pygame.image.load('assets/images/black/rook2.png'), (80, 80))
+black_rook_small = pygame.transform.scale(black_rook, (45, 45))
+# white rook
+white_rook = pygame.transform.scale(pygame.image.load('assets/images/white/rook2.png'), (80, 80))
+white_rook_small = pygame.transform.scale(white_rook, (45, 45))
+
+# black bishop
+black_bishop = pygame.transform.scale(pygame.image.load('assets/images/black/bishop2.png'), (80, 80))
+black_bishop_small = pygame.transform.scale(black_bishop, (45, 45))
+# white bishop
+white_bishop = pygame.transform.scale(pygame.image.load('assets/images/white/bishop2.png'), (80, 80))
+white_bishop_small = pygame.transform.scale(white_bishop, (45, 45))
+
+# black knight
+black_knight = pygame.transform.scale(pygame.image.load('assets/images/black/knight2.png'), (80, 80))
+black_knight_small = pygame.transform.scale(black_knight, (45, 45))
+# white pawn
+white_knight = pygame.transform.scale(pygame.image.load('assets/images/white/knight2.png'), (80, 80))
+white_knight_small = pygame.transform.scale(white_knight, (45, 45))
+
+# pawn
+black_pawn = pygame.transform.scale(pygame.image.load('assets/images/black/pawn2.png'), (65, 65))
+black_pawn_small = pygame.transform.scale(black_pawn, (45, 45))
+# white pawn
+white_pawn = pygame.transform.scale(pygame.image.load('assets/images/white/pawn2.png'), (65, 65))
+white_pawn_small = pygame.transform.scale(white_pawn, (45, 45))
+
+# text backgrounds
+white_text_bg = pygame.transform.scale(pygame.image.load('assets/images/white/move-text-bg.png'), (300, 45))
+black_text_bg = pygame.transform.scale(pygame.image.load('assets/images/black/move-text-bg.png'), (300, 45))
+
+# chess board numbers
+chess_board_numbers = pygame.transform.scale(pygame.image.load('assets/images/chess-board-numbers.png'), (800, 800))
+
+# white pieces
+white_images = [white_pawn, white_queen, white_king, white_knight, white_rook, white_bishop]
+small_white_images = [white_pawn_small, white_queen_small, white_king_small, white_knight_small, white_rook_small,
+                      white_bishop_small]
+# black pieces
+black_images = [black_pawn, black_queen, black_king, black_knight, black_rook, black_bishop]
+small_black_images = [black_pawn_small, black_queen_small, black_king_small, black_knight_small, black_rook_small,
+                      black_bishop_small]
+
+piece_list = ['pawn', 'queen', 'king', 'knight', 'rook', 'bishop']
+
+mydb = mysql.connector.connect(host=connectionCredentials()[0], user=connectionCredentials()[1],password=connectionCredentials()[2], database=connectionCredentials()[3])
+mycursor = mydb.cursor()
+
+white_promotions = ['bishop', 'knight', 'rook', 'queen']
+black_promotions = ['bishop', 'knight', 'rook', 'queen']
+# check variables/ flashing counter
+counter = 0
+moves_made_counter = 0
+moves_made_list = []
+moves_made_list_box = ""
+winner = ''
+game_over = False
+white_ep = (100, 100)
+black_ep = (100, 100)
+white_promote = False
+black_promote = False
+promo_index = 100
+left_click = ""
+check = False
+white_in_check = False
+black_in_check = False
+gameid = 0
+moveid = 0
+turn_step = 0
+# 0 - whites turn no selction: 1- whites turn piece selected: 2 - black turn no selection
+selection = 100
+valid_moves = []
+
 all_moves = ['rook (0, 0)', 'rook (0, 1)', 'rook (0, 2)', 'rook (0, 3)', 'rook (0, 4)', 'rook (0, 5)', 'rook (0, 6)', 'rook (0, 7)', 
     'rook (1, 0)', 'rook (1, 1)', 'rook (1, 2)', 'rook (1, 3)', 'rook (1, 4)', 'rook (1, 5)', 'rook (1, 6)', 'rook (1, 7)', 
     'rook (2, 0)', 'rook (2, 1)', 'rook (2, 2)', 'rook (2, 3)', 'rook (2, 4)', 'rook (2, 5)', 'rook (2, 6)', 'rook (2, 7)', 
@@ -126,91 +214,3 @@ all_moves = ['rook (0, 0)', 'rook (0, 1)', 'rook (0, 2)', 'rook (0, 3)', 'rook (
     'pawn (7, 0)', 'pawn (7, 1)', 'pawn (7, 2)', 'pawn (7, 3)', 'pawn (7, 4)', 'pawn (7, 5)', 'pawn (7, 6)', 'pawn (7, 7)',
     'castle (0, 0) (1, 0)', 'castle (2, 0) (1, 0)', 'castle (2, 7) (1, 7)', 'castle (4, 7) (5, 7)', 'castle (4, 0) (5, 0)',
     'castle (0, 7) (1, 7)', 'castle (7, 0) (5, 0)', 'castle (7, 7) (5, 7)']
-
-# black king
-black_king = pygame.transform.scale(pygame.image.load('assets/images/black/king2.png'), (80, 80))
-black_king_small = pygame.transform.scale(black_king, (45, 45))
-# white king
-white_king = pygame.transform.scale(pygame.image.load('assets/images/white/king2.png'), (80, 80))
-white_king_small = pygame.transform.scale(white_king, (45, 45))
-
-# black queen
-black_queen = pygame.transform.scale(pygame.image.load('assets/images/black/queen2.png'), (80, 80))
-black_queen_small = pygame.transform.scale(black_queen, (45, 45))
-# white queen
-white_queen = pygame.transform.scale(pygame.image.load('assets/images/white/queen2.png'), (80, 80))
-white_queen_small = pygame.transform.scale(white_queen, (45, 45))
-
-# black rook
-black_rook = pygame.transform.scale(pygame.image.load('assets/images/black/rook2.png'), (80, 80))
-black_rook_small = pygame.transform.scale(black_rook, (45, 45))
-# white rook
-white_rook = pygame.transform.scale(pygame.image.load('assets/images/white/rook2.png'), (80, 80))
-white_rook_small = pygame.transform.scale(white_rook, (45, 45))
-
-# black bishop
-black_bishop = pygame.transform.scale(pygame.image.load('assets/images/black/bishop2.png'), (80, 80))
-black_bishop_small = pygame.transform.scale(black_bishop, (45, 45))
-# white bishop
-white_bishop = pygame.transform.scale(pygame.image.load('assets/images/white/bishop2.png'), (80, 80))
-white_bishop_small = pygame.transform.scale(white_bishop, (45, 45))
-
-# black knight
-black_knight = pygame.transform.scale(pygame.image.load('assets/images/black/knight2.png'), (80, 80))
-black_knight_small = pygame.transform.scale(black_knight, (45, 45))
-# white pawn
-white_knight = pygame.transform.scale(pygame.image.load('assets/images/white/knight2.png'), (80, 80))
-white_knight_small = pygame.transform.scale(white_knight, (45, 45))
-
-# pawn
-black_pawn = pygame.transform.scale(pygame.image.load('assets/images/black/pawn2.png'), (65, 65))
-black_pawn_small = pygame.transform.scale(black_pawn, (45, 45))
-# white pawn
-white_pawn = pygame.transform.scale(pygame.image.load('assets/images/white/pawn2.png'), (65, 65))
-white_pawn_small = pygame.transform.scale(white_pawn, (45, 45))
-
-# text backgrounds
-white_text_bg = pygame.transform.scale(pygame.image.load('assets/images/white/move-text-bg.png'), (300, 45))
-black_text_bg = pygame.transform.scale(pygame.image.load('assets/images/black/move-text-bg.png'), (300, 45))
-
-# chess board numbers
-chess_board_numbers = pygame.transform.scale(pygame.image.load('assets/images/chess-board-numbers.png'), (800, 800))
-
-# white pieces
-white_images = [white_pawn, white_queen, white_king, white_knight, white_rook, white_bishop]
-small_white_images = [white_pawn_small, white_queen_small, white_king_small, white_knight_small, white_rook_small,
-                      white_bishop_small]
-# black pieces
-black_images = [black_pawn, black_queen, black_king, black_knight, black_rook, black_bishop]
-small_black_images = [black_pawn_small, black_queen_small, black_king_small, black_knight_small, black_rook_small,
-                      black_bishop_small]
-
-piece_list = ['pawn', 'queen', 'king', 'knight', 'rook', 'bishop']
-
-mydb = mysql.connector.connect(host=connectionCredentials()[0], user=connectionCredentials()[1],password=connectionCredentials()[2], database=connectionCredentials()[3])
-mycursor = mydb.cursor()
-
-white_promotions = ['bishop', 'knight', 'rook', 'queen']
-black_promotions = ['bishop', 'knight', 'rook', 'queen']
-# check variables/ flashing counter
-counter = 0
-moves_made_counter = 0
-moves_made_list = []
-moves_made_list_box = ""
-winner = ''
-game_over = False
-white_ep = (100, 100)
-black_ep = (100, 100)
-white_promote = False
-black_promote = False
-promo_index = 100
-left_click = ""
-check = False
-white_in_check = False
-black_in_check = False
-gameid = 0
-moveid = 0
-turn_step = 0
-# 0 - whites turn no selction: 1- whites turn piece selected: 2 - black turn no selection
-selection = 100
-valid_moves = []

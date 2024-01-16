@@ -1,4 +1,5 @@
 <h1>Persistent Two-Player Chess</h1>
+<h3>Game Over</h3>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.36.21 AM.png" alt="black won the game! Persistent Two-Player Chess">
 
 <h3>Pawn Promotions</h3>
@@ -50,4 +51,10 @@
 <li>Record game winners to a table (moves? or it's own table).</li>
 <li>Add more features based on database connection.</li>
 </ol>
-
+<h2>To to run this on your local</h2>
+<ol>
+<li>Install Python 3.12.0 or newer.</li>
+<li>Install MySQL 8.0.34 or newer.</li>
+<li>Create a db_connection.py file in the root of the pythonchess folder.</li>
+<li>Copy and paste stored_proceedures.sql and run it the structured queries.</li>
+</ol>

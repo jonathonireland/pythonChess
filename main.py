@@ -1,8 +1,8 @@
 # import pygame
 from constants import *
-from all_moves import all_moves
 from db_functions import *
 from service_functions import *
+
 
 def get_bishop_moves(position, color): # Check Bishop's Valid Moves
     moves_list = []
@@ -25,8 +25,7 @@ def get_bishop_moves(position, color): # Check Bishop's Valid Moves
                 x = -1
                 y = 1
         while path:
-            if (position[0] + (chain * x), position[1] + (chain * y)) not in friends_list and \
-                    0 <= position[0] + (chain * x) <= 7 and 0 <= position[1] + (chain * y) <= 7:
+            if (position[0] + (chain * x), position[1] + (chain * y)) not in friends_list and 0 <= position[0] + (chain * x) <= 7 and 0 <= position[1] + (chain * y) <= 7:
                 moves_list.append((position[0] + (chain * x), position[1] + (chain * y)))
                 if (position[0] + (chain * x), position[1] + (chain * y)) in enemies_list:
                     path = False
@@ -34,6 +33,7 @@ def get_bishop_moves(position, color): # Check Bishop's Valid Moves
             else:
                 path = False
     return moves_list
+
 
 def get_knight_moves(position, color): # Check Knight's Valid Moves
     moves_list = []
@@ -46,15 +46,14 @@ def get_knight_moves(position, color): # Check Knight's Valid Moves
             moves_list.append(target)
     return moves_list
 
+
 def get_pawn_moves(position, color): # Check if Pawn Can Move
     moves_list = []
     match color:
         case 'white':
-            if (position[0], position[1] + 1) not in white_locations and \
-                    (position[0], position[1] + 1) not in black_locations and position[1] < 7:
+            if (position[0], position[1] + 1) not in white_locations and (position[0], position[1] + 1) not in black_locations and position[1] < 7:
                 moves_list.append((position[0], position[1] + 1))
-                if (position[0], position[1] + 2) not in white_locations and \
-                        (position[0], position[1] + 2) not in black_locations and position[1] == 1:
+                if (position[0], position[1] + 2) not in white_locations and (position[0], position[1] + 2) not in black_locations and position[1] == 1:
                     moves_list.append((position[0], position[1] + 2))
             if (position[0] + 1, position[1] + 1) in black_locations:
                 moves_list.append((position[0] + 1, position[1] + 1))
@@ -66,11 +65,9 @@ def get_pawn_moves(position, color): # Check if Pawn Can Move
             if (position[0] - 1, position[1] + 1) == black_ep:
                 moves_list.append((position[0] - 1, position[1] + 1))
         case 'black':
-            if (position[0], position[1] - 1) not in white_locations and \
-                    (position[0], position[1] - 1) not in black_locations and position[1] > 0:
+            if (position[0], position[1] - 1) not in white_locations and (position[0], position[1] - 1) not in black_locations and position[1] > 0:
                 moves_list.append((position[0], position[1] - 1))
-                if (position[0], position[1] - 2) not in white_locations and \
-                        (position[0], position[1] - 2) not in black_locations and position[1] == 6:
+                if (position[0], position[1] - 2) not in white_locations and (position[0], position[1] - 2) not in black_locations and position[1] == 6:
                     moves_list.append((position[0], position[1] - 2))
             if (position[0] + 1, position[1] - 1) in white_locations:
                 moves_list.append((position[0] + 1, position[1] - 1))
@@ -83,12 +80,14 @@ def get_pawn_moves(position, color): # Check if Pawn Can Move
                 moves_list.append((position[0] - 1, position[1] - 1))
     return moves_list
 
+
 def get_queen_moves(position, color): # Check Queen's Valid Moves
     moves_list = get_bishop_moves(position, color)
     second_list = get_rook_moves(position, color)
     for i in range(len(second_list)):
         moves_list.append(second_list[i])
     return moves_list
+
 
 def get_rook_moves(position, color): # Check if Rook Can Move
     moves_list = []
@@ -121,6 +120,7 @@ def get_rook_moves(position, color): # Check if Rook Can Move
                 path = False
     return moves_list
 
+
 def draw_check(): # Draw a Flashing Square Around King if in Check
     global check
     check = False
@@ -134,8 +134,7 @@ def draw_check(): # Draw a Flashing Square Around King if in Check
                     global white_in_check 
                     white_in_check = True
                     if counter < 15:
-                        pygame.draw.rect(screen, 'dark red', [white_locations[king_index][0] * 100 + 1,
-                                                              white_locations[king_index][1] * 100 + 1, 100, 100], 5)
+                        pygame.draw.rect(screen, 'dark red', [white_locations[king_index][0] * 100 + 1, white_locations[king_index][1] * 100 + 1, 100, 100], 5)
     else:
         if 'king' in black_pieces:
             king_index = black_pieces.index('king')
@@ -146,8 +145,8 @@ def draw_check(): # Draw a Flashing Square Around King if in Check
                     global black_in_check
                     black_in_check = True
                     if counter < 15:
-                        pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1,
-                                                               black_locations[king_index][1] * 100 + 1, 100, 100], 5)
+                        pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1, black_locations[king_index][1] * 100 + 1, 100, 100], 5)
+
 
 def get_all_moves(pieces, locations, turn): # Check All Pieces Valid Options on Board
     global castling_moves
@@ -172,6 +171,7 @@ def get_all_moves(pieces, locations, turn): # Check All Pieces Valid Options on 
                 moves_list, castling_moves = get_king_moves(location, turn)
         all_moves_list.append(moves_list)
     return all_moves_list
+
 
 def get_in_check_data(color): # determine if check is true and if it is who's in check?
     global check
@@ -205,6 +205,7 @@ def get_in_check_data(color): # determine if check is true and if it is who's in
                         check = False
                         black_in_check = False
 
+
 def get_valid_moves(): # Check for Valid Moves for Selected Piece
     if turn_step < 2:
         options_list = white_options
@@ -215,6 +216,7 @@ def get_valid_moves(): # Check for Valid Moves for Selected Piece
     else:
         valid_options = []
     return valid_options
+
 
 def get_ep(old_coords, new_coords): # Check en passant 
     if turn_step <= 1:
@@ -231,6 +233,7 @@ def get_ep(old_coords, new_coords): # Check en passant
     else: 
         ep_coords = (100, 100)
     return ep_coords
+
 
 def get_promotion_information(): # Check to Add Pawn Promotion
     pawn_indexes = []
@@ -254,6 +257,7 @@ def get_promotion_information(): # Check to Add Pawn Promotion
             promote_index = pawn_indexes[i]
     return white_promotion, black_promotion, promote_index
 
+
 def get_castling_moves(): # Check if Castling is Possible
     castle_moves = []  # store each valid castle move as [((king_coords), (castle_coords))]
     rook_indexes = []
@@ -272,13 +276,11 @@ def get_castling_moves(): # Check if Castling is Possible
             for i in range(len(rook_indexes)):
                 castle = True
                 if rook_locations[i][0] > king_pos[0]:
-                    empty_squares = [(king_pos[0] + 1, king_pos[1]), (king_pos[0] + 2, king_pos[1]),
-                                     (king_pos[0] + 3, king_pos[1])]
+                    empty_squares = [(king_pos[0] + 1, king_pos[1]), (king_pos[0] + 2, king_pos[1]),(king_pos[0] + 3, king_pos[1])]
                 else:
                     empty_squares = [(king_pos[0] - 1, king_pos[1]), (king_pos[0] - 2, king_pos[1])]
                 for j in range(len(empty_squares)):
-                    if empty_squares[j] in white_locations or empty_squares[j] in black_locations or \
-                            empty_squares[j] in black_options or rook_indexes[i]:
+                    if empty_squares[j] in white_locations or empty_squares[j] in black_locations or empty_squares[j] in black_options or rook_indexes[i]:
                         castle = False
                 if castle:
                     castle_moves.append((empty_squares[1], empty_squares[0]))
@@ -294,17 +296,16 @@ def get_castling_moves(): # Check if Castling is Possible
             for i in range(len(rook_indexes)):
                 castle = True
                 if rook_locations[i][0] > king_pos[0]:
-                    empty_squares = [(king_pos[0] + 1, king_pos[1]), (king_pos[0] + 2, king_pos[1]),
-                                     (king_pos[0] + 3, king_pos[1])]
+                    empty_squares = [(king_pos[0] + 1, king_pos[1]), (king_pos[0] + 2, king_pos[1]),(king_pos[0] + 3, king_pos[1])]
                 else:
                     empty_squares = [(king_pos[0] - 1, king_pos[1]), (king_pos[0] - 2, king_pos[1])]
                 for j in range(len(empty_squares)):
-                    if empty_squares[j] in white_locations or empty_squares[j] in black_locations or \
-                            empty_squares[j] in white_options or rook_indexes[i]:
+                    if empty_squares[j] in white_locations or empty_squares[j] in black_locations or empty_squares[j] in white_options or rook_indexes[i]:
                         castle = False
                 if castle:
                     castle_moves.append((empty_squares[1], empty_squares[0]))
     return castle_moves
+
 
 def get_king_moves(position, color): # Check King's Valid Moves
     moves_list = []
@@ -317,6 +318,7 @@ def get_king_moves(position, color): # Check King's Valid Moves
         if target not in friends_list and 0 <= target[0] <= 7 and 0 <= target[1] <= 7:
             moves_list.append(target)
     return moves_list, castle_moves
+
     
 def get_promo_select(): # Check Promotion Options
     mouse_pos = pygame.mouse.get_pos()
@@ -338,6 +340,7 @@ def get_promo_select(): # Check Promotion Options
         piece = black_pieces[promo_index]
         promotion_id = str(piece)+str(moveid)+str(color)
     record_pawn_promotion(piece, moveid, color, promotion_id)
+
     
 def draw_captured(): # Draw Captured Pieces 
     captured_piece = ''
@@ -351,10 +354,12 @@ def draw_captured(): # Draw Captured Pieces
             index = piece_list.index(captured_piece)
             screen.blit(small_white_images[index], (925, 5 + 50*i))
 
+
 def get_both_options(): # Get Options from check_options 
     black_options = get_all_moves(black_pieces, black_locations, 'black')
     white_options = get_all_moves(white_pieces, white_locations, 'white')
     return black_options, white_options
+
 
 def create_new_game(): # Create a New Game in Persistant Data
     sql = "INSERT INTO games (game_name, game_notes) VALUES (%s, %s)"
@@ -366,6 +371,7 @@ def create_new_game(): # Create a New Game in Persistant Data
         gameid = mycursor.lastrowid
     except:
         mydb.rollback()
+        
 
 def record_game_move(gameid, moves_made_counter, color, selected_piece, selection, click_coords):
     sql = "INSERT INTO gameMoves (games_id, order_number, color, piece, start_pos, end_pos) VALUES ('"+str(gameid)+"', '"+str(moves_made_counter)+"', '"+color+"', '"+str(selected_piece)+"', '"+str(selection)+"', '"+str(click_coords)+"')"
@@ -376,6 +382,7 @@ def record_game_move(gameid, moves_made_counter, color, selected_piece, selectio
         moveid = mycursor.lastrowid
     except:
         mydb.rollback()
+
 
 # Clean Start Game Variables and Begin While Run Loop
 create_new_game()
