@@ -1,6 +1,6 @@
 <h1>Persistent Chess</h1>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 1.48.37 AM.png">
-<p>This game development started in December of 2023 because of an interest I have in learning Python. It quickly became an obsession in completing the tutorials below:</p>
+<p>This Pygame development I started in December of 2023 because of an interest in learning Python (and) I have always thought Chess was fun. It quickly became an obsession in completing the tutorials below... I have not stopped there though.</p>
 <ol>
 <li><a href="https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s">https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s</a></li>
 <li><a href="https://www.youtube.com/watch?v=s2Dd_obh3fM&t=134s">https://www.youtube.com/watch?v=s2Dd_obh3fM&t=134s</a></li>
