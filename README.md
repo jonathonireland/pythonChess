@@ -51,7 +51,7 @@
 <li>Record game winners to a table (moves? or it's own table).</li>
 <li>Add more features based on database connection.</li>
 </ol>
-<h2>To to run this on your local</h2>
+<h2>To to run this on your local (on Mac OS 13 or newer)</h2>
 <ol>
 <li>Install Python 3.12.0 or newer.</li>
 <li>Install MySQL 8.0.34 or newer.</li>
