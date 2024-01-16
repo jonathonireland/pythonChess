@@ -5,9 +5,19 @@
 <li><a href="https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s">https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s</a></li>
 <li><a href="https://www.youtube.com/watch?v=s2Dd_obh3fM&t=134s">https://www.youtube.com/watch?v=s2Dd_obh3fM&t=134s</a></li>
 </ol>
-
+<p>Those two tutorials were a great foundation to begin experimentation and learning in Python. Once they were completed, I began to start coding ideas of my own for the game, and I still am developing new features.</p>
 <h2>Working through development plans.</h2>
-<p>After Following the tutorials above, I started adding some more features including listing out moves next to the pieces that were captured throughout the games and database tables for games, moves, captures, checks, pawn promotions, and castlings.</p>
+<p>I started adding some more features which include: </p>
+<ul>
+<li>listing out the moves made through the game next to the pieces that were captured</li> 
+<li>adding (and inserting into) new database table "games" for each new game</li>
+<li>adding (and inserting into) a "gameMoves" table for each move</li>
+<li>adding (and inserting into) a "gameCaptures" table for each capture</li> 
+<li>adding (and inserting into) a "gameChecks" table for each check</li>
+<li>adding (and inserting into) a "gamePromotions" table for each pawn promotion</li>
+<li>adding (and inserting into) a "gameCastling" table for each castle.</li>
+</ul>
+
 <h3>Development plans:</h3>
 <ol>
 <li>Completed: Connect pygame to persistent data.</li>
