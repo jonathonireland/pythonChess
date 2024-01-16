@@ -22,6 +22,7 @@
 <li>Fix Game reset after forfeit pieces do not reset as expected.</li>
 <li>Improve Readme file 100X over</li>
 <li>Clean up code.</li>
+<li>Record game winners to a table (moves? or it's own table).</li>
 <li>Add more features based on database connection.</li>
 </ol>
 
