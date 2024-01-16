@@ -1,4 +1,12 @@
 <h1>Data Persistent Two-Player Chess</h1>
+<h2>Project Synopsis</h2>
+<p>Once all data is captured that records all aspects of the game my long term goals for this project are as follows:</p>
+<ol>
+<li>Continue having fun and learning in the process. May incorporate an OOP re-write.</li>
+<li>To be able to load a game that didn't result in a winner yet (provide a user interface to select a previous game).</li>
+<li>To be able to animate through a previously played loaded game.</li>
+<li>To be able to eventually verse the computer instead of only have 2 human players.</li>
+</ol>
 <h3>Game Over</h3>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.36.21 AM.png" alt="black won the game! Persistent Two-Player Chess">
 
