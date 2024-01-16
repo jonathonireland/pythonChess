@@ -1,4 +1,4 @@
-<h1>Persistent Two-Player Chess</h1>
+<h1>Data Persistent Two-Player Chess</h1>
 <h3>Game Over</h3>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.36.21 AM.png" alt="black won the game! Persistent Two-Player Chess">
 
@@ -46,7 +46,6 @@
 <li>Completed: Fix game move quirks created from adding castling to moves types.</li>
 <li>Completed: Replace old ugly game pieces with glossy nice ones.</li>
 <li>Fix Game reset after forfeit pieces do not reset as expected.</li>
-<li>Improve Readme file 100X over</li>
 <li>Clean up code.</li>
 <li>Record game winners to a table (moves? or it's own table).</li>
 <li>Add more features based on database connection.</li>
