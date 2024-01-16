@@ -19,7 +19,7 @@ def record_captured_piece(piece, moveid, color, captured_id):
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         mydb.rollback()
-        
+      
 def record_castling_event(color, moveid, rook_locations, king_pos):
     sql = "INSERT INTO gameCastling (color, rook_locations, king_pos, game_moves_id) VALUES (%s, %s, %s, %s)"
     values = (str(color), str(rook_locations), str(king_pos), str(moveid))

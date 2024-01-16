@@ -1,8 +1,8 @@
 # import pygame
 from constants import *
+from all_moves import all_moves
 from db_functions import *
 from service_functions import *
-pygame.init()
 
 def get_bishop_moves(position, color): # Check Bishop's Valid Moves
     moves_list = []
