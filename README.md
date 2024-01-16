@@ -42,7 +42,7 @@
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 10.04.40 AM.png" alt="select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id." /></li>
 <li>adding (and inserting into) a "gameWinners" table for every completed game and incompleted game.</li>
 </ul>
-<h3>Development plans:</h3>
+<h3>Short-term Development plans:</h3>
 <ol>
 <li>Completed: Connect pygame to persistent data.</li>
 <li>Completed: Save each game to a games table assigned last game id to global gameid variable.</li>
