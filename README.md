@@ -13,18 +13,18 @@
 </ul>
 <p>New coding features include: </p>
 <ul>
-<li>adding (and inserting into) a "games" table for each game
+<li>adding (and inserting into) a "games" table for each game<br>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.56.49 AM.png" alt ="Select * from games ORDER BY id DESC LIMIT 10 shows that the games table is probably the least imaginative table but it is the base building block upon the games data is started with."/>
 </li>
-<li>adding (and inserting into) a "gameMoves" table for each move
+<li>adding (and inserting into) a "gameMoves" table for each move<br>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.53.33 AM.png" alt="Select * from gameMoves ORDER BY id DESC LIMIT 10 shows that game successfully creates a move associated with a specific game that includes the piece, starting position, ending position, and color."></li>
-<li>adding (and inserting into) a "gameCaptures" table for each capture
+<li>adding (and inserting into) a "gameCaptures" table for each capture<br>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.44.15 AM.png" alt="Select * From gameCaptures limit 10 shows that game successfully logs captures when playing the game." /></li> 
 <li>adding (and inserting into) a "gameChecks" table for each check
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.41.52 AM.png" alt="inserts completed in gameChecks"/></li>
-<li>adding (and inserting into) a "gamePromotions" table for each pawn promotion, there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. Still working through these issues.
+<li>adding (and inserting into) a "gamePromotions" table for each pawn promotion, there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. Still working through these issues.<br>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot%202024-01-16%20at%2010.00.58%20AM.png" alt="select * from gamePromotions ORDER BY id DESC LIMIT 10 shows that there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. " /></li>
-<li>adding (and inserting into) a "gameCastling" table for each castle. There is room for improvement here, would like to capture the starting position of the king and rook and then their position after they complete the castle maneuver 
+<li>adding (and inserting into) a "gameCastling" table for each castle. There is room for improvement here, would like to capture the starting position of the king and rook and then their position after they complete the castle maneuver<br> 
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 10.04.40 AM.png" alt="select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id." /></li>
 <li>adding (and inserting into) a "gameWinners" table for every completed game and incompleted game.</li>
 </ul>
