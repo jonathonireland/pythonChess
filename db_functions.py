@@ -29,3 +29,13 @@ def record_castling_event(color, moveid, rook_locations, king_pos):
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         mydb.rollback()
+
+def record_check_event(color, king_location, moveid, game_check_id):
+    sql = "INSERT INTO gameChecks (king_color, king_pos, game_moves_id, gameCheckId) VALUES (%s, %s, %s, %s)"
+    values = (str(color), str(king_location), str(moveid), str(game_check_id)) 
+    try:
+        mycursor.execute(sql, values)
+        mydb.commit()
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        mydb.rollback()

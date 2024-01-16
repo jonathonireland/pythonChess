@@ -13,12 +13,15 @@ Working through development plans.
 Development plans:
 1. Completed: Connect pygame to persistent data  
 2. Completed: Save each game to a games table assigned last game id to global gameid variable.
-3. Completed: Save each moves made list to a gameMoves table.
+3. Completed: Save each moves made to a gameMoves table.
 4. Completed: Save each pawn promotion to a gamePromotions table. 
 5. Completed: Save each capture to a gameCaptures table.
 6. Completed: Save each castling instance to a gameCastling table.
-7. Save each check instance to a gameChecks table.
-8. Fix game move quirks created from adding castling to moves types.
-9. Clean up code.
-10. Add more features.
+7. Completed: Save each check instance to a gameChecks table.
+8. Completed: Fix game move quirks created from adding castling to moves types.
+9. Completed: Replace old ugly game pieces with glossy nice ones.
+10. Fix Game reset after forfeit pieces do not reset as expected.
+11. Improve Readme file 100X over
+12. Clean up code.
+13. Add more features based on database connection.
 

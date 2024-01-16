@@ -130,8 +130,9 @@ def draw_check(): # Draw a Flashing Square Around King if in Check
             king_location = white_locations[king_index]
             for i in range(len(black_options)):
                 if king_location in black_options[i]:
-                    print(str(black_options[i]))
                     check = True
+                    global white_in_check 
+                    white_in_check = True
                     if counter < 15:
                         pygame.draw.rect(screen, 'dark red', [white_locations[king_index][0] * 100 + 1,
                                                               white_locations[king_index][1] * 100 + 1, 100, 100], 5)
@@ -141,8 +142,9 @@ def draw_check(): # Draw a Flashing Square Around King if in Check
             king_location = black_locations[king_index]
             for i in range(len(white_options)):
                 if king_location in white_options[i]:
-                    print(str(white_options[i]))
                     check = True
+                    global black_in_check
+                    black_in_check = True
                     if counter < 15:
                         pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1,
                                                                black_locations[king_index][1] * 100 + 1, 100, 100], 5)
@@ -171,6 +173,38 @@ def get_all_moves(pieces, locations, turn): # Check All Pieces Valid Options on 
         all_moves_list.append(moves_list)
     return all_moves_list
 
+def get_in_check_data(color): # determine if check is true and if it is who's in check?
+    global check
+    global black_in_check
+    global white_in_check 
+    match color:
+        case 'white':
+            if 'king' in white_pieces:
+                king_index = white_pieces.index('king')
+                king_location = white_locations[king_index]
+                for i in range(len(black_options)):
+                    if king_location in black_options[i]:
+                        check = True
+                        white_in_check = True
+                        # if true record event
+                        record_check_event(color, king_location, moveid, str(color + '_in_check_' + str(gameid) + '_' + str(moveid)))   
+                    else:
+                        check = False
+                        white_in_check = False
+        case 'black':
+            if 'king' in black_pieces:
+                king_index = black_pieces.index('king')
+                king_location = black_locations[king_index]
+                for i in range(len(white_options)):
+                    if king_location in white_options[i]:
+                        check = True
+                        black_in_check = True
+                        # if true record event
+                        record_check_event(color, king_location, moveid, str(color + '_in_check_' + str(gameid) + '_' + str(moveid)))
+                    else:
+                        check = False
+                        black_in_check = False
+
 def get_valid_moves(): # Check for Valid Moves for Selected Piece
     if turn_step < 2:
         options_list = white_options
@@ -179,7 +213,6 @@ def get_valid_moves(): # Check for Valid Moves for Selected Piece
     if selection <= len(options_list):
         valid_options = options_list[selection]
     else:
-        print('selection outside of options range!')
         valid_options = []
     return valid_options
 
@@ -308,8 +341,6 @@ def get_promo_select(): # Check Promotion Options
     
 def draw_captured(): # Draw Captured Pieces 
     captured_piece = ''
-    color = ''
-    captured_id = ''
     if len(captured_pieces_white) > 0 or len(captured_pieces_black) > 0:
         for i in range(len(captured_pieces_white)):
             captured_piece = captured_pieces_white[i]
@@ -333,7 +364,6 @@ def create_new_game(): # Create a New Game in Persistant Data
         mydb.commit()
         global gameid
         gameid = mycursor.lastrowid
-        print(str(gameid) + " game id has a value")
     except:
         mydb.rollback()
 
@@ -344,7 +374,6 @@ def record_game_move(gameid, moves_made_counter, color, selected_piece, selectio
         mydb.commit()
         global moveid
         moveid = mycursor.lastrowid
-        print(str(moveid) + " move id has a value")
     except:
         mydb.rollback()
 
@@ -372,6 +401,10 @@ while run:
         if white_promote or black_promote:
             draw_promotion(white_promote, black_promote)
             get_promo_select()
+    if selection == 100 and white_in_check == True:
+        get_in_check_data('white')
+    if selection == 100 and black_in_check == True:
+        get_in_check_data('black')
     if selection != 100:
         valid_moves = get_valid_moves()
         draw_valid(valid_moves)
@@ -535,11 +568,11 @@ while run:
                     
                     # check what piece is selected, so you can only draw castling if king is selected
                     selected_piece = black_pieces[selection]
-                    
+
                     # second click
                     if turn_step == 2:
-                        turn_step = 3
-                        
+                        turn_step = 3      
+                
                 if click_coords in valid_moves and selection != 100:
                     # is this a En passant move?
                     black_ep = get_ep(black_locations[selection], click_coords)
@@ -606,6 +639,7 @@ while run:
                     
                 #add option to castle
                 elif selection != 100 and selected_piece == 'king':
+                    
                     for q in range(len(castling_moves)):
                         if click_coords == castling_moves[q][0]:
                             
@@ -662,16 +696,16 @@ while run:
                             
         if event.type == pygame.KEYDOWN and game_over:
             if event.key == pygame.K_RETURN:
+                gameid = 0
+                moveid = 0  
                 screen.fill('dark gray')
                 game_over = False
                 winner = ''
                 white_pieces = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn']
                 white_locations = [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (0, 1), (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1)]
-                previous_white_locations = []
                 white_moved = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
                 black_pieces = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn']
                 black_locations = [(0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (7, 7), (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6), (7, 6)]
-                previous_black_locations = []
                 black_moved = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
                 captured_pieces_white = []
                 captured_pieces_black = []
@@ -682,9 +716,14 @@ while run:
                 white_options = get_both_options()[1]
                 column_two_counter = 0
                 column_three_counter = 0
+                column_four_counter = 0
                 moves_made_counter = 0
                 moves_made_list = []    
+                previous_white_locations = []
+                previous_black_locations = []
                 create_new_game()
+                run = True
+                screen.fill('dark gray')
     if winner != '':
             game_over = True
             draw_game_over(winner)    

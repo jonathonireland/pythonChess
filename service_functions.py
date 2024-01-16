@@ -154,5 +154,4 @@ def draw_moves_made(moves_made_list, color, moves_made_counter, column_two_count
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, white_font_color), (1300, iteration_spacer))
         else: 
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1300, iteration_spacer))
-    print(str(moves_made_counter)+'. '+all_moves[moves_made_list[-1]])
         
