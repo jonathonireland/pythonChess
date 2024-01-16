@@ -23,8 +23,7 @@
 <li>adding (and inserting into) a "gameChecks" table for each check
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.41.52 AM.png" alt="inserts completed in gameChecks"/></li>
 <li>adding (and inserting into) a "gamePromotions" table for each pawn promotion, there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. Still working through these issues.
-<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 10.00.58 AM.png
-" alt="select * from gamePromotions ORDER BY id DESC LIMIT 10 shows that there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. " /></li>
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot%202024-01-16%20at%2010.00.58%20AM.png" alt="select * from gamePromotions ORDER BY id DESC LIMIT 10 shows that there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. " /></li>
 <li>adding (and inserting into) a "gameCastling" table for each castle. There is room for improvement here, would like to capture the starting position of the king and rook and then their position after they complete the castle maenuver 
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 10.04.40 AM.png" alt="select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id." />
 </li>
