@@ -7,9 +7,6 @@
 <li>To be able to animate through a previously played loaded game.</li>
 <li>To be able to eventually verse the computer instead of only have 2 human players.</li>
 </ol>
-<h3>Game Over</h3>
-<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.36.21 AM.png" alt="black won the game! Persistent Two-Player Chess">
-
 <h3>Pawn Promotions</h3>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.33.12 AM.png" alt="Pawn Promotion image">
 <h3>Long Castling (on the queen's side)</h3>
@@ -18,6 +15,8 @@
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-17 at 10.11.06 AM.png" alt="Picture shows white side of the board with both castle options" />
 <h3>Shows 128 Moves</h3>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-17 at 10.28.49 AM.png" alt="Shows 128 Moves on the right rectangle box" />
+<h3>Game Over</h3>
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.36.21 AM.png" alt="black won the game! Persistent Two-Player Chess">
 <p>This Pygame development I started in December of 2023 because of an interest in learning Python (and) I have always thought Chess was fun. It quickly became an obsession in completing the tutorials below... It has not stopped there though, I don't know where this will end up, it's only for fun, so it doesn't have to stop.</p>
 <ol>
 <li><a href="https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s">https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s</a></li>
