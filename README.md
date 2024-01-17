@@ -59,7 +59,7 @@
 <li>Completed: Fix game move quirks created from adding castling to moves types.</li>
 <li>Completed: Replace old ugly game pieces with glossy nice ones.</li>
 <li>Completed: Record gamesCompleted in it's own table.</li>
-<li>Fix Game reset after forfeit pieces do not reset as expected.</li>
+<li>Fix Game reset after forfeit, right now the pieces do not reset on the board as expected.</li>
 <li>Continue adding featues as ideas pop into my mind.</li>
 </ol>
 <h2>To to run this on your local (on Mac OS 13 or newer)</h2>
