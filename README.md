@@ -6,7 +6,7 @@
 <li>To be able to load a game that didn't result in a winner yet (provide a user interface to select a previous game).</li>
 <li>To be able to animate through a previously played loaded game.</li>
 <li>May incorporate an OOP re-write.</li>
-<li>To be able to eventually verse the computer instead of only have 2 human players.</li>
+<li>To be able to eventually vs. the computer instead of only have 2 human players.</li>
 </ol>
 <h3>Pawn Promotions</h3>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.33.12 AM.png" alt="Pawn Promotion image">
