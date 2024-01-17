@@ -733,6 +733,8 @@ while run:
                 screen.fill('dark gray')
     if winner != '':
             game_over = True
-            draw_game_over(winner)    
+            draw_game_over(winner)
+            gameCompletedKey = str(gameid)+"_"+str(moveid)+"_"+str(winner)
+            record_game_over(gameid, moveid, winner, gameCompletedKey)
     pygame.display.flip()
 pygame.quit()
