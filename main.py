@@ -4,6 +4,17 @@ from db_functions import *
 from service_functions import *
 
 
+def pop_piece_out_lists(piece, color): # Remove Pieces from Lists as Captures Happen
+    if color == 'white':
+        white_pieces.pop(piece)
+        white_locations.pop(piece)
+        white_moved.pop(piece)
+    if color == 'black':
+        black_pieces.pop(piece)
+        black_locations.pop(piece)
+        black_moved.pop(piece)
+
+
 def get_bishop_moves(position, color): # Check Bishop's Valid Moves
     moves_list = []
     friends_list = get_friendly_list(color)

@@ -60,7 +60,7 @@
 <li>Completed: Fix game move quirks created from adding castling to moves types.</li>
 <li>Completed: Replace old ugly game pieces with glossy nice ones.</li>
 <li>Completed: Record gamesCompleted in it's own table.</li>
-<li>Fix Game reset after forfeit, making progress here but the game still doesn't behave correctly after hitting the Enter key to reset. </li>
+<li>Completed: Fix Game reset after forfeit. </li>
 <li>Fix Loop related repeated attempts to insert into database (denoted by the gap between auto incremented ids) for the following:
     <ul>
         <li>gamesCompleted</li>

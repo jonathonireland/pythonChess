@@ -32,17 +32,6 @@ def get_enemy_list(color): # Determine which Locations are Enemies
     return enemies_list
 
 
-def pop_piece_out_lists(piece, color): # Remove Pieces from Lists as Captures Happen
-    if color == 'white':
-        white_pieces.pop(piece)
-        white_locations.pop(piece)
-        white_moved.pop(piece)
-    if color == 'black':
-        black_pieces.pop(piece)
-        black_locations.pop(piece)
-        black_moved.pop(piece)
-
-
 # DRAWING SERVICE FUNCTIONS #
 def draw_board(): # Draw Main Game Board
     screen.fill('white', (0, 0, (screen.get_width()//3)*1.85, screen.get_height()))
