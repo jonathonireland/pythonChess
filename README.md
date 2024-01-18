@@ -60,7 +60,7 @@
 <li>Completed: Fix game move quirks created from adding castling to moves types.</li>
 <li>Completed: Replace old ugly game pieces with glossy nice ones.</li>
 <li>Completed: Record gamesCompleted in it's own table.</li>
-<li>Completed: Fix Game reset after forfeit.</li>
+<li>Fix Game reset after forfeit, making progress here but the game still doesn't behave correctly after hitting the Enter key to reset. </li>
 <li>Fix Loop related repeated attempts to insert into database (denoted by the gap between auto incremented ids) for the following:
     <ul>
         <li>gamesCompleted</li>
@@ -75,6 +75,6 @@
 <li>Install Python 3.12.0 or newer.</li>
 <li>Install MySQL 8.0.34 or newer.</li>
 <li>Create a db_connection.py file in the root of the pythonchess folder.</li>
-<li>Copy and paste stored_procedures.sql and run it the structured queries.</li>
+<li>Copy and paste stored_procedures.sql and run the structured queries.</li>
 <li>Run the main.py file to start the game.</li>
 </ol>
