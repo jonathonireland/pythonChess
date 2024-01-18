@@ -19,14 +19,10 @@ fps = 60
 # game variables and images
 white_pieces = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn']
 white_locations = [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (0, 1), (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1)]
-previous_white_locations = []
 white_moved = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
 black_pieces = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn']
 black_locations = [(0, 7), (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (7, 7),(0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6), (7, 6)]
-previous_black_locations = []
 black_moved = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
-captured_pieces_white = []
-captured_pieces_black = []
 
 # black king
 black_king = pygame.transform.scale(pygame.image.load('assets/images/black/king2.png'), (80, 80))
@@ -93,11 +89,11 @@ mycursor = mydb.cursor()
 
 white_promotions = ['bishop', 'knight', 'rook', 'queen']
 black_promotions = ['bishop', 'knight', 'rook', 'queen']
+
 # check variables/ flashing counter
 counter = 0
 moves_made_counter = 0
 moves_made_list = []
-moves_made_list_box = ""
 winner = ''
 game_over = False
 white_ep = (100, 100)
@@ -115,6 +111,10 @@ turn_step = 0
 # 0 - whites turn no selction: 1- whites turn piece selected: 2 - black turn no selection
 selection = 100
 valid_moves = []
+captured_pieces_white = []
+captured_pieces_black = []
+previous_white_locations = []
+previous_black_locations = []
 
 all_moves = ['rook (0, 0)', 'rook (0, 1)', 'rook (0, 2)', 'rook (0, 3)', 'rook (0, 4)', 'rook (0, 5)', 'rook (0, 6)', 'rook (0, 7)', 
     'rook (1, 0)', 'rook (1, 1)', 'rook (1, 2)', 'rook (1, 3)', 'rook (1, 4)', 'rook (1, 5)', 'rook (1, 6)', 'rook (1, 7)', 

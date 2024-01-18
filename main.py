@@ -384,6 +384,27 @@ def record_game_move(gameid, moves_made_counter, color, selected_piece, selectio
         mydb.rollback()
 
 
+def draw_pieces(): # Draw Pieces Onto Board 
+    for i in range(len(white_pieces)):
+        index = piece_list.index(white_pieces[i])
+        if white_pieces[i] == 'pawn':
+            screen.blit(white_pawn, (white_locations[i][0] * 100 + 22, white_locations[i][1] * 100 + 30))
+        else:
+            screen.blit(white_images[index],(white_locations[i][0] * 100 + 10, white_locations[i][1] * 100 + 10))
+        if turn_step < 2:
+            if selection == i:
+                pygame.draw.rect(screen,'red',[white_locations[i][0] * 100 + 1, white_locations[i][1] * 100 + 1, 100, 100], 2)
+    for i in range(len(black_pieces)):
+        index = piece_list.index(black_pieces[i])
+        if black_pieces[i] == 'pawn':
+            screen.blit(black_pawn, (black_locations[i][0] * 100 + 22, black_locations[i][1] * 100 + 30))
+        else:
+            screen.blit(black_images[index],(black_locations[i][0] * 100 + 10, black_locations[i][1] * 100 + 10))
+        if turn_step >= 2:
+            if selection == i:
+                pygame.draw.rect(screen,'blue',[black_locations[i][0] * 100 + 1, black_locations[i][1] * 100 + 1, 100, 100], 2)
+
+
 # Clean Start Game Variables and Begin While Run Loop
 create_new_game()
 black_options = get_both_options()[0]
@@ -703,11 +724,24 @@ while run:
                             
         if event.type == pygame.KEYDOWN and game_over:
             if event.key == pygame.K_RETURN:
+                counter = 0
+                moves_made_counter = 0
+                moves_made_list = [] 
+                winner = ''
+                game_over = False
+                white_promote = False
+                black_promote = False
+                promo_index = 100
+                left_click = ""
+                check = False
+                white_in_check = False
+                black_in_check = False
                 gameid = 0
                 moveid = 0  
                 screen.fill('dark gray')
-                game_over = False
-                winner = ''
+                turn_step = 0
+                selection = 100                
+                valid_moves = []
                 white_pieces = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn']
                 white_locations = [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (0, 1), (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1)]
                 white_moved = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
@@ -716,21 +750,17 @@ while run:
                 black_moved = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
                 captured_pieces_white = []
                 captured_pieces_black = []
-                turn_step = 0
-                selection = 100
-                valid_moves = []
+                previous_white_locations = []
+                previous_black_locations = []
+                create_new_game()
                 black_options = get_both_options()[0]
                 white_options = get_both_options()[1]
                 column_two_counter = 0
                 column_three_counter = 0
                 column_four_counter = 0
-                moves_made_counter = 0
-                moves_made_list = []    
-                previous_white_locations = []
-                previous_black_locations = []
-                create_new_game()
                 run = True
                 screen.fill('dark gray')
+                
     if winner != '':
             game_over = True
             draw_game_over(winner)
