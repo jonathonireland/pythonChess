@@ -63,13 +63,3 @@ def record_check_event(color, king_location, moveid, game_check_id):
         print(f"Error: {err}")
         mydb.rollback()
 
-
-def record_game_over(gameid, moveid, winner, gameCompletedKey):
-    sql = "INSERT INTO gamesCompleted (gameid, game_moves_id, winner, gameCompletedKey) VALUES(%s, %s, %s, %s)"
-    values = (str(gameid), str(moveid), str(winner), str(gameCompletedKey))
-    try:
-        mycursor.execute(sql, values)
-        mydb.commit()
-    except mysql.connector.Error as err:
-        print(f"Error: {err}")
-        mydb.rollback()

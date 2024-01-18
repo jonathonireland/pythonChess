@@ -63,7 +63,7 @@
 <li>Completed: Fix Game reset after forfeit. </li>
 <li>Fix Loop related repeated attempts to insert into database (denoted by the gap between auto incremented ids) for the following:
     <ul>
-        <li>gamesCompleted</li>
+        <li>Completed: gamesCompleted insert only happens once</li>
         <li>gamePromotions</li>
         <li>gameChecks</li>
     </ul>

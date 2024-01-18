@@ -395,6 +395,19 @@ def record_game_move(gameid, moves_made_counter, color, selected_piece, selectio
         mydb.rollback()
 
 
+def record_game_over(gameid, moveid, winner, gameCompletedKey):
+    sql = "INSERT INTO gamesCompleted (gameid, game_moves_id, winner, gameCompletedKey) VALUES(%s, %s, %s, %s)"
+    values = (str(gameid), str(moveid), str(winner), str(gameCompletedKey))
+    try:
+        mycursor.execute(sql, values)
+        mydb.commit()
+        global gameCompletedId
+        gameCompletedId = mycursor.lastrowid
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        mydb.rollback()
+
+
 def draw_pieces(): # Draw Pieces Onto Board 
     for i in range(len(white_pieces)):
         index = piece_list.index(white_pieces[i])
@@ -420,6 +433,7 @@ def draw_pieces(): # Draw Pieces Onto Board
 create_new_game()
 black_options = get_both_options()[0]
 white_options = get_both_options()[1]
+gameCompletedId = 0
 column_two_counter = 0
 column_three_counter = 0
 column_four_counter = 0
@@ -769,6 +783,7 @@ while run:
                 column_two_counter = 0
                 column_three_counter = 0
                 column_four_counter = 0
+                gameCompletedId = 0
                 run = True
                 screen.fill('dark gray')
                 
@@ -776,6 +791,7 @@ while run:
             game_over = True
             draw_game_over(winner)
             gameCompletedKey = str(gameid)+"_"+str(moveid)+"_"+str(winner)
-            record_game_over(gameid, moveid, winner, gameCompletedKey)
+            if gameCompletedId == 0:
+                record_game_over(gameid, moveid, winner, gameCompletedKey)
     pygame.display.flip()
 pygame.quit()
