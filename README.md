@@ -61,6 +61,13 @@
 <li>Completed: Replace old ugly game pieces with glossy nice ones.</li>
 <li>Completed: Record gamesCompleted in it's own table.</li>
 <li>Completed: Fix Game reset after forfeit.</li>
+<li>Fix Loop related repeated attempts to insert into database (denoted by the gap between auto incremented ids) for the following:
+    <ul>
+        <li>gamesCompleted</li>
+        <li>gamePromotions</li>
+        <li>gameChecks</li>
+    </ul>
+</li>
 <li>Continue adding featues as ideas pop into my mind.</li>
 </ol>
 <h2>To to run this on your local (on Mac OS 13 or newer)</h2>
