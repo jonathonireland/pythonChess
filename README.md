@@ -46,6 +46,7 @@
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 10.04.40 AM.png" alt="select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id." /></li>
 <li>adding (and inserting into) a "gamesCompleted" table for every completed game.<br>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-17 at 11.50.14 AM.png" alt="select * from gamesCompleted shows that I am now recording games that have been completed."/></li>
+<li>Fixed Game Reset after Forfeit button is clicked!!</li>
 </ul>
 <h3>Short-term Development plans:</h3>
 <ol>
