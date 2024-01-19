@@ -73,7 +73,7 @@
 </li>
 <li>Continue adding featues as ideas pop into my mind.</li>
 </ol>
-<h2>To to run this on your local (on Mac OS 13 or newer)</h2>
+<h2>To run this on your local (on Mac OS 13 or newer)</h2>
 <ol>
 <li>Install Python 3.12.0 or newer.</li>
 <li>Install MySQL 8.0.34 or newer.</li>
