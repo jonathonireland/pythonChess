@@ -353,12 +353,19 @@ def get_promo_select(): # Check Promotion Options
         color = 'white'
         piece = white_pieces[promo_index]
         promotion_id = str(piece)+str(moveid)+str(color)
+        try:
+            alreadyPromoted = promo_events.index(promotion_id)
+        except:
+            record_pawn_promotion(piece, moveid, color, promotion_id)
     if black_promote and left_click and x_pos > 7 and y_pos < 4:
         black_pieces[promo_index] = black_promotions[y_pos]
         color = 'black'
         piece = black_pieces[promo_index]
         promotion_id = str(piece)+str(moveid)+str(color)
-    record_pawn_promotion(piece, moveid, color, promotion_id)
+        try:
+            alreadyPromoted = promo_events.index(promotion_id)
+        except:
+            record_pawn_promotion(piece, moveid, color, promotion_id)
 
     
 def draw_captured(): # Draw Captured Pieces 

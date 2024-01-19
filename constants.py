@@ -108,6 +108,7 @@ black_ep = (100, 100)
 white_promote = False
 black_promote = False
 promo_index = 100
+promo_events = []
 left_click = ""
 check = False
 check_events = []

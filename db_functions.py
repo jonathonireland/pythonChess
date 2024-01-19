@@ -5,6 +5,8 @@ def record_pawn_promotion(piece, moveid, color, promotion_id):
     try:
         mycursor.execute(record_pawn_promotion_sql, values)
         mydb.commit()
+        global promo_events
+        promo_events.append(promotion_id)
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         mydb.rollback()
