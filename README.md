@@ -44,8 +44,7 @@
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot%202024-01-16%20at%2010.00.58%20AM.png" alt="select * from gamePromotions ORDER BY id DESC LIMIT 10 shows that there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. " /></li>
 <li>adding (and inserting into) a "gameCastling" table for each castle. There is room for improvement here, would like to (possibly) capture the starting position of the king and rook and then their position after they complete the castle maneuver<br>select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id.<br>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 10.04.40 AM.png" alt="select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id." /></li>
-<li>adding (and inserting into) a "gamesCompleted" table for every completed game.<br>
-<img src="https://www.jonathonireland.com/resume/data/files/Screenshot%202024-01-18%20at%205.37.21%20PM.png" alt="select * from gamesCompleted shows that I am now recording games that have been completed."/>
+<li>adding (and inserting into) a "gamesCompleted" table for every completed game.
 </li>
 <li>Fixed Game Reset after Forfeit button is clicked!!</li>
 </ul>
@@ -64,7 +63,9 @@
 <li>Completed: Fix Game reset after forfeit. </li>
 <li>Fix Loop related repeated attempts to insert into database (denoted by the gap between auto incremented ids) for the following:
     <ul>
-        <li>Completed: "gamesCompleted" insert only happens once per game completion</li>
+        <li>Completed: "gamesCompleted" insert only happens once per game completion
+            <img src="https://www.jonathonireland.com/resume/data/files/Screenshot%202024-01-18%20at%205.37.21%20PM.png" alt="select * from gamesCompleted shows that I am now recording games that have been completed."/>
+        </li>
         <li>Completed: "gamePromotions" insert only happens once per pawn promotion
             <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-19 at 10.52.57 AM.png" alt="Pawn Promotions only happen once per promotion fixing auto increment in the database table">
         </li>
