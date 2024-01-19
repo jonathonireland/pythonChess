@@ -64,9 +64,11 @@
 <li>Completed: Fix Game reset after forfeit. </li>
 <li>Fix Loop related repeated attempts to insert into database (denoted by the gap between auto incremented ids) for the following:
     <ul>
-        <li>Completed: gamesCompleted insert only happens once</li>
-        <li>gamePromotions</li>
-        <li>Completed: gameChecks insert only happens once
+        <li>Completed: "gamesCompleted" insert only happens once per game completion</li>
+        <li>Completed: "gamePromotions" insert only happens once per pawn promotion
+            <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-19 at 10.52.57 AM.png" alt="Pawn Promotions only happen once per promotion fixing auto increment in the database table">
+        </li>
+        <li>Completed: "gameChecks" insert only happen once per game Check
             <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-18 at 8.37.39 PM.png" alt="Game Checks are now incrementing without missing sequential ids" />
         </li>
     </ul>
