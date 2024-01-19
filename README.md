@@ -66,7 +66,9 @@
     <ul>
         <li>Completed: gamesCompleted insert only happens once</li>
         <li>gamePromotions</li>
-        <li>gameChecks</li>
+        <li>Completed: gameChecks insert only happens once
+            <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-18 at 8.37.39 PM.png" alt="Game Checks are now incrementing without missing sequential ids" />
+        </li>
     </ul>
 </li>
 <li>Continue adding featues as ideas pop into my mind.</li>

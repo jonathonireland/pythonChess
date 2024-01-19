@@ -188,6 +188,8 @@ def get_in_check_data(color): # determine if check is true and if it is who's in
     global check
     global black_in_check
     global white_in_check 
+    global check_events
+    checkIdKey = str(color + '_in_check_' + str(gameid) + '_' + str(moveid))    
     match color:
         case 'white':
             if 'king' in white_pieces:
@@ -197,8 +199,11 @@ def get_in_check_data(color): # determine if check is true and if it is who's in
                     if king_location in black_options[i]:
                         check = True
                         white_in_check = True
-                        # if true record event
-                        record_check_event(color, king_location, moveid, str(color + '_in_check_' + str(gameid) + '_' + str(moveid)))   
+                        # if true record event                        
+                        try:
+                            alreadyChecked = check_events.index(checkIdKey)
+                        except:
+                            record_check_event(color, king_location, moveid, checkIdKey)   
                     else:
                         check = False
                         white_in_check = False
@@ -211,7 +216,10 @@ def get_in_check_data(color): # determine if check is true and if it is who's in
                         check = True
                         black_in_check = True
                         # if true record event
-                        record_check_event(color, king_location, moveid, str(color + '_in_check_' + str(gameid) + '_' + str(moveid)))
+                        try:
+                            alreadyChecked = check_events.index(checkIdKey)
+                        except:
+                            record_check_event(color, king_location, moveid, checkIdKey)
                     else:
                         check = False
                         black_in_check = False
@@ -373,10 +381,9 @@ def get_both_options(): # Get Options from check_options
 
 
 def create_new_game(): # Create a New Game in Persistant Data
-    sql = "INSERT INTO games (game_name, game_notes) VALUES (%s, %s)"
     val = ("newGame", "initial attempt")
     try:
-        mycursor.execute(sql, val)
+        mycursor.execute(create_new_game_sql, val)
         mydb.commit()
         global gameid
         gameid = mycursor.lastrowid
@@ -385,9 +392,9 @@ def create_new_game(): # Create a New Game in Persistant Data
         
 
 def record_game_move(gameid, moves_made_counter, color, selected_piece, selection, click_coords):
-    sql = "INSERT INTO gameMoves (games_id, order_number, color, piece, start_pos, end_pos) VALUES ('"+str(gameid)+"', '"+str(moves_made_counter)+"', '"+color+"', '"+str(selected_piece)+"', '"+str(selection)+"', '"+str(click_coords)+"')"
+    values = (str(gameid), str(moves_made_counter), str(color), str(selected_piece), str(selection), str(click_coords)) 
     try:
-        mycursor.execute(sql)
+        mycursor.execute(record_game_move_sql, values)
         mydb.commit()
         global moveid
         moveid = mycursor.lastrowid
@@ -396,10 +403,9 @@ def record_game_move(gameid, moves_made_counter, color, selected_piece, selectio
 
 
 def record_game_over(gameid, moveid, winner, gameCompletedKey):
-    sql = "INSERT INTO gamesCompleted (gameid, game_moves_id, winner, gameCompletedKey) VALUES(%s, %s, %s, %s)"
     values = (str(gameid), str(moveid), str(winner), str(gameCompletedKey))
     try:
-        mycursor.execute(sql, values)
+        mycursor.execute(record_game_over_sql, values)
         mydb.commit()
         global gameCompletedId
         gameCompletedId = mycursor.lastrowid
