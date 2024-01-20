@@ -1,15 +1,5 @@
 from constants import *
 
-# SERVICE DECORATORS ####
-def get_moves_decorator(func):
-    def wrapper():
-        moves_list = []
-        friends_list = get_friendly_list(color)
-        enemy_list = get_enemy_list(color)
-        func()
-        return moves_list
-    return wrapper
-
 
 # LISTING SERVICE FUNCTIONS #
 def get_friendly_list(color): # Determine which Locations are Friendlies
