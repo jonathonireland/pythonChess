@@ -95,6 +95,7 @@ record_castling_event_sql = "INSERT INTO gameCastling (color, rook_locations, ki
 record_captures_sql = "INSERT INTO gameCaptures (captured_piece, game_moves_id, color, captured_id) VALUES (%s, %s, %s, %s)"
 record_pawn_promotion_sql = "INSERT INTO gamePromotions (promotion_to_piece, game_moves_id, color, promotion_id) VALUES (%s, %s, %s, %s)"
 # SELECTS
+fetch_10_games_sql = "SELECT * FROM games ORDER BY id DESC LIMIT 10"
 fetch_game_move_sql = "SELECT * FROM gameMoves WHERE games_id = %s AND order_number = %s"
 fetch_game_moves_sql = "SELECT * FROM gameMoves WHERE games_id = %s"
 

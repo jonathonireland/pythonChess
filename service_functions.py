@@ -98,12 +98,17 @@ def draw_castling(moves):
         pygame.draw.line(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70),
                          (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 2)
 
+def draw_previous_games():
+    pygame.draw.rect(screen, 'black', [200, 200, 400, 100])
+
 
 def draw_moves_made(moves_made_list, color, moves_made_counter, column_two_counter, column_three_counter, column_four_counter): # Draw List of Moves as Game is Played
     white_font_color = (255, 255, 255)
     black_font_color = (0, 0, 0)
     iteration_spacer = 1
     increment_pixels = 24
+    moves = fetch_game_moves(gameid)
+    
     if moves_made_counter == 1 or moves_made_counter > 1 \
         and moves_made_counter < 33:
         iteration_spacer = moves_made_counter * increment_pixels

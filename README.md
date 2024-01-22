@@ -50,31 +50,11 @@
 </ul>
 <h3>Short-term Development plans:</h3>
 <ol>
-<li>Completed: Connect pygame to persistent data.</li>
-<li>Completed: Save each game to a games table assigned last game id to global gameid variable.</li>
-<li>Completed: Save each moves made to a gameMoves table.</li>
-<li>Completed: Save each pawn promotion to a gamePromotions table.</li>
-<li>Completed: Save each capture to a gameCaptures table.</li>
-<li>Completed: Save each castling instance to a gameCastling table.</li>
-<li>Completed: Save each check instance to a gameChecks table.</li>
-<li>Completed: Fix game move quirks created from adding castling to moves types.</li>
-<li>Completed: Replace old ugly game pieces with glossy nice ones.</li>
-<li>Completed: Record gamesCompleted in it's own table.</li>
-<li>Completed: Fix Game reset after forfeit. </li>
-<li>Fix Loop related repeated attempts to insert into database (denoted by the gap between auto incremented ids) for the following:
-    <ul>
-        <li>Completed: "gamesCompleted" insert only happens once per game completion
-            <img src="https://www.jonathonireland.com/resume/data/files/Screenshot%202024-01-18%20at%205.37.21%20PM.png" alt="select * from gamesCompleted shows that I am now recording games that have been completed."/>
-        </li>
-        <li>Completed: "gamePromotions" insert only happens once per pawn promotion
-            <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-19 at 10.52.57 AM.png" alt="Pawn Promotions only happen once per promotion fixing auto increment in the database table">
-        </li>
-        <li>Completed: "gameChecks" insert only happen once per game Check
-            <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-18 at 8.37.39 PM.png" alt="Game Checks are now incrementing without missing sequential ids" />
-        </li>
-    </ul>
-</li>
-<li>Continue adding featues as ideas pop into my mind.</li>
+<li>Load a list of games from persistent Data</li>
+<li>Select a game from the list and load all game moves played already.</li>
+<li>Give option to save game or delete it.</li>
+<li>Give an option to re-name a game.</li>
+<li>Give an option to add notes to the game.</li>
 </ol>
 <h2>To run this on your local (on Mac OS 13 or newer)</h2>
 <ol>

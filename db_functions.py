@@ -48,6 +48,16 @@ def record_check_event(color, king_location, moveid, game_check_id):
 
 ## FETCH or SELECT FUNCTIONAL QUERIES
 
+def fetch_all_games():
+    try:
+        mycursor.execute(fetch_10_games_sql,())
+        games = mycursor.fetchall()
+        return games
+    except mysql.connector.Errror as err:
+        print(f"Error: {err}")
+        mydb.rollback()
+        return []
+
 def fetch_game_move(game_id, moves_made_counter):
     try:
         mycursor.execute(fetch_game_move_sql, (game_id, moves_made_counter))

@@ -441,7 +441,7 @@ def draw_pieces(): # Draw Pieces Onto Board
             if selection == i:
                 pygame.draw.rect(screen,'blue',[black_locations[i][0] * 100 + 1, black_locations[i][1] * 100 + 1, 100, 100], 2)
 
-
+draw_previous_games()
 # Clean Start Game Variables and Begin While Run Loop
 create_new_game()
 black_options = get_both_options()[0]
