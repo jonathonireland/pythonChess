@@ -1,5 +1,7 @@
 from constants import * 
 
+
+## RECORD or INSERT FUNCTIONAL QUERIES
 def record_pawn_promotion(piece, moveid, color, promotion_id):
     values = (str(piece), str(moveid), str(color), str(promotion_id))
     try:
@@ -43,3 +45,25 @@ def record_check_event(color, king_location, moveid, game_check_id):
         print(f"Error: {err}")
         mydb.rollback()
 
+
+## FETCH or SELECT FUNCTIONAL QUERIES
+
+def fetch_game_move(game_id, moves_made_counter):
+    try:
+        mycursor.execute(fetch_game_move_sql, (game_id, moves_made_counter))
+        move = mycursor.fetchall()
+        return move
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        mydb.rollback()
+        return []
+    
+def fetch_game_moves(game_id):
+    try:
+        mycursor.execute(fetch_game_moves_sql, (game_id,))
+        moves = mycursor.fetchall()
+        return moves
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        mydb.rollback()
+        return []

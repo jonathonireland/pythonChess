@@ -539,6 +539,10 @@ while run:
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords) ))
                     
+                    move = fetch_game_move(gameid, moves_made_counter)
+                    for x in move:
+                        print(x)
+                    
                     # display moves to right column
                     draw_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                     
@@ -611,6 +615,10 @@ while run:
                             # display moves to right column
                             draw_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                             
+                            move = fetch_game_move(gameid, moves_made_counter)
+                            for x in move:
+                                print(x)
+                            
                             # log castling event
                             record_castling_event('white', moveid, str(white_locations[rook_index]), str(king_index))
                             
@@ -676,7 +684,12 @@ while run:
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords)))
                     
+                    move = fetch_game_move(gameid, moves_made_counter)
+                    for x in move:
+                        print(x)
+                    
                     # display moves to right column
+                    
                     draw_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                     
                     # record capture of white pieces
@@ -745,6 +758,10 @@ while run:
                             
                             # append to moves list
                             moves_made_list.append(all_moves.index('castle ' + str(rook_coords) + ' ' + str(king_index)))
+                            
+                            move = fetch_game_move(gameid, moves_made_counter)
+                            for x in move:
+                                print(x)
                             
                             # display moves to right column
                             draw_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
