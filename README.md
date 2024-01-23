@@ -38,6 +38,7 @@
 <li>adding (and inserting into) a "gameCastling" table for each castle. There is room for improvement here, would like to (possibly) capture the starting position of the king and rook and then their position after they complete the castle maneuver<br>select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id.<br>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 10.04.40 AM.png" alt="select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id." /></li>
 <li>adding (and inserting into) a "gamesCompleted" table for every completed game.
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-22 at 11.11.51 PM.png" alt="select * from gamesCompleted; shows that the game is recording completd games that result in a winner." />
 </li>
 <li>Fixed Game Reset after Forfeit button is clicked!!</li>
 </ul>
