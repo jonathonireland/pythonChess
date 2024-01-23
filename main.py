@@ -705,7 +705,7 @@ while run:
                     if click_coords == white_ep:
                         white_piece = white_locations.index((white_ep[0], white_ep[1]+1))
                         captured_pieces_black.append(white_pieces[white_piece])
-                        record_captured_piece(white_pieces[white_piece], moveid, 'black', str(white_pieces[black_piece])+str(moveid)+'black')
+                        record_captured_piece(white_pieces[white_piece], moveid, 'black', str(white_pieces[white_piece])+str(moveid)+'black')
                         pop_piece_out_lists(white_piece, 'white')
                         
                     black_options = get_both_options()[0]

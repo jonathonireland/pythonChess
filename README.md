@@ -11,6 +11,11 @@
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-17 at 10.28.49 AM.png" alt="Shows 128 Moves on the right rectangle box" />
 <h3>Game Over</h3>
 <img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-16 at 9.36.21 AM.png" alt="black won the game! Persistent Two-Player Chess">
+<h3>En passant</h3>
+<p>En Passant allows a pawn to capture after moving diagonnally behind an opponents piece. The highlighted square in the graphic here shows that the black pawn can move diagonally and then capture the white pawn behind it.</p>
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-23 at 12.44.54 PM.png" alt="En Passant allows a pawn to capture after moving diagonnally behind an opponents piece. The highlighted square in the graphic here shows that the black pawn can move diagonally and then capture the white pawn behind it." />
+<p>This screen shot shows that the captured black pawn is no longer on the board after the en passant move takes place.</p>
+<img src="https://www.jonathonireland.com/resume/data/files/Screenshot 2024-01-23 at 12.45.09 PM.png" alt="This screen shot shows that the captured black pawn is no longer on the board after the en passant move takes place."/>
 <p>This Pygame development I started in December of 2023 because of an interest in learning Python (and) I have always thought Chess was fun. It quickly became an obsession in completing the tutorials below... It has not stopped there though, I don't know where this will end up, it's only for fun, so it doesn't have to stop.</p>
 <ol>
 <li><a href="https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s">https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s</a></li>
