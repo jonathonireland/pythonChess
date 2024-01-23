@@ -107,7 +107,6 @@ def draw_moves_made(moves_made_list, color, moves_made_counter, column_two_count
     black_font_color = (0, 0, 0)
     iteration_spacer = 1
     increment_pixels = 24
-    moves = fetch_game_moves(gameid)
     
     if moves_made_counter == 1 or moves_made_counter > 1 \
         and moves_made_counter < 33:
