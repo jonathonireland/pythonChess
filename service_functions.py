@@ -24,31 +24,30 @@ def get_enemy_list(color): # Determine which Locations are Enemies
 
 # DRAWING SERVICE FUNCTIONS #
 def draw_board(): # Draw Main Game Board
-    screen.fill('white', (0, 0, (screen.get_width()//3)*1.85, screen.get_height()))
-    screen.fill('dark gray', (800, 0, 200, HEIGHT))
+    screen.fill('white', (0, 0, (screen.get_width()//3)*1.85, BOARD_HEIGHT))
+    screen.fill('dark gray', (BOARD_HEIGHT, 0, 2*SPACE_SIZE, BOARD_HEIGHT))
     for i in range(32):
         column = i % 4
         row = i // 4
         if row % 2 == 0:
-            pygame.draw.rect(screen, 'light gray', [600 - (column * 200), row * 100, 100, 100])
+            pygame.draw.rect(screen, 'light gray', [6*SPACE_SIZE - (column * (2*SPACE_SIZE)), row * SPACE_SIZE, SPACE_SIZE, SPACE_SIZE])
         else:
-            pygame.draw.rect(screen, 'light gray', [700 - (column * 200), row * 100, 100, 100])
-        pygame.draw.rect(screen, 'gray', [0, 800, WIDTH, 100])
-        pygame.draw.rect(screen, 'gold', [0, 800, WIDTH, 100], 5)
-        pygame.draw.rect(screen, 'gold', [800, 0, 200, HEIGHT], 5)
-        pygame.draw.rect(screen, 'black', [1000, 0, 400, HEIGHT], 5)
+            pygame.draw.rect(screen, 'light gray', [7*SPACE_SIZE - (column * (2*SPACE_SIZE)), row * SPACE_SIZE, SPACE_SIZE, SPACE_SIZE])
+        pygame.draw.rect(screen, 'gray', [0, BOARD_HEIGHT, WIDTH, SPACE_SIZE])
+        pygame.draw.rect(screen, 'gold', [0, BOARD_HEIGHT, WIDTH, SPACE_SIZE], 5)
+        pygame.draw.rect(screen, 'gold', [BOARD_HEIGHT, 0, 2*SPACE_SIZE, HEIGHT], 5)
+        pygame.draw.rect(screen, 'black', [10*SPACE_SIZE, 0, 4*SPACE_SIZE, HEIGHT], 5)
         status_text = ['White: Select a Piece to Move!', 'White: Select a Destination!',
                        'Black: Select a Piece to Move!', 'Black: Select a Destination!']
-        screen.blit(big_font.render(status_text[turn_step], True, 'black'), (20, 820))
+        screen.blit(big_font.render(status_text[turn_step], True, 'black'), (20, BOARD_HEIGHT+20))
         for i in range(9):
-            pygame.draw.line(screen, 'black', (0, 100 * i), (800, 100 * i), 2)
-            pygame.draw.line(screen, 'black', (100 * i, 0), (100 * i, 800), 2)
-        screen.blit(medium_font.render('FORFEIT', True, 'black'), (810, 830))
+            pygame.draw.line(screen, 'black', (0, SPACE_SIZE * i), (BOARD_HEIGHT, SPACE_SIZE * i), 2)
+            pygame.draw.line(screen, 'black', (SPACE_SIZE * i, 0), (SPACE_SIZE * i, BOARD_HEIGHT), 2)
+        screen.blit(medium_font.render('FORFEIT', True, 'black'), (BOARD_HEIGHT + 10, BOARD_HEIGHT+30))
         if white_promote or black_promote:
-            pygame.draw.rect(screen, 'gray', [0, 800, WIDTH - 200, 100])
-            pygame.draw.rect(screen, 'gold', [0, 800, WIDTH - 200, 100], 5)
-            screen.blit(big_font.render('Select Piece to Promote Pawn', True, 'black'), (20, 820))
-    screen.blit(chess_board_numbers, (5,5))
+            pygame.draw.rect(screen, 'gray', [0, BOARD_HEIGHT, WIDTH - 2*SPACE_SIZE, SPACE_SIZE])
+            pygame.draw.rect(screen, 'gold', [0, BOARD_HEIGHT, WIDTH - 2*SPACE_SIZE, SPACE_SIZE], 5)
+            screen.blit(big_font.render('Select Piece to Promote Pawn', True, 'black'), (20, BOARD_HEIGHT+20))
 
         
 def draw_game_over(winner): # Draw Game Over Box and Text #
@@ -63,7 +62,7 @@ def draw_valid(moves): # Draw valid moves in game
     else:
         color = 'blue'
     for i in range(len(moves)):
-        pygame.draw.circle(screen, color, (moves[i][0] * 100 + 50, moves[i][1] * 100 + 50), 5)
+        pygame.draw.circle(screen, color, (moves[i][0] * SPACE_SIZE + 50, moves[i][1] * SPACE_SIZE + 50), 5)
 
 
 def draw_promotion(white_promote, black_promote): # Draw Pawn Promotion 
@@ -74,13 +73,13 @@ def draw_promotion(white_promote, black_promote): # Draw Pawn Promotion
         for i in range(len(white_promotions)):
             piece = white_promotions[i]
             index = piece_list.index(piece)
-            screen.blit(white_images[index], (860, 5 + 100 * i))
+            screen.blit(white_images[index], (BOARD_SIZE+60, 5 + SPACE_SIZE * i))
     if black_promote: 
         color = 'black'
         for i in range(len(black_promotions)):
             piece = black_promotions[i]
             index = piece_list.index(piece)
-            screen.blit(black_images[index], (860, 5 + 100 * i))
+            screen.blit(black_images[index], (BOARD_SIZE+60, 5 + SPACE_SIZE * i))
     pygame.draw.rect(screen, color, [800, 0, 200, 420], 8)
 
 
@@ -90,13 +89,13 @@ def draw_castling(moves):
     else:
         color = 'blue'
     for i in range(len(moves)):
-        pygame.draw.circle(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70), 8)
-        screen.blit(font.render('king', True, 'black'), (moves[i][0][0] * 100 + 30, moves[i][0][1] * 100 + 70))
-        pygame.draw.circle(screen, color, (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 8)
+        pygame.draw.circle(screen, color, (moves[i][0][0] * SPACE_SIZE + 50, moves[i][0][1] * SPACE_SIZE + 70), 8)
+        screen.blit(font.render('king', True, 'black'), (moves[i][0][0] * 100 + 30, moves[i][0][1] * SPACE_SIZE + 70))
+        pygame.draw.circle(screen, color, (moves[i][1][0] * SPACE_SIZE + 50, moves[i][1][1] * SPACE_SIZE + 70), 8)
         screen.blit(font.render('rook', True, 'black'),
-                    (moves[i][1][0] * 100 + 30, moves[i][1][1] * 100 + 70))
-        pygame.draw.line(screen, color, (moves[i][0][0] * 100 + 50, moves[i][0][1] * 100 + 70),
-                         (moves[i][1][0] * 100 + 50, moves[i][1][1] * 100 + 70), 2)
+                    (moves[i][1][0] * SPACE_SIZE + 30, moves[i][1][1] * SPACE_SIZE + 70))
+        pygame.draw.line(screen, color, (moves[i][0][0] * SPACE_SIZE + 50, moves[i][0][1] * SPACE_SIZE + 70),
+                         (moves[i][1][0] * SPACE_SIZE + 50, moves[i][1][1] * SPACE_SIZE + 70), 2)
 
 def draw_previous_games():
     pygame.draw.rect(screen, 'black', [200, 200, 400, 100])

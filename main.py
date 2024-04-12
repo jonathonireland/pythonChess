@@ -374,11 +374,11 @@ def draw_captured(): # Draw Captured Pieces
         for i in range(len(captured_pieces_white)):
             captured_piece = captured_pieces_white[i]
             index = piece_list.index(captured_piece)
-            screen.blit(small_black_images[index], (825, 5 + 50*i))
+            screen.blit(small_black_images[index], (BOARD_WIDTH+25, 5 + 50*i))
         for i in range(len(captured_pieces_black)):
             captured_piece = captured_pieces_black[i]
             index = piece_list.index(captured_piece)
-            screen.blit(small_white_images[index], (925, 5 + 50*i))
+            screen.blit(small_white_images[index], (BOARD_WIDTH+100+25, 5 + 50*i))
 
 
 def get_both_options(): # Get Options from check_options 
@@ -425,21 +425,21 @@ def draw_pieces(): # Draw Pieces Onto Board
     for i in range(len(white_pieces)):
         index = piece_list.index(white_pieces[i])
         if white_pieces[i] == 'pawn':
-            screen.blit(white_pawn, (white_locations[i][0] * 100 + 22, white_locations[i][1] * 100 + 30))
+            screen.blit(white_pawn, (white_locations[i][0] * SPACE_SIZE + 22, white_locations[i][1] * SPACE_SIZE + 30))
         else:
-            screen.blit(white_images[index],(white_locations[i][0] * 100 + 10, white_locations[i][1] * 100 + 10))
+            screen.blit(white_images[index],(white_locations[i][0] * SPACE_SIZE + 10, white_locations[i][1] * SPACE_SIZE + 10))
         if turn_step < 2:
             if selection == i:
-                pygame.draw.rect(screen,'red',[white_locations[i][0] * 100 + 1, white_locations[i][1] * 100 + 1, 100, 100], 2)
+                pygame.draw.rect(screen,'red',[white_locations[i][0] * SPACE_SIZE + 1, white_locations[i][1] * SPACE_SIZE + 1, SPACE_SIZE, SPACE_SIZE], 2)
     for i in range(len(black_pieces)):
         index = piece_list.index(black_pieces[i])
         if black_pieces[i] == 'pawn':
-            screen.blit(black_pawn, (black_locations[i][0] * 100 + 22, black_locations[i][1] * 100 + 30))
+            screen.blit(black_pawn, (black_locations[i][0] * SPACE_SIZE + 22, black_locations[i][1] * SPACE_SIZE + 30))
         else:
-            screen.blit(black_images[index],(black_locations[i][0] * 100 + 10, black_locations[i][1] * 100 + 10))
+            screen.blit(black_images[index],(black_locations[i][0] * SPACE_SIZE + 10, black_locations[i][1] * SPACE_SIZE + 10))
         if turn_step >= 2:
             if selection == i:
-                pygame.draw.rect(screen,'blue',[black_locations[i][0] * 100 + 1, black_locations[i][1] * 100 + 1, 100, 100], 2)
+                pygame.draw.rect(screen,'blue',[black_locations[i][0] * SPACE_SIZE + 1, black_locations[i][1] * SPACE_SIZE + 1, SPACE_SIZE, SPACE_SIZE], 2)
 
 
 # Clean Start Game Variables and Begin While Run Loop
@@ -480,8 +480,8 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and not game_over:
-            x_coord = event.pos[0] // 100
-            y_coord = event.pos[1] // 100
+            x_coord = event.pos[0] // SPACE_SIZE
+            y_coord = event.pos[1] // SPACE_SIZE
             click_coords = (x_coord, y_coord)
             # white's turn
             if turn_step <= 1:
