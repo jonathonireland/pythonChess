@@ -145,7 +145,7 @@ def draw_check(): # Draw a Flashing Square Around King if in Check
                     global white_in_check 
                     white_in_check = True
                     if counter < 15:
-                        pygame.draw.rect(screen, 'dark red', [white_locations[king_index][0] * 100 + 1, white_locations[king_index][1] * 100 + 1, 100, 100], 5)
+                        pygame.draw.rect(screen, 'dark red', [white_locations[king_index][0] * SPACE_SIZE + 1, white_locations[king_index][1] * SPACE_SIZE + 1, SPACE_SIZE, SPACE_SIZE], 5)
     else:
         if 'king' in black_pieces:
             king_index = black_pieces.index('king')
@@ -156,7 +156,7 @@ def draw_check(): # Draw a Flashing Square Around King if in Check
                     global black_in_check
                     black_in_check = True
                     if counter < 15:
-                        pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * 100 + 1, black_locations[king_index][1] * 100 + 1, 100, 100], 5)
+                        pygame.draw.rect(screen, 'dark blue', [black_locations[king_index][0] * SPACE_SIZE + 1, black_locations[king_index][1] * SPACE_SIZE + 1, SPACE_SIZE, SPACE_SIZE], 5)
 
 
 def get_all_moves(pieces, locations, turn): # Check All Pieces Valid Options on Board
