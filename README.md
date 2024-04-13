@@ -59,7 +59,14 @@
 <ol>
 <li>Install Python 3.12.0 or newer.</li>
 <li>Install MySQL 8.0.34 or newer.</li>
-<li>Create a db_connection.py file in the root of the pythonchess folder.</li>
+<li>Create a db_connection.py file in the root of the pythonchess folder.
+<ol>
+<li>define a function "connectionCredentials" and return from it "localhost", "username", "password", "databasename"</li>
+</ol>
+</li>
 <li>Copy and paste stored_procedures.sql and run the structured queries.</li>
+<li>Install mysql.connector python module</li>
+<li>Install python screeninfo module</li>
+<li>Install python pygame module</li>
 <li>Run the main.py file to start the game.</li>
 </ol>
