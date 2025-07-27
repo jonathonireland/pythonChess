@@ -1,4 +1,6 @@
 from constants import *
+import random
+import string
 
 
 # LISTING SERVICE FUNCTIONS #
@@ -137,3 +139,17 @@ def draw_moves_made(moves_made_list, color, moves_made_counter, column_two_count
         else: 
             screen.blit(small_font.render(str(moves_made_counter) + '. ' + all_moves[moves_made_list[-1]], True, black_font_color), (1300, iteration_spacer))
         
+
+def generate_random_alphanumeric(length):
+    """
+    Generates a random alphanumeric string of a specified length.
+
+    Args:
+        length (int): The desired length of the alphanumeric string.
+
+    Returns:
+        str: A randomly generated alphanumeric string.
+    """
+    characters = string.ascii_letters + string.digits
+    random_string = ''.join(random.choice(characters) for _ in range(length))
+    return random_string

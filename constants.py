@@ -1,6 +1,6 @@
 import pygame
-import mysql.connector
-from db_connection import connectionCredentials
+# import mysql.connector
+# from db_connection import connectionCredentials
 pygame.init()
 
 WIDTH = 1400
@@ -84,20 +84,20 @@ small_black_images = [black_pawn_small, black_queen_small, black_king_small, bla
 
 piece_list = ['pawn', 'queen', 'king', 'knight', 'rook', 'bishop']
 
-mydb = mysql.connector.connect(host=connectionCredentials()[0], user=connectionCredentials()[1],password=connectionCredentials()[2], database=connectionCredentials()[3])
-mycursor = mydb.cursor()
+# mydb = mysql.connector.connect(host=connectionCredentials()[0], user=connectionCredentials()[1],password=connectionCredentials()[2], database=connectionCredentials()[3])
+# mycursor = mydb.cursor()
 # INSERTS
-create_new_game_sql = "INSERT INTO games (game_name, game_notes) VALUES (%s, %s)"
-record_game_move_sql = "INSERT INTO gameMoves (games_id, order_number, color, piece, start_pos, end_pos) VALUES (%s, %s, %s, %s, %s, %s)"
-record_game_over_sql = "INSERT INTO gamesCompleted (gameid, game_moves_id, winner, gameCompletedKey) VALUES(%s, %s, %s, %s)"
-record_check_event_sql = "INSERT INTO gameChecks (king_color, king_pos, game_moves_id, gameCheckId) VALUES (%s, %s, %s, %s)"
-record_castling_event_sql = "INSERT INTO gameCastling (color, rook_locations, king_pos, game_moves_id) VALUES (%s, %s, %s, %s)"
-record_captures_sql = "INSERT INTO gameCaptures (captured_piece, game_moves_id, color, captured_id) VALUES (%s, %s, %s, %s)"
-record_pawn_promotion_sql = "INSERT INTO gamePromotions (promotion_to_piece, game_moves_id, color, promotion_id) VALUES (%s, %s, %s, %s)"
-# SELECTS
-fetch_10_games_sql = "SELECT * FROM games ORDER BY id DESC LIMIT 10"
-fetch_game_move_sql = "SELECT * FROM gameMoves WHERE games_id = %s AND order_number = %s"
-fetch_game_moves_sql = "SELECT * FROM gameMoves WHERE games_id = %s"
+# create_new_game_sql = "INSERT INTO games (game_name, game_notes) VALUES (%s, %s)"
+# record_game_move_sql = "INSERT INTO gameMoves (games_id, order_number, color, piece, start_pos, end_pos) VALUES (%s, %s, %s, %s, %s, %s)"
+# record_game_over_sql = "INSERT INTO gamesCompleted (gameid, game_moves_id, winner, gameCompletedKey) VALUES(%s, %s, %s, %s)"
+# record_check_event_sql = "INSERT INTO gameChecks (king_color, king_pos, game_moves_id, gameCheckId) VALUES (%s, %s, %s, %s)"
+# record_castling_event_sql = "INSERT INTO gameCastling (color, rook_locations, king_pos, game_moves_id) VALUES (%s, %s, %s, %s)"
+# record_captures_sql = "INSERT INTO gameCaptures (captured_piece, game_moves_id, color, captured_id) VALUES (%s, %s, %s, %s)"
+# record_pawn_promotion_sql = "INSERT INTO gamePromotions (promotion_to_piece, game_moves_id, color, promotion_id) VALUES (%s, %s, %s, %s)"
+# # SELECTS
+# fetch_10_games_sql = "SELECT * FROM games ORDER BY id DESC LIMIT 10"
+# fetch_game_move_sql = "SELECT * FROM gameMoves WHERE games_id = %s AND order_number = %s"
+# fetch_game_moves_sql = "SELECT * FROM gameMoves WHERE games_id = %s"
 
 white_promotions = ['bishop', 'knight', 'rook', 'queen']
 black_promotions = ['bishop', 'knight', 'rook', 'queen']

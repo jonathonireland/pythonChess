@@ -1,6 +1,6 @@
 # import pygame
 from constants import *
-from db_functions import *
+# from db_functions import *
 from service_functions import *
 
 
@@ -200,10 +200,10 @@ def get_in_check_data(color): # determine if check is true and if it is who's in
                         check = True
                         white_in_check = True
                         # if true record event                        
-                        try:
-                            alreadyChecked = check_events.index(checkIdKey)
-                        except:
-                            record_check_event(color, king_location, moveid, checkIdKey)   
+                        # try:
+                        #     alreadyChecked = check_events.index(checkIdKey)
+                        # except:
+                        #     record_check_event(color, king_location, moveid, checkIdKey)   
                     else:
                         check = False
                         white_in_check = False
@@ -216,10 +216,10 @@ def get_in_check_data(color): # determine if check is true and if it is who's in
                         check = True
                         black_in_check = True
                         # if true record event
-                        try:
-                            alreadyChecked = check_events.index(checkIdKey)
-                        except:
-                            record_check_event(color, king_location, moveid, checkIdKey)
+                        # try:
+                        #     alreadyChecked = check_events.index(checkIdKey)
+                        # except:
+                        #    record_check_event(color, king_location, moveid, checkIdKey)
                     else:
                         check = False
                         black_in_check = False
@@ -353,19 +353,19 @@ def get_promo_select(): # Check Promotion Options
         color = 'white'
         piece = white_pieces[promo_index]
         promotion_id = str(piece)+str(moveid)+str(color)
-        try:
-            alreadyPromoted = promo_events.index(promotion_id)
-        except:
-            record_pawn_promotion(piece, moveid, color, promotion_id)
+        # try:
+        #     alreadyPromoted = promo_events.index(promotion_id)
+        # except:
+        #     #record_pawn_promotion(piece, moveid, color, promotion_id)
     if black_promote and left_click and x_pos > 7 and y_pos < 4:
         black_pieces[promo_index] = black_promotions[y_pos]
         color = 'black'
         piece = black_pieces[promo_index]
         promotion_id = str(piece)+str(moveid)+str(color)
-        try:
-            alreadyPromoted = promo_events.index(promotion_id)
-        except:
-            record_pawn_promotion(piece, moveid, color, promotion_id)
+        # try:
+        #     alreadyPromoted = promo_events.index(promotion_id)
+        # except:
+        #     #record_pawn_promotion(piece, moveid, color, promotion_id)
 
     
 def draw_captured(): # Draw Captured Pieces 
@@ -387,38 +387,38 @@ def get_both_options(): # Get Options from check_options
     return black_options, white_options
 
 
-def create_new_game(): # Create a New Game in Persistant Data
-    val = ("newGame", "initial attempt")
-    try:
-        mycursor.execute(create_new_game_sql, val)
-        mydb.commit()
-        global gameid
-        gameid = mycursor.lastrowid
-    except:
-        mydb.rollback()
+# def create_new_game(): # Create a New Game in Persistant Data
+    # val = ("newGame", "initial attempt")
+    # try:
+    #     mycursor.execute(create_new_game_sql, val)
+    #     mydb.commit()
+    #     global gameid
+    #     gameid = mycursor.lastrowid
+    # except:
+    #     mydb.rollback()
         
 
-def record_game_move(gameid, moves_made_counter, color, selected_piece, selection, click_coords):
-    values = (str(gameid), str(moves_made_counter), str(color), str(selected_piece), str(selection), str(click_coords)) 
-    try:
-        mycursor.execute(record_game_move_sql, values)
-        mydb.commit()
-        global moveid
-        moveid = mycursor.lastrowid
-    except:
-        mydb.rollback()
+# def record_game_move(gameid, moves_made_counter, color, selected_piece, selection, click_coords):
+    # values = (str(gameid), str(moves_made_counter), str(color), str(selected_piece), str(selection), str(click_coords)) 
+    #try:
+        # mycursor.execute(record_game_move_sql, values)
+        # mydb.commit()
+        #global moveid
+        # moveid = mycursor.lastrowid
+    #except:
+        #mydb.rollback()
 
 
 def record_game_over(gameid, moveid, winner, gameCompletedKey):
     values = (str(gameid), str(moveid), str(winner), str(gameCompletedKey))
-    try:
-        mycursor.execute(record_game_over_sql, values)
-        mydb.commit()
-        global gameCompletedId
-        gameCompletedId = mycursor.lastrowid
-    except mysql.connector.Error as err:
-        print(f"Error: {err}")
-        mydb.rollback()
+    # try:
+    #     mycursor.execute(record_game_over_sql, values)
+    #     mydb.commit()
+    #     global gameCompletedId
+    #     gameCompletedId = mycursor.lastrowid
+    # except mysql.connector.Error as err:
+    #     print(f"Error: {err}")
+    #     mydb.rollback()
 
 
 def draw_pieces(): # Draw Pieces Onto Board 
@@ -443,7 +443,7 @@ def draw_pieces(): # Draw Pieces Onto Board
 
 
 # Clean Start Game Variables and Begin While Run Loop
-create_new_game()
+#  create_new_game()
 black_options = get_both_options()[0]
 white_options = get_both_options()[1]
 gameCompletedId = 0
@@ -534,14 +534,14 @@ while run:
                         column_four_counter += 1
                         
                     # log game move to gameMoves table
-                    record_game_move(gameid,moves_made_counter,'white',selected_piece,previous_white_locations[-1],click_coords)
+                    # record_game_move(gameid,moves_made_counter,'white',selected_piece,previous_white_locations[-1],click_coords)
                     
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords) ))
                     
-                    move = fetch_game_move(gameid, moves_made_counter)
-                    for x in move:
-                        print(x)
+                    #move = fetch_game_move(gameid, moves_made_counter)
+                    #for x in move:
+                    #    print(x)
                     
                     # display moves to right column
                     draw_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
@@ -550,7 +550,7 @@ while run:
                     if click_coords in black_locations:
                         black_piece = black_locations.index(click_coords)
                         captured_pieces_white.append(black_pieces[black_piece])
-                        record_captured_piece(black_pieces[black_piece], moveid, 'white', str(black_pieces[black_piece])+str(moveid)+'white')
+                        #record_captured_piece(black_pieces[black_piece], moveid, 'white', str(black_pieces[black_piece])+str(moveid)+'white')
                         if black_pieces[black_piece] == 'king':
                             winner = 'white'
                         pop_piece_out_lists(black_piece, 'black')
@@ -559,7 +559,7 @@ while run:
                     if click_coords == black_ep:
                         black_piece = black_locations.index((black_ep[0], black_ep[1]-1))
                         captured_pieces_white.append(black_pieces[black_piece])
-                        record_captured_piece(black_pieces[black_piece], moveid, 'white', str(black_pieces[black_piece])+str(moveid)+'white')
+                        #record_captured_piece(black_pieces[black_piece], moveid, 'white', str(black_pieces[black_piece])+str(moveid)+'white')
                         pop_piece_out_lists(black_piece, 'black')
                     
                     black_options = get_both_options()[0]
@@ -607,7 +607,7 @@ while run:
                             white_locations[rook_index] = castling_moves[q][1]
                             
                             # log game move to gameMoves table
-                            record_game_move(gameid,moves_made_counter,'white',selected_piece,previous_white_locations[-1],click_coords)
+                            # record_game_move(gameid,moves_made_counter,'white',selected_piece,previous_white_locations[-1],click_coords)
                             
                             # append to moves list
                             moves_made_list.append(all_moves.index('castle ' + str(rook_coords) + ' ' + str(king_index)))
@@ -615,12 +615,12 @@ while run:
                             # display moves to right column
                             draw_moves_made(moves_made_list, 'white', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                             
-                            move = fetch_game_move(gameid, moves_made_counter)
-                            for x in move:
-                                print(x)
+                            #move = fetch_game_move(gameid, moves_made_counter)
+                            # for x in move:
+                            #     print(x)
                             
                             # log castling event
-                            record_castling_event('white', moveid, str(white_locations[rook_index]), str(king_index))
+                            #record_castling_event('white', moveid, str(white_locations[rook_index]), str(king_index))
                             
                             black_options = get_both_options()[0]
                             white_options = get_both_options()[1]
@@ -679,14 +679,14 @@ while run:
                         column_four_counter +=1
                         
                     # log game move to gameMoves table
-                    record_game_move(gameid,moves_made_counter,'black',selected_piece,previous_black_locations[-1],click_coords)
+                    # record_game_move(gameid,moves_made_counter,'black',selected_piece,previous_black_locations[-1],click_coords)
                     
                     # append to moves list
                     moves_made_list.append(all_moves.index(selected_piece +' '+ str(click_coords)))
                     
-                    move = fetch_game_move(gameid, moves_made_counter)
-                    for x in move:
-                        print(x)
+                    #move = fetch_game_move(gameid, moves_made_counter)
+                    # for x in move:
+                    #     print(x)
                     
                     # display moves to right column
                     
@@ -696,7 +696,7 @@ while run:
                     if click_coords in white_locations:
                         white_piece = white_locations.index(click_coords)
                         captured_pieces_black.append(white_pieces[white_piece])
-                        record_captured_piece(white_pieces[white_piece], moveid, 'black', str(white_pieces[white_piece])+str(moveid)+'black')
+                        #record_captured_piece(white_pieces[white_piece], moveid, 'black', str(white_pieces[white_piece])+str(moveid)+'black')
                         if white_pieces[white_piece] == 'king':
                             winner = 'black'
                         pop_piece_out_lists(white_piece, 'white')
@@ -705,7 +705,7 @@ while run:
                     if click_coords == white_ep:
                         white_piece = white_locations.index((white_ep[0], white_ep[1]+1))
                         captured_pieces_black.append(white_pieces[white_piece])
-                        record_captured_piece(white_pieces[white_piece], moveid, 'black', str(white_pieces[white_piece])+str(moveid)+'black')
+                        #record_captured_piece(white_pieces[white_piece], moveid, 'black', str(white_pieces[white_piece])+str(moveid)+'black')
                         pop_piece_out_lists(white_piece, 'white')
                         
                     black_options = get_both_options()[0]
@@ -754,20 +754,20 @@ while run:
                             black_locations[rook_index] = castling_moves[q][1]
                             
                             # log game move to gameMoves table
-                            record_game_move(gameid,moves_made_counter,'black',selected_piece,previous_black_locations[-1],click_coords)
+                            # record_game_move(gameid,moves_made_counter,'black',selected_piece,previous_black_locations[-1],click_coords)
                             
                             # append to moves list
                             moves_made_list.append(all_moves.index('castle ' + str(rook_coords) + ' ' + str(king_index)))
                             
-                            move = fetch_game_move(gameid, moves_made_counter)
-                            for x in move:
-                                print(x)
+                            #move = fetch_game_move(gameid, moves_made_counter)
+                            # for x in move:
+                            #     print(x)
                             
                             # display moves to right column
                             draw_moves_made(moves_made_list, 'black', moves_made_counter, column_two_counter, column_three_counter, column_four_counter)
                             
                             # log castling event
-                            record_castling_event('black', moveid, str(black_locations[rook_index]), str(king_index))
+                            #record_castling_event('black', moveid, str(black_locations[rook_index]), str(king_index))
                             
                             black_options = get_both_options()[0]
                             white_options = get_both_options()[1]
@@ -807,7 +807,7 @@ while run:
                 captured_pieces_black = []
                 previous_white_locations = []
                 previous_black_locations = []
-                create_new_game()
+                # create_new_game()
                 black_options = get_both_options()[0]
                 white_options = get_both_options()[1]
                 column_two_counter = 0
