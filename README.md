@@ -1,65 +1,88 @@
-<h1>Data Persistent Two-Player Chess</h1>
-<h2>Project Synopsis</h2>
-<p>Now that data is captured for every aspect for a chess game, I am going to continue pursuing short term development plans.</p>
-<h3>Pawn Promotions</h3>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-16 at 9.33.12 AM.png" alt="Pawn Promotion image">
-<h3>Long Castling (on the queen's side)</h3>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-16 at 9.32.08 AM.png" alt="Long Castling" />
-<h3>Both Castle Options</h3>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-17 at 10.11.06 AM.png" alt="Picture shows white side of the board with both castle options" />
-<h3>Shows 128 Moves</h3>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-17 at 10.28.49 AM.png" alt="Shows 128 Moves on the right rectangle box" />
-<h3>Game Over</h3>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-16 at 9.36.21 AM.png" alt="black won the game! Persistent Two-Player Chess">
-<h3>En passant</h3>
-<p>En Passant allows a pawn to capture after moving diagonally behind an opponents piece. The highlighted square in the graphic here shows that the white pawn can move diagonally and then capture the black pawn behind it.</p>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-23 at 12.44.54 PM.png" alt="En Passant allows a pawn to capture after moving diagonally behind an opponents piece. The highlighted square in the graphic here shows that the white pawn can move diagonally and then capture the black pawn behind it." />
-<p>This screen shot shows that the captured black pawn is no longer on the board after the en passant move takes place.</p>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-23 at 12.45.09 PM.png" alt="This screen shot shows that the captured black pawn is no longer on the board after the en passant move takes place."/>
-<p>This Pygame development I started in December of 2023 because of an interest in learning Python (and) I have always thought Chess was fun. It quickly became an obsession in completing the tutorials below... It has not stopped there though, I don't know where this will end up, it's only for fun, so it doesn't have to stop.</p>
-<ol>
-<li><a href="https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s">https://www.youtube.com/watch?v=X-e0jk4I938&t=7481s</a></li>
-<li><a href="https://www.youtube.com/watch?v=s2Dd_obh3fM&t=134s">https://www.youtube.com/watch?v=s2Dd_obh3fM&t=134s</a></li>
-</ol>
-<p>Those two tutorials were a great foundation to begin experimentation and learning in Python. Once they were completed, I began to start coding ideas of my own for the game, and I still am developing new features.</p>
-<h2>Working through development plans.</h2>
-<p>Obvious changes in the game's interface:</p>
-<ul>
-<li>listing out the moves made through the game next to the pieces that were captured</li> 
-</ul>
-<p>New coding features include: </p>
-<ul>
-<li>adding (and inserting into) a "games" table for each game.<br>Select * from games ORDER BY id DESC LIMIT 10 shows that the games table is probably the least imaginative table but it is the base building block upon the games data is started with.<br>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-16 at 9.56.49 AM.png" alt ="Select * from games ORDER BY id DESC LIMIT 10 shows that the games table is probably the least imaginative table but it is the base building block upon the games data is started with."/>
-</li>
-<li>adding (and inserting into) a "gameMoves" table for each move<br>Select * from gameMoves ORDER BY id DESC LIMIT 10 shows that game successfully creates a move associated with a specific game that includes the piece, starting position, ending position, and color.<br>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-16 at 9.53.33 AM.png" alt="Select * from gameMoves ORDER BY id DESC LIMIT 10 shows that game successfully creates a move associated with a specific game that includes the piece, starting position, ending position, and color."></li>
-<li>adding (and inserting into) a "gameCaptures" table for each capture<br>Select * From gameCaptures limit 10 shows that game successfully logs captures when playing the game.<br>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-16 at 9.44.15 AM.png" alt="Select * From gameCaptures limit 10 shows that game successfully logs captures when playing the game." /></li> 
-<li>adding (and inserting into) a "gameChecks" table for each check
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-16 at 9.41.52 AM.png" alt="inserts completed in gameChecks"/></li>
-<li>adding (and inserting into) a "gamePromotions" table for each pawn promotion.<br>select * from gamePromotions ORDER BY id DESC LIMIT 10 shows that there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening.<br>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot%202024-01-16%20at%2010.00.58%20AM.png" alt="select * from gamePromotions ORDER BY id DESC LIMIT 10 shows that there is room for improvement here, the ids for the promotion do not increment as they should due to the game looping while the insert is happening. " /></li>
-<li>adding (and inserting into) a "gameCastling" table for each castle. There is room for improvement here, would like to (possibly) capture the starting position of the king and rook and then their position after they complete the castle maneuver<br>select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id.<br>
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-16 at 10.04.40 AM.png" alt="select * from gameCastling ORDER BY id DESC LIMIT 10 shows that castle moves are captured and associated with a game move id." /></li>
-<li>adding (and inserting into) a "gamesCompleted" table for every completed game.
-<img src="https://jonathonireland.com/backup_old_site/resume/data/files/Screenshot 2024-01-22 at 11.11.51 PM.png" alt="select * from gamesCompleted; shows that the game is recording completd games that result in a winner." />
-</li>
-<li>Fixed Game Reset after Forfeit button is clicked!!</li>
-</ul>
-<h3>Short-term Development plans:</h3>
-<ol>
-<li>Load a list of games from persistent Data</li>
-<li>Select a game from the list and load all game moves played already.</li>
-<li>Give option to save game or delete it.</li>
-<li>Give an option to re-name a game.</li>
-<li>Give an option to add notes to the game.</li>
-</ol>
-<h2>To run this on your local (on Mac OS 13 or newer)</h2>
-<ol>
-<li>Install Python 3.12.0 or newer.</li>
-<li>Install MySQL 8.0.34 or newer.</li>
-<li>Create a db_connection.py file in the root of the pythonchess folder.</li>
-<li>Copy and paste stored_procedures.sql and run the structured queries.</li>
-<li>Run the main.py file to start the game.</li>
-</ol>
+# Python Chess
+
+A two-player desktop chess application built with Python and Pygame. The project began as a guided exercise and grew into a larger exploration of chess rules, game-state management, interface design, and data persistence.
+
+## Why this project matters
+
+Chess creates a useful engineering challenge because a legal action depends on more than a piece's movement pattern. The application must coordinate board occupancy, turn ownership, captures, king safety, and special moves while keeping the interface synchronized with the active game state.
+
+This repository demonstrates continued development beyond the original tutorials, including independently added rule handling and gameplay feedback.
+
+## Implemented gameplay
+
+- Legal movement generation for pawns, rooks, knights, bishops, queens, and kings
+- Alternating white and black turns
+- Friendly-piece blocking and opponent captures
+- Valid-move previews for the selected piece
+- Check detection and visual feedback
+- King-side and queen-side castling
+- En passant handling
+- Pawn promotion to bishop, knight, rook, or queen
+- Captured-piece display
+- Move-history display supporting long games
+- Forfeit, game-over, and restart flows
+
+## Architecture
+
+The current implementation is divided across three primary modules:
+
+- `main.py` coordinates move generation, rule evaluation, turn flow, and the Pygame event loop.
+- `service_functions.py` contains reusable drawing, board-list, move-history, and utility functions.
+- `constants.py` initializes Pygame, loads assets, and defines shared board and game state.
+
+The code uses coordinate tuples and parallel piece/location collections to represent the board. Candidate moves are calculated by piece type and filtered against occupied squares and board boundaries before the active turn can apply them.
+
+## Persistence experiment
+
+The repository includes schema and function experiments for recording games, moves, captures, checks, castling, promotions, and completed matches in MySQL. These integrations are currently commented out in the active branch, so the playable application should be treated as an in-memory Pygame game rather than a production-persistent system.
+
+That distinction is intentional in this README: the persistence work documents an architectural direction and prior experiment, not a currently enabled runtime dependency.
+
+## Run locally
+
+### Prerequisites
+
+- Python 3.12 or newer
+- Pygame
+
+Install Pygame:
+
+```bash
+python -m pip install pygame
+```
+
+Start the game from the repository root:
+
+```bash
+python main.py
+```
+
+The application loads piece and interface images from `assets/images`, so run it with the repository root as the working directory.
+
+## Current limitations
+
+- The game uses module-level mutable state, which makes isolated testing and replay more difficult.
+- Rule handling, drawing, and turn coordination still have areas of tight coupling.
+- Automated rule tests are not yet included.
+- MySQL persistence code is not enabled in the active branch.
+- The interface is designed for a fixed desktop window rather than responsive scaling.
+
+## Good next steps
+
+1. Introduce `Board`, `GameState`, `Move`, and piece-domain classes.
+2. Separate candidate-move generation from final king-safety validation and state mutation.
+3. Add automated tests for castling, en passant, promotion, pins, check, and game-over states.
+4. Replace parallel lists with a single authoritative board model.
+5. Reintroduce persistence behind a repository or service boundary.
+6. Add saved-game loading only after moves can be serialized and replayed deterministically.
+
+## Learning foundation
+
+The project began with these tutorials before moving into additional experimentation and independently developed features:
+
+- [Creating Chess in Python](https://www.youtube.com/watch?v=X-e0jk4I938)
+- [Additional Pygame chess development](https://www.youtube.com/watch?v=s2Dd_obh3fM)
+
+## Portfolio context
+
+This project complements the C# and React chess applications in my portfolio. Together, they show how the same rules-heavy domain can be approached through procedural Pygame state, object-oriented .NET architecture, and component-based React/TypeScript design.
